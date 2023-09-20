@@ -9,7 +9,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import java.util.Locale;
 
 
-public class AlexDistanceSensorUtil extends RobotPart {
+public class AlexDistanceSensorUtil {
 
     private DistanceSensor sensorRange1;
     private DistanceSensor sensorRange2;
