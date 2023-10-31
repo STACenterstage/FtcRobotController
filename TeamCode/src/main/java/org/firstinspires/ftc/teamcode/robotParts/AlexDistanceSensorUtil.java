@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.robotParts;
+/*package org.firstinspires.ftc.teamcode.robotParts;
 
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -39,4 +39,4 @@ public class AlexDistanceSensorUtil {
         // veld is in inches dus ook beter om met inches te rekenen
     }
 
-}
+}*/

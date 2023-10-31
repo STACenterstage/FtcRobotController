@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class Drivetrain {
     public static class drivetrain {
 
-        AlexDistanceSensorUtil distanceSensor = new AlexDistanceSensorUtil();
+        //AlexDistanceSensorUtil distanceSensor = new AlexDistanceSensorUtil();
         private DcMotorEx leftFront;
         private DcMotorEx rightFront;
         private DcMotorEx leftBack;
