@@ -12,6 +12,8 @@ public class Arm {
     private Servo servoGripper;
     private Servo servoMoveGripper;
     private Servo servoIntake;
+    public Servo servoVliegtuig;
+    public Servo servoVliegtuigHouder;
 
     public void init(HardwareMap map) {
         arm = map.get(DcMotorEx.class, "arm1");
@@ -19,9 +21,11 @@ public class Arm {
         servoGripper = map.get(Servo.class, "servoGripper");
         servoMoveGripper = map.get(Servo.class, "servoMoveGripper");
         servoIntake = map.get(Servo.class, "Intake");
+        servoVliegtuig = map.get(Servo.class, "Vliegtuig");
+        servoVliegtuigHouder = map.get(Servo.class, "VliegtuigHouder");
+
 
         arm.setDirection(DcMotorSimple.Direction.REVERSE);
-
         arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
     }
@@ -29,7 +33,7 @@ public class Arm {
     public void gripper(double position){servoGripper.setPosition(position);}
     public void moveGripper(double position){servoMoveGripper.setPosition(position);}
     public void servoIntake(double position){servoIntake.setPosition(position);}
-
-
+    public void servoVliegtuig(double position){servoVliegtuig.setPosition(position);}
+    public void servoVliegtuigHouder(double position){servoVliegtuigHouder.setPosition(position);}
 
 }

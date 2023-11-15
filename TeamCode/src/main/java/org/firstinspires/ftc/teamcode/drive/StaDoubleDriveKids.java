@@ -1,13 +1,14 @@
 package org.firstinspires.ftc.teamcode.drive;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.robotParts.Arm;
 //import org.firstinspires.ftc.teamcode.robotParts.Limits;
 import org.firstinspires.ftc.teamcode.robotParts.Drivetrain;
 
-@TeleOp(name = "STAdrive",group = "TeleOp")
-public class STAdrive extends LinearOpMode {
+@TeleOp(name = "StaDoubleDriveKids",group = "TeleOp")
+public class StaDoubleDriveKids extends LinearOpMode {
     Drivetrain.drivetrain drivetrain = new Drivetrain.drivetrain();
     Arm arm = new Arm();
     @Override
@@ -21,27 +22,32 @@ public class STAdrive extends LinearOpMode {
 
         if (isStopRequested()) return;
 
+
         while (opModeIsActive()) {
-            double y = -gamepad1.left_stick_x; // y direction is reversed
-            double x = gamepad1.left_stick_y;
-            double rotate = -gamepad1.right_stick_x;
-            boolean grab = gamepad2.a;
-            boolean release = gamepad2.b;
-            double moveGripper = gamepad2.left_stick_x *-1 +1;
+            double y = -gamepad1.left_stick_x*.5 + -gamepad2.left_stick_x; // y direction is reversed
+            double x = gamepad1.left_stick_y*.5 + gamepad2.left_stick_y;
+            double rotate = -gamepad1.right_stick_x*.5 + -gamepad2.right_stick_x;
 
-            boolean servoIntakeOn = gamepad1.a;
-            boolean servoIntakeOff = gamepad1.b;
+            boolean servoIntakeOn = gamepad1.a = gamepad2.a;
+            boolean servoIntakeOff = gamepad1.b = gamepad2.b;
 
-            boolean servoVliegtuigTrigger = gamepad1.left_bumper;
+            boolean servoVliegtuigTrigger = gamepad1.left_bumper = gamepad2.left_bumper;
 
-
-            double armPower = gamepad2.right_trigger - gamepad2.left_trigger;
-
-            if(grab){
-                arm.gripper(1);
-            } else if (release) {
-                arm.gripper(0);
+            if (gamepad2.dpad_down){
+                stop();
+                sleep(100);
             }
+
+            if(gamepad2.left_stick_button){
+                gamepad1.reset();
+            }
+            if (gamepad2.right_stick_button) {
+                gamepad1.reset();
+            }
+            if (gamepad2.dpad_down) {
+                terminateOpModeNow();
+            }
+
 
             if(servoIntakeOn){
                 arm.servoIntake(1);
@@ -57,15 +63,8 @@ public class STAdrive extends LinearOpMode {
                 arm.servoVliegtuig(0);
                 arm.servoVliegtuigHouder(0);
             }
-
-            arm.moveGripper(moveGripper);
             drivetrain.drive(x, y, rotate);
-            arm.move(armPower);
             telemetry.update();
-
-
-
-
         }
     }
 }
