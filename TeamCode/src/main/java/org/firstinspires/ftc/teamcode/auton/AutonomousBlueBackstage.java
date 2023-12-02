@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -19,38 +21,37 @@ public class AutonomousBlueBackstage extends LinearOpMode {
     private Servo servoGripper;
     private Servo servoMoveGripper;
     private Servo servoIntake;
-    double power = 1;
+    double power = .25;
 
     private double servoGripperMin = 0.0;  // Minimum position for servo1 (in degrees)
     private double servoGripperMax = 180.0;  // Maximum position for servo1 (in degrees)
     private double servoMoveGripperMin = 0.0;  // Minimum position for servo2 (in degrees)
     private double servoMoveGripperMax = 180.0;  // Maximum position for servo2 (in degrees)
 
+    public void init(HardwareMap map) {
+        leftFront = map.get(DcMotorEx.class, "left_front");
+        rightFront = map.get(DcMotorEx.class, "right_front");
+        leftBack = map.get(DcMotorEx.class, "left_back");
+        rightBack = map.get(DcMotorEx.class, "right_back");
 
-    @Override
-    public void runOpMode() {
-        waitForStart();
-        runtime.reset();
-        telemetry.addData("Status", "Initialized");
-        telemetry.update();
-
-        leftFront = hardwareMap.get(DcMotorEx.class, "left_front");
-        rightFront = hardwareMap.get(DcMotorEx.class, "right_front");
-        leftBack = hardwareMap.get(DcMotorEx.class, "left_back");
-        rightBack = hardwareMap.get(DcMotorEx.class, "right_back");
         arm1 = hardwareMap.get(DcMotorEx.class, "arm1");
 
         servoGripper = hardwareMap.get(Servo.class, "servoGripper");
         servoMoveGripper = hardwareMap.get(Servo.class, "servoMoveGripper");
         servoIntake = hardwareMap.get(Servo.class, "Intake");
 
-        leftFront.setDirection(DcMotor.Direction.REVERSE);
-        rightFront.setDirection(DcMotor.Direction.FORWARD);
-        leftBack.setDirection(DcMotor.Direction.REVERSE);
-        rightBack.setDirection(DcMotor.Direction.FORWARD);
+        servoGripper.setPosition(0);
+        servoIntake.setPosition(1);
 
-        //arm1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        /*leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -58,65 +59,78 @@ public class AutonomousBlueBackstage extends LinearOpMode {
         leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);*/
+    }
 
+    @Override
+    public void runOpMode() {
+        runtime.reset();
+        telemetry.addData("Status", "Initialized");
+        telemetry.update();
 
+        init(hardwareMap);
+
+        //arm1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         waitForStart();
         runtime.reset();
 
 
         //pak pixel en wacht
-        servoGripper.setPosition(0);
+        servoGripper.setPosition(.2);
         servoIntake.setPosition(1);
-        sleep(5000);
+        sleep(400);
 
-        //Vanuit startpositie naar rechts
+        //Vanuit startpositie naar links
         leftFront.setPower(power);
         rightFront.setPower(-power);
         leftBack.setPower(-power);
         rightBack.setPower(power);
-        sleep(520);
+        sleep(3600);
 
         //Intake open voor loslaten paarse pixel
         servoIntake.setPosition(0);
 
-        //Klein beetje naar rechts
+        //stoppen
         leftFront.setPower(0);
         leftBack.setPower(0);
         rightBack.setPower(0);
         rightFront.setPower(0);
-        sleep(200);
+        sleep(400);
 
-        //stukje naar achteren voor pixel
+        //stukje naar voren voor pixel
         leftFront.setPower(-power);
         rightFront.setPower(-power);
         leftBack.setPower(-power);
         rightBack.setPower(-power);
-        sleep(180);
+        sleep(720);
 
         leftFront.setPower(0.8*power);
         rightFront.setPower(0.8*power);
         leftBack.setPower(0.8*power);
         rightBack.setPower(0.8*power);
-        sleep(500);
+        sleep(2000);
 
-        //Naar voren rijden en arm omhoog
-        arm1.setPower(power);
+        //Naar achteren rijden
         leftFront.setPower(0.8*power);
         rightFront.setPower(0.8*power);
         leftBack.setPower(0.8*power);
         rightBack.setPower(0.8*power);
-        sleep(400);
+        sleep(2600);
 
-        //langzaam tegen het bord aan rijden
+        //arm omhoog
+        arm1.setPower(1);
+        sleep(550);
+
+        //Klein stukje naar links
         arm1.setPower(0);
-        leftFront.setPower(0.3*power);
-        rightFront.setPower(0.3*power);
-        leftBack.setPower(0.3*power);
-        rightBack.setPower(0.3*power);
-        sleep(1800);
+        leftFront.setPower(-0.8*power);
+        rightFront.setPower(0.8*power);
+        leftBack.setPower(0.8*power);
+        rightBack.setPower(-0.8*power);
+        sleep(1000);
 
         //Alles uit
+        arm1.setPower(0);
         leftFront.setPower(0);
         rightFront.setPower(0);
         leftBack.setPower(0);
@@ -128,7 +142,7 @@ public class AutonomousBlueBackstage extends LinearOpMode {
         sleep(800);
 
         //laat gele pixel los
-        servoGripper.setPosition(1);
+        servoGripper.setPosition(.45);
         sleep(800);
 
         //alles uit
@@ -136,25 +150,43 @@ public class AutonomousBlueBackstage extends LinearOpMode {
         rightFront.setPower(0);
         leftBack.setPower(0);
         rightBack.setPower(0);
-        sleep(250);
+        sleep(3000);
 
         //kléin stukje naar voren
         leftFront.setPower(-power);
         rightFront.setPower(-power);
         leftBack.setPower(-power);
         rightBack.setPower(-power);
-        arm1.setPower(-power);
-        sleep(60);
+        sleep(1000);
+
+        //Klein stukje naar links
+        leftFront.setPower(-0.8*power);
+        rightFront.setPower(0.8*power);
+        leftBack.setPower(0.8*power);
+        rightBack.setPower(-0.8*power);
+        sleep(4000);
+
+        //Arm in
+        arm1.setPower(-1);
+        sleep(550);
+
+        //Naar achteren rijden
+        arm1.setPower(0);
+        leftFront.setPower(0.8*power);
+        rightFront.setPower(0.8*power);
+        leftBack.setPower(0.8*power);
+        rightBack.setPower(0.8*power);
+        sleep(3000);
 
         //alles uit
         leftFront.setPower(-0);
         rightFront.setPower(-0);
         leftBack.setPower(-0);
         rightBack.setPower(-0);
-        sleep(200);
+        sleep(400);
 
         arm1.setPower(0);
-
+        servoMoveGripper.setPosition(1);
 
 
 

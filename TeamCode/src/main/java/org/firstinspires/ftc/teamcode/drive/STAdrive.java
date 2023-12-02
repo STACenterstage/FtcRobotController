@@ -10,6 +10,7 @@ import org.firstinspires.ftc.teamcode.robotParts.Drivetrain;
 public class STAdrive extends LinearOpMode {
     Drivetrain.drivetrain drivetrain = new Drivetrain.drivetrain();
     Arm arm = new Arm();
+    boolean hold = false;
     @Override
     public void runOpMode() throws InterruptedException {
         drivetrain.init(hardwareMap);
@@ -28,6 +29,8 @@ public class STAdrive extends LinearOpMode {
             boolean grab = gamepad2.a;
             boolean release = gamepad2.b;
             double moveGripper = gamepad2.left_stick_x *-1 +1;
+            boolean holdChange = gamepad2.dpad_down;
+            boolean holdOff = gamepad2.dpad_up;
 
             boolean servoIntakeOn = gamepad1.a;
             boolean servoIntakeOff = gamepad1.b;
@@ -37,10 +40,14 @@ public class STAdrive extends LinearOpMode {
 
             double armPower = gamepad2.right_trigger - gamepad2.left_trigger;
 
+            boolean GripperHoldOn = gamepad2.left_bumper;
+            boolean GripperHoldOff = gamepad2.right_bumper;
+
+
             if(grab){
-                arm.gripper(1);
+                arm.gripper(.45);
             } else if (release) {
-                arm.gripper(0);
+                arm.gripper(.2);
             }
 
             if(servoIntakeOn){
@@ -56,6 +63,24 @@ public class STAdrive extends LinearOpMode {
                 sleep(800);
                 arm.servoVliegtuig(0);
                 arm.servoVliegtuigHouder(0);
+            }
+
+            if(holdChange){
+                hold = true;
+            }
+            else if(holdOff){
+                hold = false;
+            }
+
+            if(GripperHoldOn){
+                arm.servoGripperHold(1);
+            }
+            else if(GripperHoldOff){
+                arm.servoGripperHold(0);
+            }
+
+            if(hold){
+                arm.hold();
             }
 
             arm.moveGripper(moveGripper);

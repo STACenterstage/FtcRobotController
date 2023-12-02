@@ -4,8 +4,12 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+
 
     @Autonomous(name="AutonomousRedWing", group="LinearOpmode")
     public class AutonomousRedWing extends LinearOpMode {
@@ -19,53 +23,69 @@ import com.qualcomm.robotcore.util.ElapsedTime;
         private Servo servoGripper;
         private Servo servoMoveGripper;
         private Servo servoIntake;
-        double power = 1;
+        double power = .6;
 
         private double servoGripperMin = 0.0;  // Minimum position for servo1 (in degrees)
         private double servoGripperMax = 180.0;  // Maximum position for servo1 (in degrees)
         private double servoMoveGripperMin = 0.0;  // Minimum position for servo2 (in degrees)
         private double servoMoveGripperMax = 180.0;  // Maximum position for servo2 (in degrees)
 
+        public void init(HardwareMap map) {
+            leftFront = map.get(DcMotorEx.class, "left_front");
+            rightFront = map.get(DcMotorEx.class, "right_front");
+            leftBack = map.get(DcMotorEx.class, "left_back");
+            rightBack = map.get(DcMotorEx.class, "right_back");
 
-        @Override
-        public void runOpMode() {
-            waitForStart();
-            runtime.reset();
-            telemetry.addData("Status", "Initialized");
-            telemetry.update();
-
-            leftFront = hardwareMap.get(DcMotorEx.class, "left_front");
-            rightFront = hardwareMap.get(DcMotorEx.class, "right_front");
-            leftBack = hardwareMap.get(DcMotorEx.class, "left_back");
-            rightBack = hardwareMap.get(DcMotorEx.class, "right_back");
             arm1 = hardwareMap.get(DcMotorEx.class, "arm1");
 
             servoGripper = hardwareMap.get(Servo.class, "servoGripper");
             servoMoveGripper = hardwareMap.get(Servo.class, "servoMoveGripper");
             servoIntake = hardwareMap.get(Servo.class, "Intake");
 
-            leftFront.setDirection(DcMotor.Direction.REVERSE);
-            rightFront.setDirection(DcMotor.Direction.FORWARD);
-            leftBack.setDirection(DcMotor.Direction.REVERSE);
-            rightBack.setDirection(DcMotor.Direction.FORWARD);
+            servoGripper.setPosition(0);
+            servoIntake.setPosition(1);
 
-            //arm1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+            leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
+            leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+            /*leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+            leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);*/
+        }
+
+        @Override
+        public void runOpMode() {
+            runtime.reset();
+            telemetry.addData("Status", "Initialized");
+            telemetry.update();
+
+            init(hardwareMap);
 
             waitForStart();
             runtime.reset();
 
             //pak pixel en wacht
-            servoGripper.setPosition(0);
+            servoGripper.setPosition(.2);
             servoIntake.setPosition(1);
-            sleep(5000);
+            sleep(100);
 
             //Vanuit startpositie naar links
             leftFront.setPower(-power);
             rightFront.setPower(power);
             leftBack.setPower(power);
             rightBack.setPower(-power);
-            sleep(520);
+            sleep(650);
 
             //Intake open voor loslaten paarse pixel
             servoIntake.setPosition(0);
@@ -119,7 +139,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             sleep(800);
 
             //laat gele pixel los
-            servoGripper.setPosition(1);
+            servoGripper.setPosition(.45);
             sleep(800);
 
             //alles uit
@@ -145,6 +165,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             sleep(200);
 
             arm1.setPower(0);
+            servoMoveGripper.setPosition(1);
 
 
 
