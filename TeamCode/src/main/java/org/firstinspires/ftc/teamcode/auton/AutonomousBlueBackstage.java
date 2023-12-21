@@ -18,6 +18,7 @@ public class AutonomousBlueBackstage extends LinearOpMode {
     private DcMotorEx leftBack;
     private DcMotorEx rightBack;
     private DcMotorEx arm1;
+    
     private Servo servoGripper;
     private Servo servoMoveGripper;
     private Servo servoIntake;
