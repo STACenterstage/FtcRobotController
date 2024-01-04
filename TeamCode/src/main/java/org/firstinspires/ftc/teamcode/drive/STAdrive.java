@@ -91,7 +91,6 @@ public class STAdrive extends LinearOpMode {
                 arm.hold();
             }
 
-
             telemetry.addData("ArmPos",arm.ArmPos());
             arm.moveGripper(moveGripper);
             drivetrain.drive(x, y, rotate);
