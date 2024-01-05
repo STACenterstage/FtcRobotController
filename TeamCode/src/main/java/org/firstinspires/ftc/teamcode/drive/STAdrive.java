@@ -55,7 +55,7 @@ public class STAdrive extends LinearOpMode {
                 arm.ChopstickL(0.47);
                 arm.ChopstickR(0.3);
             }
-            else if(opModeIsActive()) {
+            else {
                 if (chopstickLOff) {
                     arm.ChopstickL(1);
                 }

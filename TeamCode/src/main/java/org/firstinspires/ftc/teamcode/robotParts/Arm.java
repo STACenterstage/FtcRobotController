@@ -48,8 +48,8 @@ public class Arm {
     }
     public void hold(){double power = arm.getPower(); arm.setPower(power);}
 
-    public void spoelPositivePower(double spoelPower){spoel.setPower(spoelPower);}
-    public void spoelNegativePower(double spoelPower){spoel.setPower(-spoelPower);}
+    //public void spoelPositivePower(double spoelPower){spoel.setPower(spoelPower);}
+    //public void spoelNegativePower(double spoelPower){spoel.setPower(-spoelPower);}
 
     public int ArmPos(){return armEncoder.getCurrentPosition();}
 
