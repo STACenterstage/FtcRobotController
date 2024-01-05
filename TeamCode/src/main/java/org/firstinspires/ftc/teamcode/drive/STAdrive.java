@@ -64,7 +64,6 @@ public class STAdrive extends LinearOpMode {
                 }
             }
 
-
             /*
             if(runtime.milliseconds() > 2500) {
                 if (spoelPositivePower) {
