@@ -29,8 +29,8 @@ public class STAdrive extends LinearOpMode {
             double y = -gamepad1.left_stick_x; // y direction is reversed
             double x = gamepad1.left_stick_y;
             double rotate = -gamepad1.right_stick_x;
-            boolean grab = gamepad2.a;
-            boolean release = gamepad2.b;
+
+
             double moveGripper = gamepad2.left_stick_x *-1 +1;
             boolean holdChange = gamepad2.dpad_down;
             boolean holdOff = gamepad2.dpad_up;
@@ -40,20 +40,33 @@ public class STAdrive extends LinearOpMode {
 
             boolean servoVliegtuigTrigger = gamepad1.left_bumper;
 
-            boolean spoelNegativePower = gamepad2.left_bumper;
-            boolean spoelPositivePower = gamepad2.right_bumper;
+            //boolean spoelNegativePower = gamepad2.left_bumper;
+            //boolean spoelPositivePower = gamepad2.right_bumper;
 
-            double armPower = (gamepad2.right_trigger - gamepad2.left_trigger)*.65;
+            double armPower = (gamepad2.right_trigger - gamepad2.left_trigger);
+
+            boolean chopstickOn = gamepad2.y;
+            boolean chopstickLOff = gamepad2.left_bumper;
+            boolean chopstickROff = gamepad2.right_bumper;
 
 
 
-            if(grab){
-                arm.gripper(.45);
-            } else if (release) {
-                arm.gripper(.2);
+            if(chopstickOn){
+                arm.ChopstickL(0.47);
+                arm.ChopstickR(0.3);
+            }
+            else if(opModeIsActive()) {
+                if (chopstickLOff) {
+                    arm.ChopstickL(1);
+                }
+                if (chopstickROff) {
+                    arm.ChopstickR(0);
+                }
             }
 
-            if(runtime.milliseconds() > 90000) {
+
+            /*
+            if(runtime.milliseconds() > 2500) {
                 if (spoelPositivePower) {
                     arm.spoelPositivePower(1);
                 } else if (spoelNegativePower) {
@@ -63,7 +76,7 @@ public class STAdrive extends LinearOpMode {
                     arm.spoelPositivePower(0);
                 }
             }
-
+            */
 
             if(servoIntakeOn){
                 arm.servoIntake(1);

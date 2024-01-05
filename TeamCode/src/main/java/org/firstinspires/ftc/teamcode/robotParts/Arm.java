@@ -12,7 +12,10 @@ public class Arm {
     public DcMotorEx armEncoder;
 
     public DcMotorEx spoel;
-    private Servo servoGripper;
+
+    private Servo servoChopstickL;
+    private Servo servoChopstickR;
+
     private Servo servoMoveGripper;
     private Servo servoIntake;
     public Servo servoVliegtuig;
@@ -30,7 +33,8 @@ public class Arm {
 
         spoel = map.get(DcMotorEx.class, "spoel");
 
-        servoGripper = map.get(Servo.class, "servoGripper");
+        servoChopstickL = map.get(Servo.class, "servoChopstickL");
+        servoChopstickR = map.get(Servo.class, "servoChopstickR");
         servoMoveGripper = map.get(Servo.class, "servoMoveGripper");
         servoIntake = map.get(Servo.class, "Intake");
         servoVliegtuig = map.get(Servo.class, "Vliegtuig");
@@ -50,7 +54,8 @@ public class Arm {
     public int ArmPos(){return armEncoder.getCurrentPosition();}
 
     public void move(double armPowerLocal){arm.setPower(armPowerLocal);}
-    public void gripper(double position){servoGripper.setPosition(position);}
+    public void ChopstickL(double position){servoChopstickL.setPosition(position);}
+    public void ChopstickR(double position){servoChopstickR.setPosition(position);}
     public void moveGripper(double position){servoMoveGripper.setPosition(position);}
     public void servoIntake(double position){servoIntake.setPosition(position);}
     public void servoVliegtuig(double position){servoVliegtuig.setPosition(position);}
