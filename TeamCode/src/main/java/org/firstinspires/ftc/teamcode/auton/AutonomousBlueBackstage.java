@@ -229,5 +229,6 @@ public class AutonomousBlueBackstage extends LinearOpMode {
             leftFront.setPower(0);
             rightFront.setPower(0);
             leftBack.setPower(0);
-            rightBack.setPower(0);*/
+            rightBack.setPower(0);
+*/
 

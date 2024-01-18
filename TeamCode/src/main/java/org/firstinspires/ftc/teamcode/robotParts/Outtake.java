@@ -1,11 +1,12 @@
 package org.firstinspires.ftc.teamcode.robotParts;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@TeleOp(name = "ServoControlWithGamepad", group = "TeleOp")
+@Disabled //(name = "ServoControlWithGamepad", group = "TeleOp")
 public class Outtake extends LinearOpMode {
 
     private Servo servoGripper;

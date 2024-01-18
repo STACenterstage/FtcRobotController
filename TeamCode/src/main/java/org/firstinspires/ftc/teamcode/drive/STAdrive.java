@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.drive;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
 import org.firstinspires.ftc.teamcode.robotParts.Arm;
 //import org.firstinspires.ftc.teamcode.robotParts.Limits;
 import org.firstinspires.ftc.teamcode.robotParts.Drivetrain;
@@ -14,12 +13,19 @@ public class STAdrive extends LinearOpMode {
     Drivetrain.drivetrain drivetrain = new Drivetrain.drivetrain();
     Arm arm = new Arm();
     boolean hold = false;
+    boolean btnMode = false;
+    int armHeight;
+
     @Override
     public void runOpMode() throws InterruptedException {
         drivetrain.init(hardwareMap);
         arm.init(hardwareMap);
 //            intake.init(hardwareMap);
 
+
+        telemetry.addData("ArmPos", arm.ArmPos());
+        telemetry.addData("MoveGripperPos", arm.MoveGripperPos());
+        telemetry.update();
 
         waitForStart();
 
@@ -30,8 +36,6 @@ public class STAdrive extends LinearOpMode {
             double x = gamepad1.left_stick_y;
             double rotate = -gamepad1.right_stick_x;
 
-
-            double moveGripper = gamepad2.left_stick_x *-1 +1;
             boolean holdChange = gamepad2.dpad_down;
             boolean holdOff = gamepad2.dpad_up;
 
@@ -40,29 +44,73 @@ public class STAdrive extends LinearOpMode {
 
             boolean servoVliegtuigTrigger = gamepad1.left_bumper;
 
+
             //boolean spoelNegativePower = gamepad2.left_bumper;
             //boolean spoelPositivePower = gamepad2.right_bumper;
 
             double armPower = (gamepad2.right_trigger - gamepad2.left_trigger);
+
+            boolean intakeBtn = gamepad2.x;
+            boolean til = gamepad2.dpad_left;
+            boolean pak = gamepad2.dpad_right;
 
             boolean chopstickOn = gamepad2.y;
             boolean chopstickLOff = gamepad2.left_bumper;
             boolean chopstickROff = gamepad2.right_bumper;
 
 
-
-            if(chopstickOn){
-                arm.ChopstickL(0.47);
-                arm.ChopstickR(0.3);
-            }
-            else {
+            if (chopstickOn) {
+                arm.chopstickL(0.47);
+                arm.chopstickR(0.3);
+            } else {
                 if (chopstickLOff) {
-                    arm.ChopstickL(1);
+                    arm.chopstickL(1);
                 }
                 if (chopstickROff) {
-                    arm.ChopstickR(0);
+                    arm.chopstickR(0);
                 }
             }
+
+            boolean intakeOn = gamepad1.a;
+            boolean intakeOff = gamepad1.b;
+
+            if (intakeOn) {
+                arm.intakeL(1);
+                arm.intakeR(0);
+            } else if (intakeOff) {
+                arm.intakeL(0);
+                arm.intakeR(1);
+            }
+
+            boolean pixelsPakken = gamepad2.dpad_left;
+            boolean pixelsOptillen = gamepad2.dpad_right;
+
+            if (pixelsOptillen) {
+                if (arm.ArmPos() < -320) {
+                    while (arm.ArmPos() < -310) {
+                        arm.move(.7);
+                    }
+                }
+                else if (arm.ArmPos() > -280) {
+                    while (arm.ArmPos() > -290) {
+                        arm.move(-.7);
+                    }
+                }
+            }
+            else if (pixelsPakken) {
+                if (arm.ArmPos() < -520) {
+                    while (arm.ArmPos() < -510) {
+                        arm.move(.7);
+                    }
+                }
+                else if (arm.ArmPos() > -480) {
+                    while (arm.ArmPos() > -490) {
+                        arm.move(-.7);
+                    }
+                }
+            }
+
+
 
             /*
             if(runtime.milliseconds() > 2500) {
@@ -77,34 +125,42 @@ public class STAdrive extends LinearOpMode {
             }
             */
 
-            if(servoIntakeOn){
+            if (servoIntakeOn) {
                 arm.servoIntake(1);
             } else if (servoIntakeOff) {
                 arm.servoIntake(0);
             }
 
-            if(servoVliegtuigTrigger){
+            if (servoVliegtuigTrigger) {
                 arm.servoVliegtuigHouder(1);
-                sleep(200);
+                sleep(80);
                 arm.servoVliegtuig(1);
-                sleep(800);
+                sleep(920);
                 arm.servoVliegtuig(0);
                 arm.servoVliegtuigHouder(0);
             }
 
-            if(holdChange){
-                hold = true;
-            }
-            else if(holdOff){
-                hold = false;
-            }
-
-            if(hold){
-                arm.hold();
+            if (arm.ArmPos() < 2550) {
+                arm.moveGripper(.75);
+            } else if (arm.ArmPos() > 2600) {
+                arm.moveGripper(0.000275 * arm.ArmPos() - 0.76);
             }
 
-            telemetry.addData("ArmPos",arm.ArmPos());
-            arm.moveGripper(moveGripper);
+            /*if (intakeBtn)
+                if (til) {
+                btnMode = true;
+                armHeight = -300;
+            } else if (pak) {
+                btnMode = true;
+                armHeight = -500;
+            }
+
+            if (Math.abs(armPower) > 0.1) {
+                btnMode = false;
+            }
+*/
+            telemetry.addData("ArmPos", arm.ArmPos());
+            telemetry.addData("MoveGripperPos", arm.MoveGripperPos());
             drivetrain.drive(x, y, rotate);
             arm.move(armPower);
             telemetry.update();

@@ -1,8 +1,8 @@
-package org.firstinspires.ftc.teamcode.auton.Camera;
+package org.firstinspires.ftc.teamcode.auton.Camera.STTcamera;
 
-import org.checkerframework.checker.index.qual.LTEqLengthOf;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.auton.Camera.TPR;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Rect;
@@ -14,18 +14,19 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvPipeline;
 import org.openftc.easyopencv.OpenCvWebcam;
 
-public class OpenCVRandomization{
-    TPR myOpMode;
+public class OpenCVTrussIsLeft {
+    LinearOpMode myOpMode;
     OpenCvWebcam webcam1 = null;
 
     public int pos = 0; //Left 0, Middle 1, Right 2
     double centerAvgFin;
     double rightAvgFin;
 
-    public OpenCVRandomization(TPR opMode) {myOpMode = opMode;}
+    public OpenCVTrussIsLeft(LinearOpMode opMode) {myOpMode = opMode;}
     public void findScoringPosition() {
         WebcamName webcamName = myOpMode.hardwareMap.get(WebcamName.class, "Webcam 1");
-        int cameraMonitorViewId = myOpMode.hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", myOpMode.hardwareMap.appContext.getPackageName());
+        int cameraMonitorViewId = myOpMode.hardwareMap.appContext.getResources().getIdentifier
+                ("cameraMonitorViewId", "id", myOpMode.hardwareMap.appContext.getPackageName());
         webcam1 = OpenCvCameraFactory.getInstance().createWebcam(webcamName, cameraMonitorViewId);
 
         webcam1.setPipeline(new examplePipeline());
@@ -43,14 +44,14 @@ public class OpenCVRandomization{
     }
     class examplePipeline extends OpenCvPipeline {
         Mat YCbCr = new Mat();
-        Rect midRect = new Rect(250,150, 180, 199);
-        Rect rightRect = new Rect(860, 140, 260, 300);
+        Rect midRect = new Rect(350, 200, 180, 199);
+        Rect rightRect = new Rect(900, 250, 230, 240);
 
         Mat outPut = new Mat();
         Scalar redColor = new Scalar(255.0, 0.0, 0.0);
         Scalar greenColor = new Scalar(0.0, 255.0, 0.0);
         public Mat processFrame(Mat input) {
-
+            // We do not change the second parameter, because aids.
             Imgproc.cvtColor(input, YCbCr, Imgproc.COLOR_RGB2HSV);
 
             input.copyTo(outPut);
@@ -59,8 +60,10 @@ public class OpenCVRandomization{
             Mat midCrop = YCbCr.submat(midRect);
             Mat rightCrop = YCbCr.submat(rightRect);
 
-
-            Core.extractChannel(midCrop, midCrop, 1); //Blue: 1, Red: 2
+            /**For YCbCr: Blue = 1, Red = 2
+             * For HSV: measures intensity so always use 1. No clue what the other values do/measure/are.
+             */
+            Core.extractChannel(midCrop, midCrop, 1);
             Core.extractChannel(rightCrop, rightCrop, 1);
 
             Scalar centerAvg = Core.mean(midCrop);
@@ -72,13 +75,13 @@ public class OpenCVRandomization{
             myOpMode.telemetry.addData("valueRight", rightAvgFin);
             myOpMode.telemetry.addData("valueCenter", centerAvgFin);
 
-            if (Math.abs(centerAvgFin - rightAvgFin) > 20 && centerAvgFin > rightAvgFin) {
+            if (Math.abs(centerAvgFin - rightAvgFin) > 16 && centerAvgFin > rightAvgFin) {
                 Imgproc.rectangle(outPut, midRect, greenColor, 2);
                 pos = 1;
                 myOpMode.telemetry.addData("Current_Pos", pos);
                 myOpMode.telemetry.addData("Conclusion", "mid");
 
-            } else if (Math.abs(centerAvgFin - rightAvgFin) > 30 && rightAvgFin > centerAvgFin) {
+            } else if (Math.abs(centerAvgFin - rightAvgFin) > 25 && rightAvgFin > centerAvgFin) {
                 Imgproc.rectangle(outPut, rightRect, greenColor, 2);
                 pos = 2;
                 myOpMode.telemetry.addData("Current_Pos", pos);
@@ -87,6 +90,7 @@ public class OpenCVRandomization{
                 myOpMode.telemetry.addData("Conclusion", "left");
                 pos = 0;
             }
+
             myOpMode.telemetry.addData("pos", pos);
             myOpMode.telemetry.update();
             return(outPut);
