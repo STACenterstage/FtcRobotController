@@ -96,7 +96,7 @@ public class CameraRedWing extends LinearOpMode {
                 rightFront.setPower(power);
                 leftBack.setPower(-power);
                 rightBack.setPower(power);
-                sleep(1320);
+                sleep(1300);
                 leftFront.setPower(-power);
                 rightFront.setPower(-power);
                 leftBack.setPower(-power);
@@ -119,16 +119,29 @@ public class CameraRedWing extends LinearOpMode {
                 rightBack.setPower(0);
 
 
-
-
-
-
             } else if (finalPos == 1) {
+                servoChopstickL.setPosition(1);
+                servoChopstickR.setPosition(0);
+                servoIntakeL.setPosition(0);
+                servoIntakeR.setPosition(1);
+                servoMoveGripper.setPosition(.82);
+                sleep(50);
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(1500);
+                sleep(3100);
+                leftFront.setPower(0);
+                rightFront.setPower(0);
+                leftBack.setPower(0);
+                rightBack.setPower(0);
+                servoIntakeR.setPosition(0);
+                sleep(200);
+                leftFront.setPower(power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(power);
+                sleep(250);
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
@@ -136,10 +149,26 @@ public class CameraRedWing extends LinearOpMode {
 
             } else if (finalPos == 2){
                 leftFront.setPower(power);
-                rightFront.setPower(-power);
-                leftBack.setPower(-power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(1500);
+                sleep(2600);
+                leftFront.setPower(power);
+                rightFront.setPower(-power);
+                leftBack.setPower(power);
+                rightBack.setPower(-power);
+                sleep(1300);
+                leftFront.setPower(0);
+                rightFront.setPower(0);
+                leftBack.setPower(0);
+                rightBack.setPower(0);
+                servoIntakeR.setPosition(0);
+                sleep(200);
+                leftFront.setPower(power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(power);
+                sleep(250);
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
