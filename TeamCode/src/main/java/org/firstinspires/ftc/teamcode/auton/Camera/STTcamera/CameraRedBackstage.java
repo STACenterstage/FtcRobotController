@@ -58,8 +58,8 @@ public class CameraRedBackstage extends LinearOpMode {
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        servoChopstickL.setPosition(0);
-        servoChopstickR.setPosition(1);
+        arm.chopstickL(0.47);
+        arm.chopstickR(0.3);
         servoIntakeL.setPosition(0);
         servoIntakeR.setPosition(1);
         servoMoveGripper.setPosition(.82);
@@ -81,8 +81,8 @@ public class CameraRedBackstage extends LinearOpMode {
         if (opModeIsActive()) {
             int finalPos = camera.pos;
             if (finalPos == 0) {
-                servoChopstickL.setPosition(0);
-                servoChopstickR.setPosition(1);
+                arm.chopstickL(0.47);
+                arm.chopstickR(0.3);
                 servoIntakeL.setPosition(0);
                 servoIntakeR.setPosition(1);
                 servoMoveGripper.setPosition(.82);
