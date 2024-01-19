@@ -80,7 +80,7 @@ public class CameraRedWing extends LinearOpMode {
 
         if (opModeIsActive()) {
             int finalPos = camera.pos;
-            if (finalPos == 2) {
+            if (finalPos == 0) {
                 servoChopstickL.setPosition(1);
                 servoChopstickR.setPosition(0);
                 servoIntakeL.setPosition(0);
@@ -96,7 +96,7 @@ public class CameraRedWing extends LinearOpMode {
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(-power);
-                sleep(600);
+                sleep(800);
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
@@ -145,12 +145,12 @@ public class CameraRedWing extends LinearOpMode {
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(-power);
-                sleep(600);
+                sleep(800);
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(2550);
+                sleep(2700);
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
@@ -167,7 +167,7 @@ public class CameraRedWing extends LinearOpMode {
                 leftBack.setPower(0);
                 rightBack.setPower(0);
 
-            } else if (finalPos == 0){
+            } else if (finalPos == 2){
                 servoChopstickL.setPosition(1);
                 servoChopstickR.setPosition(0);
                 servoIntakeL.setPosition(0);
@@ -183,7 +183,7 @@ public class CameraRedWing extends LinearOpMode {
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(-power);
-                sleep(600);
+                sleep(800);
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
