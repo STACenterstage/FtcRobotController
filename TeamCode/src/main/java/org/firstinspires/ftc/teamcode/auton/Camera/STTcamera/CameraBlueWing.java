@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.robotParts.Arm;
 import org.firstinspires.ftc.teamcode.robotParts.Drivetrain;
@@ -23,6 +24,12 @@ public class CameraBlueWing extends LinearOpMode {
     private DcMotorEx leftBack;
     private DcMotorEx rightBack;
     private DcMotorEx arm1;
+    private Servo servoMoveGripper;
+    private Servo servoIntakeL; // dicht is 0
+    private Servo servoIntakeR; // dicht is 1
+    private Servo servoChopstickL;
+    private Servo servoChopstickR;
+
 
     double power = .3;
 
@@ -34,8 +41,14 @@ public class CameraBlueWing extends LinearOpMode {
         rightFront = map.get(DcMotorEx.class, "right_front");
         leftBack = map.get(DcMotorEx.class, "left_back");
         rightBack = map.get(DcMotorEx.class, "right_back");
-
         arm1 = hardwareMap.get(DcMotorEx.class, "arm1");
+
+
+        servoMoveGripper = hardwareMap.get(Servo.class, "servoMoveGripper");
+        servoIntakeL = hardwareMap.get(Servo.class, "servoIntakeL");
+        servoIntakeR = hardwareMap.get(Servo.class, "servoIntakeR");
+        servoChopstickL = hardwareMap.get(Servo.class, "servoChopstickL");
+        servoChopstickR = hardwareMap.get(Servo.class, "servoChopstickR");
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -45,9 +58,13 @@ public class CameraBlueWing extends LinearOpMode {
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        servoChopstickL.setPosition(1);
+        servoChopstickR.setPosition(0);
+        servoIntakeL.setPosition(0);
+        servoIntakeR.setPosition(1);
+        servoMoveGripper.setPosition(.82);
+
     }
-
-
 
     public void runOpMode() {
         methods.init(hardwareMap);
@@ -64,22 +81,67 @@ public class CameraBlueWing extends LinearOpMode {
         if (opModeIsActive()) {
             int finalPos = camera.pos;
             if (finalPos == 0) {
-                leftFront.setPower(-power);
+                servoChopstickL.setPosition(1);
+                servoChopstickR.setPosition(0);
+                servoIntakeL.setPosition(0);
+                servoIntakeR.setPosition(1);
+                servoMoveGripper.setPosition(.82);
+                sleep(50);
+                leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
+                rightBack.setPower(power);
+                sleep(2000);
+                leftFront.setPower(-power);
+                rightFront.setPower(power);
+                leftBack.setPower(-power);
+                rightBack.setPower(power);
+                sleep(1250);
+                leftFront.setPower(-power);
+                rightFront.setPower(-power);
+                leftBack.setPower(-power);
                 rightBack.setPower(-power);
-                sleep(1500);
+                sleep(640);
+                leftFront.setPower(0);
+                rightFront.setPower(0);
+                leftBack.setPower(0);
+                rightBack.setPower(0);
+                servoIntakeR.setPosition(0);
+                sleep(200);
+                leftFront.setPower(power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(power);
+                sleep(250);
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
                 rightBack.setPower(0);
 
+
             } else if (finalPos == 1) {
+                servoChopstickL.setPosition(1);
+                servoChopstickR.setPosition(0);
+                servoIntakeL.setPosition(0);
+                servoIntakeR.setPosition(1);
+                servoMoveGripper.setPosition(.82);
+                sleep(50);
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(1500);
+                sleep(2950);
+                leftFront.setPower(0);
+                rightFront.setPower(0);
+                leftBack.setPower(0);
+                rightBack.setPower(0);
+                servoIntakeR.setPosition(0);
+                sleep(200);
+                leftFront.setPower(power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(power);
+                sleep(250);
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
@@ -87,10 +149,26 @@ public class CameraBlueWing extends LinearOpMode {
 
             } else if (finalPos == 2){
                 leftFront.setPower(power);
-                rightFront.setPower(-power);
-                leftBack.setPower(-power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(1500);
+                sleep(2500);
+                leftFront.setPower(power);
+                rightFront.setPower(-power);
+                leftBack.setPower(power);
+                rightBack.setPower(-power);
+                sleep(1250);
+                leftFront.setPower(0);
+                rightFront.setPower(0);
+                leftBack.setPower(0);
+                rightBack.setPower(0);
+                servoIntakeR.setPosition(0);
+                sleep(200);
+                leftFront.setPower(power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(power);
+                sleep(250);
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);

@@ -80,7 +80,7 @@ public class CameraRedWing extends LinearOpMode {
 
         if (opModeIsActive()) {
             int finalPos = camera.pos;
-            if (finalPos == 0) {
+            if (finalPos == 2) {
                 servoChopstickL.setPosition(1);
                 servoChopstickR.setPosition(0);
                 servoIntakeL.setPosition(0);
@@ -91,12 +91,22 @@ public class CameraRedWing extends LinearOpMode {
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(2100);
+                sleep(300);
+                leftFront.setPower(-power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(-power);
+                sleep(600);
+                leftFront.setPower(power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(power);
+                sleep(1700);
                 leftFront.setPower(-power);
                 rightFront.setPower(power);
                 leftBack.setPower(-power);
                 rightBack.setPower(power);
-                sleep(1300);
+                sleep(1250);
                 leftFront.setPower(-power);
                 rightFront.setPower(-power);
                 leftBack.setPower(-power);
@@ -130,7 +140,17 @@ public class CameraRedWing extends LinearOpMode {
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(3100);
+                sleep(300);
+                leftFront.setPower(-power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(-power);
+                sleep(600);
+                leftFront.setPower(power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(power);
+                sleep(2550);
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
@@ -147,17 +167,33 @@ public class CameraRedWing extends LinearOpMode {
                 leftBack.setPower(0);
                 rightBack.setPower(0);
 
-            } else if (finalPos == 2){
+            } else if (finalPos == 0){
+                servoChopstickL.setPosition(1);
+                servoChopstickR.setPosition(0);
+                servoIntakeL.setPosition(0);
+                servoIntakeR.setPosition(1);
+                servoMoveGripper.setPosition(.82);
+                sleep(50);
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(2600);
+                sleep(300);
+                leftFront.setPower(-power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(-power);
+                sleep(600);
+                leftFront.setPower(power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(power);
+                sleep(2200);
                 leftFront.setPower(power);
                 rightFront.setPower(-power);
                 leftBack.setPower(power);
                 rightBack.setPower(-power);
-                sleep(1300);
+                sleep(1250);
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
