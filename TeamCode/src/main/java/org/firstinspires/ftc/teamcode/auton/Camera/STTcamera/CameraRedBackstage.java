@@ -13,8 +13,8 @@ import org.firstinspires.ftc.teamcode.robotParts.Arm;
 import org.firstinspires.ftc.teamcode.robotParts.Drivetrain;
 
 
-@Autonomous(name = "CameraRedWing")
-public class CameraRedWing extends LinearOpMode {
+@Autonomous(name = "CameraRedBackstage")
+public class CameraRedBackstage extends LinearOpMode {
 
     newAutonMethods methods = new newAutonMethods(this);
     OpenCVTrussIsLeft camera = new OpenCVTrussIsLeft(this);
@@ -58,8 +58,8 @@ public class CameraRedWing extends LinearOpMode {
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        servoChopstickL.setPosition(1);
-        servoChopstickR.setPosition(0);
+        servoChopstickL.setPosition(0);
+        servoChopstickR.setPosition(1);
         servoIntakeL.setPosition(0);
         servoIntakeR.setPosition(1);
         servoMoveGripper.setPosition(.82);
@@ -81,52 +81,147 @@ public class CameraRedWing extends LinearOpMode {
         if (opModeIsActive()) {
             int finalPos = camera.pos;
             if (finalPos == 0) {
-                servoChopstickL.setPosition(1);
-                servoChopstickR.setPosition(0);
+                servoChopstickL.setPosition(0);
+                servoChopstickR.setPosition(1);
                 servoIntakeL.setPosition(0);
                 servoIntakeR.setPosition(1);
                 servoMoveGripper.setPosition(.82);
                 sleep(50);
+
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(300);
-                leftFront.setPower(-power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(-power);
-                sleep(400);
-                leftFront.setPower(power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(power);
-                sleep(1700);
+                sleep(1870);
+
                 leftFront.setPower(-power);
                 rightFront.setPower(power);
                 leftBack.setPower(-power);
                 rightBack.setPower(power);
-                sleep(1300);
+                sleep(1200);
+
                 leftFront.setPower(-power);
                 rightFront.setPower(-power);
                 leftBack.setPower(-power);
                 rightBack.setPower(-power);
-                sleep(240);
+                sleep(640);
+
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
                 rightBack.setPower(0);
                 servoIntakeR.setPosition(0);
                 sleep(200);
+
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(250);
+                sleep(4000);
+
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
                 rightBack.setPower(0);
+                sleep(200);
+
+                /*leftFront.setPower(-power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(-power);
+                sleep(500);
+
+                leftFront.setPower(0);
+                rightFront.setPower(0);
+                leftBack.setPower(0);
+                rightBack.setPower(0);
+                sleep(200);*/
+
+                //naar voren nadat tegen bord aan
+                leftFront.setPower(-power);
+                rightFront.setPower(-power);
+                leftBack.setPower(-power);
+                rightBack.setPower(-power);
+                sleep(550);
+
+                leftFront.setPower(0);
+                rightFront.setPower(0);
+                leftBack.setPower(0);
+                rightBack.setPower(0);
+                sleep(200);
+
+                telemetry.addData("ArmPos",arm.ArmPos());
+                telemetry.update();
+
+                //arm omhoog
+                while (arm.ArmPos() < 2900){
+                    arm1.setPower(.7);
+                }
+                arm1.setPower(0);
+                sleep(200);
+
+                servoMoveGripper.setPosition(0.000275*arm.ArmPos()-0.75);
+                telemetry.addData("ArmPos",arm.ArmPos());
+                telemetry.update();
+                sleep(400);
+
+                //laat gele pixel los
+                servoChopstickL.setPosition(1);
+                servoChopstickR.setPosition(0);
+                sleep(800);
+
+
+                //alles uit
+                leftFront.setPower(0);
+                rightFront.setPower(0);
+                leftBack.setPower(0);
+                rightBack.setPower(0);
+                sleep(2000);
+
+                //klein stukje naar voren
+                leftFront.setPower(-power);
+                rightFront.setPower(-power);
+                leftBack.setPower(-power);
+                rightBack.setPower(-power);
+                sleep(1000);
+
+                //Klein stukje naar links
+                leftFront.setPower(power);
+                rightFront.setPower(-power);
+                leftBack.setPower(-power);
+                rightBack.setPower(power);
+                sleep(3000);
+
+                //Arm in
+                while (arm.ArmPos() > 500){
+                    arm1.setPower(-.7);
+                }
+                arm1.setPower(0);
+                sleep(100);
+
+                servoMoveGripper.setPosition(.745);
+                telemetry.addData("ArmPos",arm.ArmPos());
+                telemetry.update();
+                sleep(400);
+
+                //Naar achteren rijden
+                arm1.setPower(0);
+                leftFront.setPower(power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(power);
+                sleep(3000);
+
+                //alles uit
+                leftFront.setPower(-0);
+                rightFront.setPower(-0);
+                leftBack.setPower(-0);
+                rightBack.setPower(-0);
+                sleep(400);
+
+                arm1.setPower(0);
+                servoMoveGripper.setPosition(1);
+
 
 
             } else if (finalPos == 1) {
@@ -136,80 +231,57 @@ public class CameraRedWing extends LinearOpMode {
                 servoIntakeR.setPosition(1);
                 servoMoveGripper.setPosition(.82);
                 sleep(50);
+
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(300);
-                leftFront.setPower(-power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(-power);
-                sleep(400);
-                leftFront.setPower(power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(power);
-                sleep(2680);
+                sleep(3100);
+
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
                 rightBack.setPower(0);
                 servoIntakeR.setPosition(0);
                 sleep(200);
+
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
                 sleep(250);
+
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
                 rightBack.setPower(0);
 
             } else if (finalPos == 2){
-                servoChopstickL.setPosition(1);
-                servoChopstickR.setPosition(0);
-                servoIntakeL.setPosition(0);
-                servoIntakeR.setPosition(1);
-                servoMoveGripper.setPosition(.82);
-                sleep(50);
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(300);
-                leftFront.setPower(-power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(-power);
-                sleep(800);
-                leftFront.setPower(power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(power);
-                sleep(1300);
+                sleep(2500);
+
                 leftFront.setPower(power);
                 rightFront.setPower(-power);
                 leftBack.setPower(power);
                 rightBack.setPower(-power);
-                sleep(1650);
+                sleep(1250);
+
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
                 rightBack.setPower(0);
                 servoIntakeR.setPosition(0);
                 sleep(200);
-                leftFront.setPower(-power);
-                rightFront.setPower(-power);
-                leftBack.setPower(-power);
-                rightBack.setPower(-power);
-                sleep(800);
+
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
                 sleep(250);
+
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
@@ -218,37 +290,7 @@ public class CameraRedWing extends LinearOpMode {
             }
             sleep(30000);
 
-            telemetry.addData("DOnE","DONE");
-            telemetry.update();
-//            int finalPos = camera.pos;
-//            telemetry.addData("localPos", camera.pos);
-//            if (finalPos == 0) {
-//                methods.driveX(25.5 - 0.5 * methods.robotWidth_cm);
-//                methods.driveY(-90 + 0.5 * methods.robotLength_cm);
-//                methods.rotateToHeading(-90);
-//                methods.driveY(-40 + 0.5 * methods.robotLength_cm);
-//                methods.driveY(40 - 0.5 * methods.robotLength_cm);
-//                methods.driveX(-60 + 0.5 * methods.robotWidth_cm);
-//                methods.rotateToHeading(90);
-//                methods.driveY(-80 + 0.5 * methods.robotLength_cm);
-//            } else if (finalPos == 1) {
-//                methods.driveX(25.5 - 0.5 * methods.robotWidth_cm);
-//                methods.driveY(-112 + methods.robotLength_cm);
-//                methods.driveY(30);
-//                methods.driveX(-60);
-//                methods.driveY(-90 + 0.5 * methods.robotLength_cm);
-//                methods.rotateToHeading(90);
-//                methods.driveY(-30);
-//            } else if (finalPos == 2){
-//                methods.driveX(-0.5 * methods.robotWidth_cm);
-//                methods.driveY(-90 + 0.5 * methods.robotLength_cm);
-//                methods.driveY(30);
-//                methods.driveX(-30);
-//                methods.driveY(-90 + 0.5 * methods.robotLength_cm);
-//                methods.rotateToHeading(90);
-//                methods.driveY(-25);
-//            }
-            sleep(30000);
+
         }
     }
 }

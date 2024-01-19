@@ -143,7 +143,7 @@ public class STAdrive extends LinearOpMode {
             if (arm.ArmPos() < 2550) {
                 arm.moveGripper(.75);
             } else if (arm.ArmPos() > 2600) {
-                arm.moveGripper(0.000275 * arm.ArmPos() - 0.76);
+                arm.moveGripper(0.000275 * arm.ArmPos() - 0.745);
             }
 
             /*if (intakeBtn)

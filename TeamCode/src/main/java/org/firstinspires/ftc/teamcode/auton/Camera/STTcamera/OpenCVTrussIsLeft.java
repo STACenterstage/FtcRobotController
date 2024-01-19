@@ -75,9 +75,10 @@ public class OpenCVTrussIsLeft {
             myOpMode.telemetry.addData("valueRight", rightAvgFin);
             myOpMode.telemetry.addData("valueCenter", centerAvgFin);
 
-            if (Math.abs(centerAvgFin - rightAvgFin) > 16 && centerAvgFin > rightAvgFin) {
+            if (Math.abs(centerAvgFin - rightAvgFin) > 25 && centerAvgFin > rightAvgFin) {
                 Imgproc.rectangle(outPut, midRect, greenColor, 2);
                 pos = 1;
+
                 myOpMode.telemetry.addData("Current_Pos", pos);
                 myOpMode.telemetry.addData("Conclusion", "mid");
 
