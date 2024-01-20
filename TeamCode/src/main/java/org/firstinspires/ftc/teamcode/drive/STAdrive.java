@@ -82,35 +82,6 @@ public class STAdrive extends LinearOpMode {
                 arm.intakeR(1);
             }
 
-            boolean pixelsPakken = gamepad2.dpad_left;
-            boolean pixelsOptillen = gamepad2.dpad_right;
-
-            if (pixelsOptillen) {
-                if (arm.ArmPos() < -320) {
-                    while (arm.ArmPos() < -310) {
-                        arm.move(.7);
-                    }
-                }
-                else if (arm.ArmPos() > -280) {
-                    while (arm.ArmPos() > -290) {
-                        arm.move(-.7);
-                    }
-                }
-            }
-            else if (pixelsPakken) {
-                if (arm.ArmPos() < -520) {
-                    while (arm.ArmPos() < -510) {
-                        arm.move(.7);
-                    }
-                }
-                else if (arm.ArmPos() > -480) {
-                    while (arm.ArmPos() > -490) {
-                        arm.move(-.7);
-                    }
-                }
-            }
-
-
 
             /*
             if(runtime.milliseconds() > 2500) {
