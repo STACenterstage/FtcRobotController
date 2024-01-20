@@ -204,7 +204,7 @@ public class CameraRedWing extends LinearOpMode {
                 rightFront.setPower(-power);
                 leftBack.setPower(-power);
                 rightBack.setPower(-power);
-                sleep(800);
+                sleep(650);
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);

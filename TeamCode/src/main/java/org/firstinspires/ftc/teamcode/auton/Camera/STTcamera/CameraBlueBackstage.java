@@ -12,9 +12,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.robotParts.Arm;
 import org.firstinspires.ftc.teamcode.robotParts.Drivetrain;
 
-
-@Autonomous(name = "CameraRedBackstage")
-public class CameraRedBackstage extends LinearOpMode {
+@Autonomous(name = "CameraBlueBackstage")
+public class CameraBlueBackstage extends LinearOpMode {
 
     newAutonMethods methods = new newAutonMethods(this);
     OpenCVTrussIsLeft camera = new OpenCVTrussIsLeft(this);
@@ -81,38 +80,43 @@ public class CameraRedBackstage extends LinearOpMode {
         if (opModeIsActive()) {
             int finalPos = camera.pos;
             if (finalPos == 0) {
-                servoChopstickL.setPosition(0.47);
-                servoChopstickR.setPosition(0.3);
+                servoChopstickL.setPosition(1);
+                servoChopstickR.setPosition(0);
                 servoIntakeL.setPosition(0);
                 servoIntakeR.setPosition(1);
                 servoMoveGripper.setPosition(.82);
                 sleep(50);
-
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(1870);
-
+                sleep(300);
                 leftFront.setPower(-power);
                 rightFront.setPower(power);
-                leftBack.setPower(-power);
-                rightBack.setPower(power);
-                sleep(1200);
-
-                leftFront.setPower(-power);
-                rightFront.setPower(-power);
-                leftBack.setPower(-power);
+                leftBack.setPower(power);
                 rightBack.setPower(-power);
-                sleep(640);
-
+                sleep(400);
+                leftFront.setPower(power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(power);
+                sleep(2000);
+                leftFront.setPower(power);
+                rightFront.setPower(-power);
+                leftBack.setPower(power);
+                rightBack.setPower(-power);
+                sleep(1250);
+                leftFront.setPower(power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(power);
+                sleep(1300);
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
                 rightBack.setPower(0);
                 servoIntakeR.setPosition(0);
                 sleep(200);
-
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
@@ -124,7 +128,7 @@ public class CameraRedBackstage extends LinearOpMode {
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(-power);
-                sleep(500);
+                sleep(200);
 
                 leftFront.setPower(power);
                 rightFront.setPower(power);
@@ -201,10 +205,10 @@ public class CameraRedBackstage extends LinearOpMode {
                 sleep(1000);
 
                 //Klein stukje naar links
-                leftFront.setPower(power);
-                rightFront.setPower(-power);
-                leftBack.setPower(-power);
-                rightBack.setPower(power);
+                leftFront.setPower(-power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(-power);
                 sleep(3020);
 
                 //Arm in
@@ -238,25 +242,42 @@ public class CameraRedBackstage extends LinearOpMode {
                 servoMoveGripper.setPosition(.8);
 
             } else if (finalPos == 1) {
-                servoChopstickL.setPosition(0.47);
-                servoChopstickR.setPosition(0.3);
+                servoChopstickL.setPosition(1);
+                servoChopstickR.setPosition(0);
                 servoIntakeL.setPosition(0);
                 servoIntakeR.setPosition(1);
                 servoMoveGripper.setPosition(.82);
                 sleep(50);
-
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(2900);
-
+                sleep(300);
+                leftFront.setPower(-power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(-power);
+                sleep(400);
+                leftFront.setPower(power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(power);
+                sleep(2680);
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
                 rightBack.setPower(0);
                 servoIntakeR.setPosition(0);
                 sleep(200);
+                leftFront.setPower(power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(power);
+                sleep(250);
+                leftFront.setPower(0);
+                rightFront.setPower(0);
+                leftBack.setPower(0);
+                rightBack.setPower(0);
 
                 leftFront.setPower(power);
                 rightFront.setPower(power);
@@ -264,10 +285,10 @@ public class CameraRedBackstage extends LinearOpMode {
                 rightBack.setPower(power);
                 sleep(300);
 
-                leftFront.setPower(-power);
-                rightFront.setPower(power);
-                leftBack.setPower(-power);
-                rightBack.setPower(power);
+                leftFront.setPower(power);
+                rightFront.setPower(-power);
+                leftBack.setPower(power);
+                rightBack.setPower(-power);
                 sleep(1250);
 
                 servoIntakeR.setPosition(1);
@@ -277,10 +298,10 @@ public class CameraRedBackstage extends LinearOpMode {
                 rightBack.setPower(power);
                 sleep(2000);
 
-                leftFront.setPower(power);
-                rightFront.setPower(-power);
-                leftBack.setPower(-power);
-                rightBack.setPower(power);
+                leftFront.setPower(-power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(-power);
                 sleep(1800);
 
                 leftFront.setPower(power);
@@ -335,10 +356,10 @@ public class CameraRedBackstage extends LinearOpMode {
                 sleep(1000);
 
                 //Klein stukje naar links
-                leftFront.setPower(power);
-                rightFront.setPower(-power);
-                leftBack.setPower(-power);
-                rightBack.setPower(power);
+                leftFront.setPower(-power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(-power);
                 sleep(2000);
 
                 //Arm in
@@ -372,22 +393,56 @@ public class CameraRedBackstage extends LinearOpMode {
                 servoMoveGripper.setPosition(.8);
 
             } else if (finalPos == 2){
-                servoChopstickL.setPosition(0.47);
-                servoChopstickR.setPosition(0.3);
+                servoChopstickL.setPosition(1);
+                servoChopstickR.setPosition(0);
                 servoIntakeL.setPosition(0);
                 servoIntakeR.setPosition(1);
                 servoMoveGripper.setPosition(.82);
                 sleep(50);
-
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(1870);
-
+                sleep(300);
                 leftFront.setPower(-power);
                 rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(-power);
+                sleep(800);
+                leftFront.setPower(power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(power);
+                sleep(1300);
+                leftFront.setPower(power);
+                rightFront.setPower(-power);
+                leftBack.setPower(power);
+                rightBack.setPower(-power);
+                sleep(1650);
+                leftFront.setPower(0);
+                rightFront.setPower(0);
+                leftBack.setPower(0);
+                rightBack.setPower(0);
+                servoIntakeR.setPosition(0);
+                sleep(200);
+                leftFront.setPower(-power);
+                rightFront.setPower(-power);
                 leftBack.setPower(-power);
+                rightBack.setPower(-power);
+                sleep(650);
+                leftFront.setPower(power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(power);
+                sleep(250);
+                leftFront.setPower(0);
+                rightFront.setPower(0);
+                leftBack.setPower(0);
+                rightBack.setPower(0);
+
+                leftFront.setPower(power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
                 rightBack.setPower(power);
                 sleep(1200);
 
@@ -396,46 +451,19 @@ public class CameraRedBackstage extends LinearOpMode {
                 leftBack.setPower(0);
                 rightBack.setPower(0);
                 sleep(200);
-
-                leftFront.setPower(power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(power);
-                sleep(1100);
-
-                servoIntakeR.setPosition(0);
-                sleep(500);
 
                 servoIntakeR.setPosition(1);
-                leftFront.setPower(power);
-                rightFront.setPower(-power);
-                leftBack.setPower(-power);
-                rightBack.setPower(power);
-                sleep(700);
-
-                leftFront.setPower(power);
+                leftFront.setPower(-power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
-                rightBack.setPower(power);
-                sleep(1200);
-
-                leftFront.setPower(0);
-                rightFront.setPower(0);
-                leftBack.setPower(0);
-                rightBack.setPower(0);
-                sleep(200);
-
-                leftFront.setPower(power);
-                rightFront.setPower(-power);
-                leftBack.setPower(-power);
-                rightBack.setPower(power);
+                rightBack.setPower(-power);
                 sleep(150);
 
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(1000);
+                sleep(3000);
 
                 leftFront.setPower(0);
                 rightFront.setPower(0);
@@ -488,7 +516,6 @@ public class CameraRedBackstage extends LinearOpMode {
                 servoChopstickR.setPosition(0);
                 sleep(800);
 
-
                 //alles uit
                 leftFront.setPower(0);
                 rightFront.setPower(0);
@@ -504,10 +531,10 @@ public class CameraRedBackstage extends LinearOpMode {
                 sleep(1000);
 
                 //Klein stukje naar links
-                leftFront.setPower(power);
-                rightFront.setPower(-power);
-                leftBack.setPower(-power);
-                rightBack.setPower(power);
+                leftFront.setPower(-power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(-power);
                 sleep(3000);
 
                 //Arm in

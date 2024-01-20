@@ -91,17 +91,17 @@ public class CameraBlueWing extends LinearOpMode {
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(2000);
+                sleep(1850);            //todo: Dit aanpassen als te ver
                 leftFront.setPower(-power);
                 rightFront.setPower(power);
                 leftBack.setPower(-power);
                 rightBack.setPower(power);
-                sleep(1250);
+                sleep(1220);
                 leftFront.setPower(-power);
                 rightFront.setPower(-power);
                 leftBack.setPower(-power);
                 rightBack.setPower(-power);
-                sleep(640);
+                sleep(600);
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
@@ -131,7 +131,7 @@ public class CameraBlueWing extends LinearOpMode {
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(3100);
+                sleep(2850);            //todo: Dit aanpassen als te ver
 
                 leftFront.setPower(0);
                 rightFront.setPower(0);
@@ -152,11 +152,18 @@ public class CameraBlueWing extends LinearOpMode {
                 rightBack.setPower(0);
 
             } else if (finalPos == 2){
+                servoChopstickL.setPosition(1);
+                servoChopstickR.setPosition(0);
+                servoIntakeL.setPosition(0);
+                servoIntakeR.setPosition(1);
+                servoMoveGripper.setPosition(.82);
+                sleep(50);
+
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(2500);
+                sleep(2200);            //todo: Dit aanpassen als te ver
 
                 leftFront.setPower(power);
                 rightFront.setPower(-power);
