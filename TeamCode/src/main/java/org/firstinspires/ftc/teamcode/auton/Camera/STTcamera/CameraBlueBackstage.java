@@ -128,15 +128,13 @@ public class CameraBlueBackstage extends LinearOpMode {
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(-power);
-                sleep(200);
+                sleep(300);
 
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
                 sleep(1000);
-
-
 
                 leftFront.setPower(0);
                 rightFront.setPower(0);
@@ -161,7 +159,7 @@ public class CameraBlueBackstage extends LinearOpMode {
                 rightFront.setPower(-power);
                 leftBack.setPower(-power);
                 rightBack.setPower(-power);
-                sleep(620);
+                sleep(650);
 
                 leftFront.setPower(0);
                 rightFront.setPower(0);
@@ -248,42 +246,44 @@ public class CameraBlueBackstage extends LinearOpMode {
                 servoIntakeR.setPosition(1);
                 servoMoveGripper.setPosition(.82);
                 sleep(50);
-                leftFront.setPower(power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(power);
-                sleep(300);
-                leftFront.setPower(-power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(-power);
-                sleep(400);
-                leftFront.setPower(power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(power);
-                sleep(2680);
-                leftFront.setPower(0);
-                rightFront.setPower(0);
-                leftBack.setPower(0);
-                rightBack.setPower(0);
-                servoIntakeR.setPosition(0);
-                sleep(200);
-                leftFront.setPower(power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(power);
-                sleep(250);
-                leftFront.setPower(0);
-                rightFront.setPower(0);
-                leftBack.setPower(0);
-                rightBack.setPower(0);
 
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
                 sleep(300);
+
+                leftFront.setPower(-power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(-power);
+                sleep(400);
+
+                leftFront.setPower(power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(power);
+                sleep(2600);
+
+                leftFront.setPower(0);
+                rightFront.setPower(0);
+                leftBack.setPower(0);
+                rightBack.setPower(0);
+                servoIntakeR.setPosition(0);
+                sleep(200);
+
+                leftFront.setPower(power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(power);
+                sleep(500);
+
+                servoIntakeR.setPosition(1);
+                leftFront.setPower(0);
+                rightFront.setPower(0);
+                leftBack.setPower(0);
+                rightBack.setPower(0);
+                sleep(200);
 
                 leftFront.setPower(power);
                 rightFront.setPower(-power);
@@ -291,24 +291,47 @@ public class CameraBlueBackstage extends LinearOpMode {
                 rightBack.setPower(-power);
                 sleep(1250);
 
-                servoIntakeR.setPosition(1);
+                leftFront.setPower(0);
+                rightFront.setPower(0);
+                leftBack.setPower(0);
+                rightBack.setPower(0);
+                sleep(200);
+
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
                 sleep(2000);
 
+                leftFront.setPower(0);
+                rightFront.setPower(0);
+                leftBack.setPower(0);
+                rightBack.setPower(0);
+                sleep(200);
+
                 leftFront.setPower(-power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
+                rightFront.setPower(2*power);
+                leftBack.setPower(2*power);
                 rightBack.setPower(-power);
                 sleep(1800);
+
+                leftFront.setPower(0);
+                rightFront.setPower(0);
+                leftBack.setPower(0);
+                rightBack.setPower(0);
+                sleep(200);
 
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
                 sleep(1500);
+
+                leftFront.setPower(0);
+                rightFront.setPower(0);
+                leftBack.setPower(0);
+                rightBack.setPower(0);
+                sleep(200);
 
                 //naar voren nadat tegen bord aan
                 leftFront.setPower(-power);
@@ -413,7 +436,7 @@ public class CameraBlueBackstage extends LinearOpMode {
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(1300);
+                sleep(1200);
                 leftFront.setPower(power);
                 rightFront.setPower(-power);
                 leftBack.setPower(power);
@@ -429,12 +452,12 @@ public class CameraBlueBackstage extends LinearOpMode {
                 rightFront.setPower(-power);
                 leftBack.setPower(-power);
                 rightBack.setPower(-power);
-                sleep(650);
+                sleep(750);
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(250);
+                sleep(300);
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
@@ -455,9 +478,9 @@ public class CameraBlueBackstage extends LinearOpMode {
                 servoIntakeR.setPosition(1);
                 leftFront.setPower(-power);
                 rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(-power);
-                sleep(150);
+                leftBack.setPower(-power);
+                rightBack.setPower(power);
+                sleep(550);
 
                 leftFront.setPower(power);
                 rightFront.setPower(power);
@@ -489,6 +512,18 @@ public class CameraBlueBackstage extends LinearOpMode {
                 leftBack.setPower(-power);
                 rightBack.setPower(-power);
                 sleep(620);
+
+                leftFront.setPower(0);
+                rightFront.setPower(0);
+                leftBack.setPower(0);
+                rightBack.setPower(0);
+                sleep(200);
+
+                leftFront.setPower(power);
+                rightFront.setPower(-power);
+                leftBack.setPower(-power);
+                rightBack.setPower(power);
+                sleep(700);
 
                 leftFront.setPower(0);
                 rightFront.setPower(0);

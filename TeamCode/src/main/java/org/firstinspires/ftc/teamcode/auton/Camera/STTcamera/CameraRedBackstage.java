@@ -249,7 +249,7 @@ public class CameraRedBackstage extends LinearOpMode {
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(2900);
+                sleep(3000);
 
                 leftFront.setPower(0);
                 rightFront.setPower(0);
@@ -281,7 +281,7 @@ public class CameraRedBackstage extends LinearOpMode {
                 rightFront.setPower(-power);
                 leftBack.setPower(-power);
                 rightBack.setPower(power);
-                sleep(1800);
+                sleep(2000);
 
                 leftFront.setPower(power);
                 rightFront.setPower(power);
@@ -429,13 +429,7 @@ public class CameraRedBackstage extends LinearOpMode {
                 rightFront.setPower(-power);
                 leftBack.setPower(-power);
                 rightBack.setPower(power);
-                sleep(150);
-
-                leftFront.setPower(power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(power);
-                sleep(1000);
+                sleep(500);
 
                 leftFront.setPower(0);
                 rightFront.setPower(0);
@@ -501,7 +495,7 @@ public class CameraRedBackstage extends LinearOpMode {
                 rightFront.setPower(-power);
                 leftBack.setPower(-power);
                 rightBack.setPower(-power);
-                sleep(1000);
+                sleep(600);
 
                 //Klein stukje naar links
                 leftFront.setPower(power);
@@ -528,7 +522,7 @@ public class CameraRedBackstage extends LinearOpMode {
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(3000);
+                sleep(2600);
 
                 //alles uit
                 leftFront.setPower(-0);
