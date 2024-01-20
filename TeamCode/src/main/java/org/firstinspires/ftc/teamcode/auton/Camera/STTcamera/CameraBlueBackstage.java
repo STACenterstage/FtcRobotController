@@ -80,8 +80,8 @@ public class CameraBlueBackstage extends LinearOpMode {
         if (opModeIsActive()) {
             int finalPos = camera.pos;
             if (finalPos == 0) {
-                servoChopstickL.setPosition(1);
-                servoChopstickR.setPosition(0);
+                servoChopstickL.setPosition(0.47);
+                servoChopstickR.setPosition(0.3);
                 servoIntakeL.setPosition(0);
                 servoIntakeR.setPosition(1);
                 servoMoveGripper.setPosition(.82);
@@ -242,8 +242,8 @@ public class CameraBlueBackstage extends LinearOpMode {
                 servoMoveGripper.setPosition(.8);
 
             } else if (finalPos == 1) {
-                servoChopstickL.setPosition(1);
-                servoChopstickR.setPosition(0);
+                servoChopstickL.setPosition(0.47);
+                servoChopstickR.setPosition(0.3);
                 servoIntakeL.setPosition(0);
                 servoIntakeR.setPosition(1);
                 servoMoveGripper.setPosition(.82);
@@ -393,8 +393,8 @@ public class CameraBlueBackstage extends LinearOpMode {
                 servoMoveGripper.setPosition(.8);
 
             } else if (finalPos == 2){
-                servoChopstickL.setPosition(1);
-                servoChopstickR.setPosition(0);
+                servoChopstickL.setPosition(0.47);
+                servoChopstickR.setPosition(0.3);
                 servoIntakeL.setPosition(0);
                 servoIntakeR.setPosition(1);
                 servoMoveGripper.setPosition(.82);
