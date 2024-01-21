@@ -110,7 +110,7 @@ public class CameraBlueBackstage extends LinearOpMode {
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(1300);
+                sleep(1120);
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
@@ -121,20 +121,21 @@ public class CameraBlueBackstage extends LinearOpMode {
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(3000);
+                sleep(1000);
 
                 servoIntakeR.setPosition(0);
                 leftFront.setPower(-power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(-power);
-                sleep(300);
+                sleep(600);
 
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(1000);
+                sleep(2000);
+
 
                 leftFront.setPower(0);
                 rightFront.setPower(0);
@@ -171,7 +172,7 @@ public class CameraBlueBackstage extends LinearOpMode {
                 telemetry.update();
 
                 //arm omhoog
-                while (arm.ArmPos() < 3020 && !isStopRequested()){
+                while (arm.ArmPos() < 3000 && !isStopRequested()){
                     arm1.setPower(.7);
                 }
                 arm1.setPower(0);
@@ -200,14 +201,14 @@ public class CameraBlueBackstage extends LinearOpMode {
                 rightFront.setPower(-power);
                 leftBack.setPower(-power);
                 rightBack.setPower(-power);
-                sleep(1000);
+                sleep(600);
 
                 //Klein stukje naar links
                 leftFront.setPower(-power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(-power);
-                sleep(3020);
+                sleep(3420);
 
                 //Arm in
                 while (arm.ArmPos() > 600 && !isStopRequested()){
@@ -309,11 +310,11 @@ public class CameraBlueBackstage extends LinearOpMode {
                 rightBack.setPower(0);
                 sleep(200);
 
-                leftFront.setPower(-power);
-                rightFront.setPower(2*power);
-                leftBack.setPower(2*power);
+                leftFront.setPower(-1.25*power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
                 rightBack.setPower(-power);
-                sleep(1800);
+                sleep(1600);
 
                 leftFront.setPower(0);
                 rightFront.setPower(0);
@@ -436,7 +437,7 @@ public class CameraBlueBackstage extends LinearOpMode {
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(1200);
+                sleep(1100);
                 leftFront.setPower(power);
                 rightFront.setPower(-power);
                 leftBack.setPower(power);
@@ -452,7 +453,7 @@ public class CameraBlueBackstage extends LinearOpMode {
                 rightFront.setPower(-power);
                 leftBack.setPower(-power);
                 rightBack.setPower(-power);
-                sleep(750);
+                sleep(900);
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
@@ -486,7 +487,7 @@ public class CameraBlueBackstage extends LinearOpMode {
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(3000);
+                sleep(2400);
 
                 leftFront.setPower(0);
                 rightFront.setPower(0);
@@ -523,7 +524,7 @@ public class CameraBlueBackstage extends LinearOpMode {
                 rightFront.setPower(-power);
                 leftBack.setPower(-power);
                 rightBack.setPower(power);
-                sleep(700);
+                sleep(1050);
 
                 leftFront.setPower(0);
                 rightFront.setPower(0);
@@ -535,7 +536,7 @@ public class CameraBlueBackstage extends LinearOpMode {
                 telemetry.update();
 
                 //arm omhoog
-                while (arm.ArmPos() < 3020 && !isStopRequested()){
+                while (arm.ArmPos() < 3000 && !isStopRequested()){
                     arm1.setPower(.7);
                 }
                 arm1.setPower(0);

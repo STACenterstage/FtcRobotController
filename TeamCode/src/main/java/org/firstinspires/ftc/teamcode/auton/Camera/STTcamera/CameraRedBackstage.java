@@ -401,7 +401,7 @@ public class CameraRedBackstage extends LinearOpMode {
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(1100);
+                sleep(1000);
 
                 servoIntakeR.setPosition(0);
                 sleep(500);
@@ -417,7 +417,7 @@ public class CameraRedBackstage extends LinearOpMode {
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(1200);
+                sleep(1400);
 
                 leftFront.setPower(0);
                 rightFront.setPower(0);
