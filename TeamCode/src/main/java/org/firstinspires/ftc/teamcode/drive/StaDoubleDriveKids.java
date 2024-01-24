@@ -24,19 +24,13 @@ public class StaDoubleDriveKids extends LinearOpMode {
 
 
         while (opModeIsActive()) {
-            double y = -gamepad1.left_stick_x*.5 + -gamepad2.left_stick_x; // y direction is reversed
+            double y = -gamepad1.left_stick_x*.5 - gamepad2.left_stick_x; // y direction is reversed
             double x = gamepad1.left_stick_y*.5 + gamepad2.left_stick_y;
-            double rotate = -gamepad1.right_stick_x*.5 + -gamepad2.right_stick_x;
+            double rotate = -gamepad1.right_stick_x*.5 - gamepad2.right_stick_x;
 
-            boolean servoIntakeOn = gamepad1.a = gamepad2.a;
-            boolean servoIntakeOff = gamepad1.b = gamepad2.b;
+            double armPower = (gamepad2.right_trigger - gamepad2.left_trigger);
 
-            boolean servoVliegtuigTrigger = gamepad1.left_bumper = gamepad2.left_bumper;
-
-            if (gamepad2.dpad_down){
-                stop();
-                sleep(100);
-            }
+            boolean servoVliegtuigTrigger = gamepad1.left_bumper;
 
             if(gamepad2.left_stick_button){
                 gamepad1.reset();
@@ -48,11 +42,39 @@ public class StaDoubleDriveKids extends LinearOpMode {
                 terminateOpModeNow();
             }
 
+            boolean chopstickOn = gamepad2.y;
+            boolean chopstickLOff = gamepad2.left_bumper;
+            boolean chopstickROff = gamepad2.right_bumper;
 
-            if(servoIntakeOn){
-                arm.servoIntake(1);
-            } else if (servoIntakeOff) {
-                arm.servoIntake(0);
+
+            if (chopstickOn) {
+                arm.chopstickL(0.47);
+                arm.chopstickR(0.3);
+            } else {
+                if (chopstickLOff) {
+                    arm.chopstickL(1);
+                }
+                if (chopstickROff) {
+                    arm.chopstickR(0);
+                }
+            }
+
+            boolean intakeOn = gamepad1.a || gamepad2.a;
+            boolean intakeOff = gamepad1.b || gamepad2.b;
+
+            if (intakeOn) {
+                arm.intakeL(1);
+                arm.intakeR(0);
+            } else if (intakeOff) {
+                arm.intakeL(0);
+                arm.intakeR(1);
+            }
+
+
+            if (arm.ArmPos() < 2550) {
+                arm.moveGripper(.75);
+            } else if (arm.ArmPos() > 2600) {
+                arm.moveGripper(0.000275 * arm.ArmPos() - 0.745);
             }
 
             if(servoVliegtuigTrigger){
@@ -63,7 +85,10 @@ public class StaDoubleDriveKids extends LinearOpMode {
                 arm.servoVliegtuig(0);
                 arm.servoVliegtuigHouder(0);
             }
+            telemetry.addData("ArmPos", arm.ArmPos());
+            telemetry.addData("MoveGripperPos", arm.MoveGripperPos());
             drivetrain.drive(x, y, rotate);
+            arm.move(armPower);
             telemetry.update();
         }
     }
