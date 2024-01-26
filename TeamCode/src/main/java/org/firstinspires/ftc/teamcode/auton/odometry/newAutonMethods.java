@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.auton.Camera.STTcamera;
+package org.firstinspires.ftc.teamcode.auton.odometry;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -13,7 +14,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 
 public class newAutonMethods {
     private LinearOpMode myOpMode;
-//    private ElapsedTime runtime = new ElapsedTime();
+    private ElapsedTime runtime = new ElapsedTime();
 
     public DcMotor FrontL;
     public DcMotor FrontR;
@@ -22,7 +23,7 @@ public class newAutonMethods {
 
     final public int robotLength_cm = 39;
     final public int robotWidth_cm = 40;
-    final public double gravityConstant = 1;
+    final public double gravityConstant = 1.35;
 
     double current_target_heading = 0;
     public IMU imu;
@@ -32,7 +33,7 @@ public class newAutonMethods {
     double TICKS_PER_ROTATION = 8192;
     double OURTICKS_PER_CM;
     double threshold = 250;
-    final double odoMultiplier = 1;
+    final double odoMultiplier = 1.17;
 
     private DcMotor encoderX, encoderY;
 
@@ -63,22 +64,23 @@ public class newAutonMethods {
     }
 
     public void driveY (double position){
-        driveY(position,0.3, myOpMode.telemetry);
+        driveY(position,0.3, myOpMode.telemetry, 10000);
     }
 //    positive = forward
-    public void driveY(double position, double speed, Telemetry telemetry) {
+    public void driveY(double position, double speed, Telemetry telemetry, double stopTime) {
         calibrateEncoders();
+        double beginTime = System.currentTimeMillis();
+        double TimeElapsed = System.currentTimeMillis() - beginTime;
         double Kp = 0.03;
         double turn = 0;
         double heading = current_target_heading;
         double OdoY_Pos = -FrontL.getCurrentPosition();
         double tick = (int) (position * OURTICKS_PER_CM);
         double dPos = tick - OdoY_Pos;
-        while (!(dPos > -threshold  && dPos < threshold) && myOpMode.opModeIsActive()) {
+        while (!(dPos > -threshold  && dPos < threshold) && myOpMode.opModeIsActive() && TimeElapsed < stopTime) {
             if ((dPos < 0 && speed > 0) || (dPos > 0 && speed < 0)) {
                 speed = -speed;
             }
-            //TODO: see if turn correction works
 //            turn = Kp*Math.abs(speed)*(heading-getCurrentHeading());
 
             telemetry.addData("tick", tick);
@@ -87,6 +89,7 @@ public class newAutonMethods {
             telemetry.addData("speed", speed);
             telemetry.addData("CurrentHeading", getCurrentHeading());
             telemetry.addData("TargetHeading", heading);
+            telemetry.addData("time", runtime.milliseconds());
             telemetry.update();
 
 //            FrontL.setPower(speed + turn);
@@ -95,10 +98,12 @@ public class newAutonMethods {
 //            BackR.setPower(speed - turn);
 
             FrontL.setPower(speed + turn);
-            BackL.setPower(speed + turn);
+            BackL.setPower(1.2 * (speed + turn));
 
             BackR.setPower(speed - turn);
             FrontR.setPower(speed - turn);
+
+            TimeElapsed = System.currentTimeMillis() - beginTime;
 
             OdoY_Pos = -FrontL.getCurrentPosition();
             dPos = tick - OdoY_Pos;
@@ -123,8 +128,6 @@ public class newAutonMethods {
             if ((dPos > 0 && speed > 0) || (dPos < 0 && speed < 0)) {
                 speed = -speed;
             }
-            //TODO: see if turn correction works
-//            turn = Kp*Math.abs(speed)*(heading-getCurrentHeading());
 
             telemetry.addData("tick", tick);
             telemetry.addData("PosX", OdoX_Pos/OURTICKS_PER_CM);
@@ -134,7 +137,7 @@ public class newAutonMethods {
 
             FrontL.setPower(-speed + turn);
             FrontR.setPower(speed - turn);
-            BackL.setPower(gravityConstant * (speed + turn));
+            BackL.setPower(1.1 * gravityConstant * (speed + turn));
             BackR.setPower(gravityConstant * (-speed - turn));
 
             OdoX_Pos = -BackL.getCurrentPosition();
@@ -144,16 +147,20 @@ public class newAutonMethods {
         myOpMode.sleep(100);
     }
 
+    public void rotateToHeading(double target_heading){
+        rotateToHeading(target_heading,0.2, myOpMode.telemetry);
+    }
     //positive = clockwise
     public void rotateToHeading(double target_heading, double speed, Telemetry telemetry) {
         double current_heading = -getCurrentHeading();
-        double dHeading = target_heading*2 - current_heading;
+        double dHeading = target_heading - current_heading;
         double direction;
+        double margin = 1.0;
         telemetry.addData("curHeading", current_heading);
         telemetry.addData("dHeading",dHeading);
         telemetry.update();
-        while (!(Math.abs(dHeading) < 1) && myOpMode.opModeIsActive()) {
-            direction = -checkDirection(current_heading-target_heading*2);
+        while (!(Math.abs(dHeading) < margin) && myOpMode.opModeIsActive()) {
+            direction = -checkDirection(current_heading-target_heading);
 
             FrontL.setPower(-speed * direction);
             FrontR.setPower(speed * direction);
