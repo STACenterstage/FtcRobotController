@@ -62,7 +62,7 @@ public class CameraRedWing extends LinearOpMode {
         servoChopstickR.setPosition(0);
         servoIntakeL.setPosition(0);
         servoIntakeR.setPosition(1);
-        servoMoveGripper.setPosition(.82);
+        servoMoveGripper.setPosition(0);
 
     }
 
@@ -85,7 +85,7 @@ public class CameraRedWing extends LinearOpMode {
                 servoChopstickR.setPosition(0);
                 servoIntakeL.setPosition(0);
                 servoIntakeR.setPosition(1);
-                servoMoveGripper.setPosition(.82);
+                servoMoveGripper.setPosition(0);
                 sleep(50);
                 leftFront.setPower(power);
                 rightFront.setPower(power);
@@ -134,7 +134,7 @@ public class CameraRedWing extends LinearOpMode {
                 servoChopstickR.setPosition(0);
                 servoIntakeL.setPosition(0);
                 servoIntakeR.setPosition(1);
-                servoMoveGripper.setPosition(.82);
+                servoMoveGripper.setPosition(0);
                 sleep(50);
                 leftFront.setPower(power);
                 rightFront.setPower(power);
@@ -172,7 +172,7 @@ public class CameraRedWing extends LinearOpMode {
                 servoChopstickR.setPosition(0);
                 servoIntakeL.setPosition(0);
                 servoIntakeR.setPosition(1);
-                servoMoveGripper.setPosition(.82);
+                servoMoveGripper.setPosition(0);
                 sleep(50);
                 leftFront.setPower(power);
                 rightFront.setPower(power);

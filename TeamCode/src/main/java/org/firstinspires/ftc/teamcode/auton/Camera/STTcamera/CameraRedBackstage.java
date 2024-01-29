@@ -62,7 +62,7 @@ public class CameraRedBackstage extends LinearOpMode {
         servoChopstickR.setPosition(0.3);
         servoIntakeL.setPosition(0);
         servoIntakeR.setPosition(1);
-        servoMoveGripper.setPosition(.82);
+        servoMoveGripper.setPosition(0);
 
     }
 
@@ -85,7 +85,7 @@ public class CameraRedBackstage extends LinearOpMode {
                 servoChopstickR.setPosition(0.3);
                 servoIntakeL.setPosition(0);
                 servoIntakeR.setPosition(1);
-                servoMoveGripper.setPosition(.82);
+                servoMoveGripper.setPosition(0);
                 sleep(50);
 
                 leftFront.setPower(power);
@@ -175,7 +175,7 @@ public class CameraRedBackstage extends LinearOpMode {
                 arm1.setPower(0);
                 sleep(200);
 
-                servoMoveGripper.setPosition(0.000275*arm.ArmPos()-0.75);
+                servoMoveGripper.setPosition((0.000275 * arm.ArmPos()*-1+1) + 0.7);
                 telemetry.addData("ArmPos",arm.ArmPos());
                 telemetry.update();
                 sleep(400);
@@ -214,7 +214,7 @@ public class CameraRedBackstage extends LinearOpMode {
                 arm1.setPower(0);
                 sleep(100);
 
-                servoMoveGripper.setPosition(.745);
+                servoMoveGripper.setPosition(0);
                 telemetry.addData("ArmPos",arm.ArmPos());
                 telemetry.update();
                 sleep(400);
@@ -235,14 +235,14 @@ public class CameraRedBackstage extends LinearOpMode {
                 sleep(400);
 
                 arm1.setPower(0);
-                servoMoveGripper.setPosition(.8);
+                servoMoveGripper.setPosition(0);
 
             } else if (finalPos == 1) {
                 servoChopstickL.setPosition(0.47);
                 servoChopstickR.setPosition(0.3);
                 servoIntakeL.setPosition(0);
                 servoIntakeR.setPosition(1);
-                servoMoveGripper.setPosition(.82);
+                servoMoveGripper.setPosition(0);
                 sleep(50);
 
                 leftFront.setPower(power);
@@ -310,7 +310,7 @@ public class CameraRedBackstage extends LinearOpMode {
                 arm1.setPower(0);
                 sleep(200);
 
-                servoMoveGripper.setPosition(0.000275*arm.ArmPos()-0.75);
+                servoMoveGripper.setPosition((0.000275 * arm.ArmPos()*-1+1) + 0.7);
                 telemetry.addData("ArmPos",arm.ArmPos());
                 telemetry.update();
                 sleep(400);
@@ -348,7 +348,7 @@ public class CameraRedBackstage extends LinearOpMode {
                 arm1.setPower(0);
                 sleep(100);
 
-                servoMoveGripper.setPosition(.745);
+                servoMoveGripper.setPosition(0);
                 telemetry.addData("ArmPos",arm.ArmPos());
                 telemetry.update();
                 sleep(400);
@@ -369,14 +369,14 @@ public class CameraRedBackstage extends LinearOpMode {
                 sleep(400);
 
                 arm1.setPower(0);
-                servoMoveGripper.setPosition(.8);
+                servoMoveGripper.setPosition(0);
 
             } else if (finalPos == 2){
                 servoChopstickL.setPosition(0.47);
                 servoChopstickR.setPosition(0.3);
                 servoIntakeL.setPosition(0);
                 servoIntakeR.setPosition(1);
-                servoMoveGripper.setPosition(.82);
+                servoMoveGripper.setPosition(0);
                 sleep(50);
 
                 leftFront.setPower(power);
@@ -472,7 +472,7 @@ public class CameraRedBackstage extends LinearOpMode {
                 arm1.setPower(0);
                 sleep(200);
 
-                servoMoveGripper.setPosition(0.000275*arm.ArmPos()-0.75);
+                servoMoveGripper.setPosition((0.000275 * arm.ArmPos()*-1+1) + 0.7);
                 telemetry.addData("ArmPos",arm.ArmPos());
                 telemetry.update();
                 sleep(400);
@@ -511,7 +511,7 @@ public class CameraRedBackstage extends LinearOpMode {
                 arm1.setPower(0);
                 sleep(100);
 
-                servoMoveGripper.setPosition(.745);
+                servoMoveGripper.setPosition(0);
                 telemetry.addData("ArmPos",arm.ArmPos());
                 telemetry.update();
                 sleep(400);
@@ -532,7 +532,7 @@ public class CameraRedBackstage extends LinearOpMode {
                 sleep(400);
 
                 arm1.setPower(0);
-                servoMoveGripper.setPosition(.8);
+                servoMoveGripper.setPosition(0);
 
             }
             sleep(30000);

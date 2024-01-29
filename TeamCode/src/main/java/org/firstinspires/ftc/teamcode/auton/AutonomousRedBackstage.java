@@ -57,7 +57,7 @@ public class AutonomousRedBackstage extends LinearOpMode {
         servoChopstickR.setPosition(0.3);
         servoIntakeL.setPosition(0);
         servoIntakeR.setPosition(1);
-        servoMoveGripper.setPosition(.82);
+        servoMoveGripper.setPosition(0);
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -113,7 +113,7 @@ public class AutonomousRedBackstage extends LinearOpMode {
         servoChopstickR.setPosition(0.3);
         servoIntakeL.setPosition(0);
         servoIntakeR.setPosition(1);
-        servoMoveGripper.setPosition(.82);
+        servoMoveGripper.setPosition(0);
         sleep(100);
 
 
@@ -182,7 +182,7 @@ public class AutonomousRedBackstage extends LinearOpMode {
 
 
         sleep(100);
-        servoMoveGripper.setPosition(0.000275*arm.ArmPos()-0.75);
+        servoMoveGripper.setPosition((0.000275 * arm.ArmPos()*-1+1) + 0.7);
         telemetry.addData("ArmPos",arm.ArmPos());
         telemetry.update();
         sleep(400);
@@ -228,7 +228,7 @@ public class AutonomousRedBackstage extends LinearOpMode {
         arm1.setPower(0);
 
         sleep(100);
-        servoMoveGripper.setPosition(.82);
+        servoMoveGripper.setPosition(0);
         telemetry.addData("ArmPos",arm.ArmPos());
         telemetry.update();
         sleep(400);
@@ -249,7 +249,7 @@ public class AutonomousRedBackstage extends LinearOpMode {
         sleep(400);
 
         arm1.setPower(0);
-        servoMoveGripper.setPosition(1);
+        servoMoveGripper.setPosition(0);
 
 
     }

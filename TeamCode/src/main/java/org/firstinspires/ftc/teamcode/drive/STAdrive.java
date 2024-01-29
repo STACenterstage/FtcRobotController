@@ -55,8 +55,8 @@ public class STAdrive extends LinearOpMode {
             boolean pak = gamepad2.dpad_right;
 
             boolean chopstickOn = gamepad2.y;
-            boolean chopstickLOff = gamepad2.left_bumper;
-            boolean chopstickROff = gamepad2.right_bumper;
+            boolean chopstickLOff = gamepad2.right_bumper;
+            boolean chopstickROff = gamepad2.left_bumper;
 
 
             if (chopstickOn) {
@@ -111,11 +111,19 @@ public class STAdrive extends LinearOpMode {
                 arm.servoVliegtuigHouder(0);
             }
 
-            if (arm.ArmPos() < 2550) {
-                arm.moveGripper(.78);
-            } else if (arm.ArmPos() > 2600) {
-                arm.moveGripper(0.000275 * arm.ArmPos() - 0.745);
-            }
+//            if (arm.ArmPos() < 2550) {
+//                arm.moveGripper(0);
+//            } else if (arm.ArmPos() > 2600) {
+//                arm.moveGripper((0.000275 * arm.ArmPos()*-1+1) + 0.7);
+//            }
+
+            if (arm.ArmPos() < 400) {
+                arm.moveGripper(0);
+            } else if (arm.ArmPos() > 2400) {
+                arm.moveGripper((0.000275 * arm.ArmPos()*-1+1) + 0.7);
+            } else
+                arm.moveGripper(.0005*(arm.ArmPos()-400));
+
 
             /*if (intakeBtn)
                 if (til) {
