@@ -118,7 +118,6 @@ public class STAdrive extends LinearOpMode {
 //            }
 //                arm.moveGripper(-0.000233 * arm.ArmPos() + 0.3433);
 
-
             if (arm.ArmPos() < 400) {
                 arm.moveGripper(0.05 + gamepad2.left_stick_x*0.05);
 //              was 0.1
