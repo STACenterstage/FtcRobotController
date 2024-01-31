@@ -19,9 +19,9 @@ public class MecanumDrivetrain {
     public DcMotor FrontR;
     public DcMotor BackL;
     public DcMotor BackR;
-    double current_target_heading = 0;
+    double current_target_heading = 0.0;
     public IMU imu;
-    double WHEEL_RADIUS = 48;//mm
+    double WHEEL_RADIUS = 48.0;//mm
     double GEAR_RATIO = 1/13.7;
     double TICKS_PER_ROTATION = 8192;
     double OURTICKS_PER_CM;
