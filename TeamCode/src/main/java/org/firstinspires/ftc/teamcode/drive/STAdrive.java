@@ -60,14 +60,14 @@ public class STAdrive extends LinearOpMode {
 
 
             if (chopstickOn) {
-                arm.chopstickL(0.47);
-                arm.chopstickR(0.3);
+                arm.chopstickL(0.45);
+                arm.chopstickR(0.32);
             } else {
                 if (chopstickLOff) {
-                    arm.chopstickL(1);
+                    arm.chopstickL(0.61);
                 }
                 if (chopstickROff) {
-                    arm.chopstickR(0);
+                    arm.chopstickR(0.19);
                 }
             }
 
@@ -118,28 +118,39 @@ public class STAdrive extends LinearOpMode {
 //            }
 //                arm.moveGripper(-0.000233 * arm.ArmPos() + 0.3433);
 
+//            if (arm.ArmPos() < 400) {
+//                arm.moveGripper(0.00 + gamepad2.left_stick_x*0.05);
+////              was 0.1
+//            } else if (arm.ArmPos() > 2400) {
+//                arm.moveGripper((0.000275 * arm.ArmPos()*-1+1) + 0.88 + gamepad2.left_stick_x*0.1);
+//            } else {
+//                arm.moveGripper(.0005 * (arm.ArmPos() - 400));
+//            }
+
+
             if (arm.ArmPos() < 400) {
-                arm.moveGripper(0.05 + gamepad2.left_stick_x*0.05);
+                arm.moveGripper(0.245 + gamepad2.left_stick_x * 0.02);
 //              was 0.1
-            } else if (arm.ArmPos() > 2400) {
-                arm.moveGripper((0.000275 * arm.ArmPos()*-1+1) + 0.88 + gamepad2.left_stick_x*0.1);
-            } else
-                arm.moveGripper(.0005*(arm.ArmPos()-400));
-
-
-            /*if (intakeBtn)
-                if (til) {
-                btnMode = true;+
-                armHeight = -300;
-            } else if (pak) {
-                btnMode = true;
-                armHeight = -500;
+            } else if (arm.ArmPos() > 2300) {
+                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.18 + gamepad2.left_stick_x * 0.06);
+            } else {
+                arm.moveGripper(.0003 * (arm.ArmPos() - 400) + 0.26);
             }
 
-            if (Math.abs(armPower) > 0.1) {
-                btnMode = false;
-            }
-*/
+//
+//            if (intakeBtn)
+//                if (til) {
+//                btnMode = true;+
+//                armHeight = -300;
+//            } else if (pak) {
+//                btnMode = true;
+//                armHeight = -500;
+//            }
+//
+//            if (Math.abs(armPower) > 0.1) {
+//                btnMode = false;
+//            }
+
             telemetry.addData("ArmPos", arm.ArmPos());
             telemetry.addData("MoveGripperPos", arm.MoveGripperPos());
             drivetrain.drive(x, y, rotate);

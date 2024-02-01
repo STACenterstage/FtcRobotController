@@ -52,10 +52,10 @@ public class StaDoubleDriveKids extends LinearOpMode {
                 arm.chopstickR(0.3);
             } else {
                 if (chopstickLOff) {
-                    arm.chopstickL(1);
+                    arm.chopstickL(0.61);
                 }
                 if (chopstickROff) {
-                    arm.chopstickR(0);
+                    arm.chopstickR(0.19);
                 }
             }
 
@@ -70,12 +70,18 @@ public class StaDoubleDriveKids extends LinearOpMode {
                 arm.intakeR(1);
             }
 
-            if (arm.ArmPos() < 2550) {
-                arm.moveGripper(0);
-            } else if (arm.ArmPos() > 2600) {
-//                arm.moveGripper(-0.000233 * arm.ArmPos() + 0.3433);
-                arm.moveGripper((0.000275 * arm.ArmPos()*-1+1) + 0.7);
+
+            if (arm.ArmPos() < 400) {
+                arm.moveGripper(0.245 + gamepad2.left_stick_x * 0.02);
+//              was 0.1
+            } else if (arm.ArmPos() > 2300) {
+                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.18 + gamepad2.left_stick_x * 0.06);
+            } else {
+                arm.moveGripper(.0003 * (arm.ArmPos() - 400) + 0.26);
             }
+
+
+//                arm.moveGripper(-0.000233 * arm.ArmPos() + 0.3433);
 
             if(servoVliegtuigTrigger){
                 arm.servoVliegtuigHouder(1);
