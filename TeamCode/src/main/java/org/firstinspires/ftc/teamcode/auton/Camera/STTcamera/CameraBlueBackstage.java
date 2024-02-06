@@ -8,14 +8,14 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-
+import org.firstinspires.ftc.teamcode.auton.Camera.STTcamera.EigenOdometry;
 import org.firstinspires.ftc.teamcode.robotParts.Arm;
 import org.firstinspires.ftc.teamcode.robotParts.Drivetrain;
 
 @Autonomous(name = "CameraBlueBackstage")
 public class CameraBlueBackstage extends LinearOpMode {
 
-    newAutonMethods methods = new newAutonMethods(this);
+    EigenOdometry methods = new EigenOdometry(this);
     OpenCVTrussIsLeft camera = new OpenCVTrussIsLeft(this);
 
     private DcMotorEx leftFront;
@@ -57,11 +57,11 @@ public class CameraBlueBackstage extends LinearOpMode {
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        servoChopstickL.setPosition(0.47);
-        servoChopstickR.setPosition(0.3);
+        servoChopstickL.setPosition(0.61);
+        servoChopstickR.setPosition(0.19);
         servoIntakeL.setPosition(0);
         servoIntakeR.setPosition(1);
-        servoMoveGripper.setPosition(0);
+        servoMoveGripper.setPosition(0.245);
 
     }
 
@@ -80,11 +80,16 @@ public class CameraBlueBackstage extends LinearOpMode {
         if (opModeIsActive()) {
             int finalPos = camera.pos;
             if (finalPos == 0) {
-                servoChopstickL.setPosition(0.47);
-                servoChopstickR.setPosition(0.3);
+
+                methods.driveX(-120);
+
+                terminateOpModeNow();
+
+                servoChopstickL.setPosition(0.61);
+                servoChopstickR.setPosition(0.19);
                 servoIntakeL.setPosition(0);
                 servoIntakeR.setPosition(1);
-                servoMoveGripper.setPosition(0);
+                servoMoveGripper.setPosition(0.245);
                 sleep(50);
                 leftFront.setPower(power);
                 rightFront.setPower(power);
