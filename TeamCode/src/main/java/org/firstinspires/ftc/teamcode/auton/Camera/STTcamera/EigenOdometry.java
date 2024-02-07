@@ -27,11 +27,13 @@ public class EigenOdometry {
     double ODO_RADIUS = 25.0;//mm
     double GEAR_RATIO = 1/20.0;
     double TICKS_PER_ROTATION = 8192;
-    double OURTICKS_PER_CM;
+    double OURTICKS_PER_CM_Y;
+    double OURTICKS_PER_CM_X;
     double threshold = 250;
-    final double odoMultiplier = .708;
+    final double odoMultiplierY = .715; //TODO: waardes aanpassen
+    final double odoMultiplierX = .7;  //TODO: waardes aanpassen
 
-    double power = 0.4;
+    double power = 0.2;
 
     private DcMotor encoderX, encoderY;
 
@@ -50,7 +52,9 @@ public class EigenOdometry {
         FrontL.setDirection(DcMotorSimple.Direction.REVERSE);
         FrontR.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        OURTICKS_PER_CM = odoMultiplier*(TICKS_PER_ROTATION)/(2*Math.PI * GEAR_RATIO * WHEEL_RADIUS);
+        OURTICKS_PER_CM_X = odoMultiplierX*(TICKS_PER_ROTATION)/(2*Math.PI * GEAR_RATIO * WHEEL_RADIUS);
+        OURTICKS_PER_CM_Y = odoMultiplierY*(TICKS_PER_ROTATION)/(2*Math.PI * GEAR_RATIO * WHEEL_RADIUS);
+
 
         RevHubOrientationOnRobot.LogoFacingDirection logoDirection = RevHubOrientationOnRobot.LogoFacingDirection.LEFT;
         RevHubOrientationOnRobot.UsbFacingDirection  usbDirection  = RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD;
@@ -73,7 +77,7 @@ public class EigenOdometry {
         double OdoY_Pos = BackL.getCurrentPosition();
         double OdoX_Pos = FrontL.getCurrentPosition();
 
-        double tick = (int) (position * OURTICKS_PER_CM);
+        double tick = (int) (position * OURTICKS_PER_CM_Y);
         double dPos = tick - OdoY_Pos;
         while (!(dPos > -threshold  && dPos < threshold) && myOpMode.opModeIsActive()) {
             if ((dPos < 0 && speed > 0) || (dPos > 0 && speed < 0)) {
@@ -83,17 +87,13 @@ public class EigenOdometry {
 //            turn = Kp*Math.abs(speed)*(heading-getCurrentHeading());
 
             telemetry.addData("tick", tick);
-            telemetry.addData("PosY", OdoY_Pos/OURTICKS_PER_CM);
-            telemetry.addData("PosX", OdoX_Pos/OURTICKS_PER_CM);
+            telemetry.addData("PosY", OdoY_Pos/OURTICKS_PER_CM_Y);
+            telemetry.addData("PosX", OdoX_Pos/OURTICKS_PER_CM_X);
             telemetry.addData("dPos", dPos);
             telemetry.addData("speed", speed);
             telemetry.addData("CurrentHeading", getCurrentHeading());
             telemetry.addData("TargetHeading", heading);
             telemetry.update();
-//            FrontL.setPower(speed + turn);
-//            FrontR.setPower(-speed - turn);
-//            BackL.setPower(-speed + turn);
-//            BackR.setPower(speed - turn);
 
             FrontL.setPower(speed + turn);
             BackL.setPower(speed + turn);
@@ -168,7 +168,7 @@ public class EigenOdometry {
         double heading = current_target_heading;
         double OdoX_Pos = FrontL.getCurrentPosition();
         double OdoY_Pos = BackL.getCurrentPosition();
-            double tick = (int) (position * OURTICKS_PER_CM);
+            double tick = (int) (position * OURTICKS_PER_CM_X);
             double dPos = tick - OdoX_Pos;
             while (!(dPos > -threshold && dPos < threshold) && myOpMode.opModeIsActive()) {
                 if ((dPos > 0 && speed > 0) || (dPos < 0 && speed < 0)) {
@@ -177,12 +177,12 @@ public class EigenOdometry {
 
 
             telemetry.addData("tick", tick);
-            telemetry.addData("PosY", OdoY_Pos/OURTICKS_PER_CM);
+            telemetry.addData("PosY", OdoY_Pos/OURTICKS_PER_CM_Y);
             telemetry.addData("dPos", dPos);
             telemetry.addData("speed", speed);
             telemetry.addData("CurrentHeading", getCurrentHeading());
             telemetry.addData("TargetHeading", heading);
-            telemetry.addData("PosX", OdoX_Pos/OURTICKS_PER_CM);
+            telemetry.addData("PosX", OdoX_Pos/OURTICKS_PER_CM_X);
             telemetry.update();
 
             FrontL.setPower(-speed + turn);
@@ -194,26 +194,40 @@ public class EigenOdometry {
             OdoX_Pos = FrontL.getCurrentPosition();
             dPos = tick - OdoX_Pos;
 
+                while ((OdoY_Pos > 2000 || OdoY_Pos < -2000) && myOpMode.opModeIsActive()) {
+                    if(OdoY_Pos > 0){
+                        // rijd naar voren
+                        FrontL.setPower(-power);
+                        FrontR.setPower(-power);
+                        BackL.setPower(-power);
+                        BackR.setPower(-power);
+                    } else if(OdoY_Pos < 0){
+                        // rijd naar achteren
+                        FrontL.setPower(power);
+                        FrontR.setPower(power);
+                        BackL.setPower(power);
+                        BackR.setPower(power);
+                    }
 
-
-            while ((OdoY_Pos > 500 || OdoY_Pos < -500) && myOpMode.opModeIsActive()) {
+            while ((OdoY_Pos > 400 || OdoY_Pos < -400) && myOpMode.opModeIsActive()) {
                 if(OdoY_Pos > 0){
                     // rijd naar voren
-                    FrontL.setPower(-0.7*power);
-                    FrontR.setPower(-0.7*power);
-                    BackL.setPower(-0.7*power);
-                    BackR.setPower(-0.7*power);
+                    FrontL.setPower(-0.5*power);
+                    FrontR.setPower(-0.5*power);
+                    BackL.setPower(-0.5*power);
+                    BackR.setPower(-0.5*power);
                 } else if(OdoY_Pos < 0){
                     // rijd naar achteren
-                    FrontL.setPower(0.7*power);
-                    FrontR.setPower(0.7*power);
-                    BackL.setPower(0.7*power);
-                    BackR.setPower(0.7*power);
+                    FrontL.setPower(0.5*power);
+                    FrontR.setPower(0.5*power);
+                    BackL.setPower(0.5*power);
+                    BackR.setPower(0.5*power);
                 }
                 OdoY_Pos = BackL.getCurrentPosition();
                 OdoX_Pos = FrontL.getCurrentPosition();
                 dPos = tick - OdoX_Pos;
-            }
+            }}
+
                 while ((getCurrentHeading() > 5 || getCurrentHeading() < -5) && myOpMode.opModeIsActive()) {
                     if(getCurrentHeading() > 0){
                         FrontL.setPower(-0.7*power);
@@ -225,7 +239,6 @@ public class EigenOdometry {
                         FrontR.setPower(-0.7*power);
                         BackL.setPower(0.7*power);
                         BackR.setPower(-0.7*power);
-
                     }
                 }
 
@@ -240,7 +253,6 @@ public class EigenOdometry {
                         FrontR.setPower(-0.4*power);
                         BackL.setPower(0.4*power);
                         BackR.setPower(-0.4*power);
-
                     }
                 }
 

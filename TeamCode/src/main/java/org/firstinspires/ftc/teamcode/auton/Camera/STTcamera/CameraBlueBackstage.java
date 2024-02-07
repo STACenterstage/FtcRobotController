@@ -8,7 +8,6 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-import org.firstinspires.ftc.teamcode.auton.Camera.STTcamera.EigenOdometry;
 import org.firstinspires.ftc.teamcode.robotParts.Arm;
 import org.firstinspires.ftc.teamcode.robotParts.Drivetrain;
 
@@ -81,7 +80,7 @@ public class CameraBlueBackstage extends LinearOpMode {
             int finalPos = camera.pos;
             if (finalPos == 0) {
 
-                methods.driveX(-120);
+                methods.driveY(-300);
 
                 terminateOpModeNow();
 
@@ -148,17 +147,11 @@ public class CameraBlueBackstage extends LinearOpMode {
                 rightBack.setPower(0);
                 sleep(200);
 
-                /*leftFront.setPower(-power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(-power);
-                sleep(500);
-
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
                 rightBack.setPower(0);
-                sleep(200);*/
+                sleep(200);
 
                 //naar voren nadat tegen bord aan
                 leftFront.setPower(-power);
@@ -500,18 +493,6 @@ public class CameraBlueBackstage extends LinearOpMode {
                 leftBack.setPower(0);
                 rightBack.setPower(0);
                 sleep(200);
-
-                /*leftFront.setPower(-power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(-power);
-                sleep(500);
-
-                leftFront.setPower(0);
-                rightFront.setPower(0);
-                leftBack.setPower(0);
-                rightBack.setPower(0);
-                sleep(200);*/
 
                 //naar voren nadat tegen bord aan
                 leftFront.setPower(-power);
