@@ -152,7 +152,7 @@ public class newAutonMethods {
     //positive = clockwise
     public void rotateToHeading(double target_heading, double speed, Telemetry telemetry) {
         double current_heading = -getCurrentHeading();
-        double dHeading = target_heading*2 - current_heading;
+        double dHeading = target_heading - current_heading;
         double direction;
         telemetry.addData("curHeading", current_heading);
         telemetry.addData("dHeading",dHeading);

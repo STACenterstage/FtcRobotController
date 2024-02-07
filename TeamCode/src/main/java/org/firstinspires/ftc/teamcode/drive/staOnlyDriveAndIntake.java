@@ -28,8 +28,8 @@ public class staOnlyDriveAndIntake extends LinearOpMode {
             drivetrain.drive(x, y, rotate);
 
 
-            boolean intakeOn = gamepad2.a;
-            boolean intakeOff = gamepad2.b;
+            boolean intakeOn = gamepad2.left_bumper;
+            boolean intakeOff = gamepad2.right_bumper;
 
             if (intakeOn) {
                 arm.intakeL(1);

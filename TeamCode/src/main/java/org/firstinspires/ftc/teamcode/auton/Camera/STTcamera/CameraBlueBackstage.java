@@ -80,7 +80,10 @@ public class CameraBlueBackstage extends LinearOpMode {
             int finalPos = camera.pos;
             if (finalPos == 0) {
 
-                methods.driveY(-300);
+                //todo: hier is auton testen
+                methods.driveY(-150);
+                methods.rotateToHeading(90);
+                methods.driveY(-40);
 
                 terminateOpModeNow();
 

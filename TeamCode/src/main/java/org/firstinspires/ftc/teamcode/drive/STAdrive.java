@@ -58,6 +58,7 @@ public class STAdrive extends LinearOpMode {
             boolean chopstickLOff = gamepad2.right_bumper;
             boolean chopstickROff = gamepad2.left_bumper;
 
+            boolean climbMode = gamepad2.dpad_down;//todo climbMode moet een toggle worden
 
             if (chopstickOn) {
                 arm.chopstickL(0.45);
@@ -127,8 +128,9 @@ public class STAdrive extends LinearOpMode {
 //                arm.moveGripper(.0005 * (arm.ArmPos() - 400));
 //            }
 
-
-            if (arm.ArmPos() < 400) {
+            if (climbMode){ //todo climbMode moet een toggle worden
+                arm.moveGripper(0.245);
+            } else if (arm.ArmPos() < 400) {
                 arm.moveGripper(0.245 + gamepad2.left_stick_x * 0.02);
 //              was 0.1
             } else if (arm.ArmPos() > 2300) {
