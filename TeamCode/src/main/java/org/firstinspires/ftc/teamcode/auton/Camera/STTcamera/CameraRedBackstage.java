@@ -12,11 +12,13 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.robotParts.Arm;
 import org.firstinspires.ftc.teamcode.robotParts.Drivetrain;
 
+import java.lang.reflect.Method;
+
 
 @Autonomous(name = "CameraRedBackstage")
 public class CameraRedBackstage extends LinearOpMode {
 
-    newAutonMethods methods = new newAutonMethods(this);
+    EigenOdometry methods = new EigenOdometry(this);
     OpenCVTrussIsLeft camera = new OpenCVTrussIsLeft(this);
 
     private DcMotorEx leftFront;
@@ -58,11 +60,11 @@ public class CameraRedBackstage extends LinearOpMode {
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        servoChopstickL.setPosition(0.47);
-        servoChopstickR.setPosition(0.3);
+        servoChopstickL.setPosition(0.45);
+        servoChopstickR.setPosition(0.32);
         servoIntakeL.setPosition(0);
         servoIntakeR.setPosition(1);
-        servoMoveGripper.setPosition(0);
+        servoMoveGripper.setPosition(0.2);
 
     }
 
@@ -81,6 +83,40 @@ public class CameraRedBackstage extends LinearOpMode {
         if (opModeIsActive()) {
             int finalPos = camera.pos;
             if (finalPos == 0) {
+
+                methods.driveY(65);
+                methods.rotateToHeading(-90);
+                methods.driveY(-10);
+                servoIntakeR.setPosition(0);
+                methods.driveY(90);
+                methods.Stop();
+                servoIntakeR.setPosition(1);
+                sleep(300);
+                while (arm.ArmPos() < 3000 && !isStopRequested()){
+                    arm1.setPower(.7);
+                }
+                arm1.setPower(0);
+                methods.Stop();
+                sleep(300);
+                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.18);
+                sleep(300);
+                servoChopstickR.setPosition(0.19);
+                methods.Stop();
+                sleep(300);
+                while (arm.ArmPos() > 600 && !isStopRequested()){
+                    arm1.setPower(-.7);
+                }
+                arm1.setPower(0);
+                servoMoveGripper.setPosition(0.245);
+                methods.driveX(70);
+                methods.Stop();
+
+
+
+
+
+
+                terminateOpModeNow();
                 servoChopstickL.setPosition(0.47);
                 servoChopstickR.setPosition(0.3);
                 servoIntakeL.setPosition(0);

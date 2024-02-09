@@ -82,9 +82,22 @@ public class CameraBlueBackstage extends LinearOpMode {
 
                 //todo: hier is auton testen
                 methods.driveY(-150);
+                methods.rotateToHeading(-90);
+                methods.driveY(-40);
+                methods.rotateToHeading(180);
+                methods.driveY(-40);
                 methods.rotateToHeading(90);
                 methods.driveY(-40);
-
+                methods.rotateToHeading(0);
+                methods.driveY(-40);
+                methods.rotateToHeading(-90);
+                methods.driveY(-40);
+                methods.rotateToHeading(180);
+                methods.driveY(-40);
+                methods.rotateToHeading(90);
+                methods.driveY(-40);
+                methods.rotateToHeading(0);
+                methods.driveY(-40);
                 terminateOpModeNow();
 
                 servoChopstickL.setPosition(0.61);

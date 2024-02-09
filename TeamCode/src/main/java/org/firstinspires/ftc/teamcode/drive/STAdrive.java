@@ -12,9 +12,7 @@ public class STAdrive extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
     Drivetrain.drivetrain drivetrain = new Drivetrain.drivetrain();
     Arm arm = new Arm();
-    boolean hold = false;
-    boolean btnMode = false;
-    int armHeight;
+    boolean climbMode = false;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -50,15 +48,10 @@ public class STAdrive extends LinearOpMode {
 
             double armPower = (gamepad2.right_trigger - gamepad2.left_trigger);
 
-            boolean intakeBtn = gamepad2.x;
-            boolean til = gamepad2.dpad_left;
-            boolean pak = gamepad2.dpad_right;
-
             boolean chopstickOn = gamepad2.y;
             boolean chopstickLOff = gamepad2.right_bumper;
             boolean chopstickROff = gamepad2.left_bumper;
 
-            boolean climbMode = gamepad2.dpad_down;//todo climbMode moet een toggle worden
 
             if (chopstickOn) {
                 arm.chopstickL(0.45);
@@ -127,9 +120,14 @@ public class STAdrive extends LinearOpMode {
 //            } else {
 //                arm.moveGripper(.0005 * (arm.ArmPos() - 400));
 //            }
+            if (gamepad2.dpad_down){
+                climbMode = true;
+            }else if (gamepad2.dpad_up){
+                climbMode = false;
+            }
 
-            if (climbMode){ //todo climbMode moet een toggle worden
-                arm.moveGripper(0.245);
+            if (climbMode){
+                arm.moveGripper(0.12);
             } else if (arm.ArmPos() < 400) {
                 arm.moveGripper(0.245 + gamepad2.left_stick_x * 0.02);
 //              was 0.1
@@ -153,6 +151,7 @@ public class STAdrive extends LinearOpMode {
 //                btnMode = false;
 //            }
 
+            telemetry.addData("climbMode", climbMode);
             telemetry.addData("ArmPos", arm.ArmPos());
             telemetry.addData("MoveGripperPos", arm.MoveGripperPos());
             drivetrain.drive(x, y, rotate);

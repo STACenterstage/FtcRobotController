@@ -15,8 +15,6 @@ public class StaDoubleDriveKids extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         drivetrain.init(hardwareMap);
         arm.init(hardwareMap);
-//            intake.init(hardwareMap);
-
 
         waitForStart();
 
