@@ -7,12 +7,15 @@ import org.firstinspires.ftc.teamcode.robotParts.Arm;
 //import org.firstinspires.ftc.teamcode.robotParts.Limits;
 import org.firstinspires.ftc.teamcode.robotParts.Drivetrain;
 
+import java.util.concurrent.TimeUnit;
+
 @TeleOp(name = "STAdrive",group = "TeleOp")
 public class STAdrive extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
     Drivetrain.drivetrain drivetrain = new Drivetrain.drivetrain();
     Arm arm = new Arm();
     boolean climbMode = false;
+    double t1;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -98,11 +101,13 @@ public class STAdrive extends LinearOpMode {
 
             if (servoVliegtuigTrigger) {
                 arm.servoVliegtuigHouder(1);
-                sleep(80);
-                arm.servoVliegtuig(1);
-                sleep(920);
+                t1 = System.currentTimeMillis();
+            }
+            if (System.currentTimeMillis() > 1200 + t1){
                 arm.servoVliegtuig(0);
                 arm.servoVliegtuigHouder(0);
+            } else if (System.currentTimeMillis() > 100 + t1){
+                arm.servoVliegtuig(1);
             }
 
 //            if (arm.ArmPos() < 2550) {

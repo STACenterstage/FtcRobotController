@@ -136,32 +136,32 @@ public class EigenOdometry {
             while ((OdoX_Pos > 2000 || OdoX_Pos < -2000) && myOpMode.opModeIsActive()) {
                 if(OdoX_Pos > 0){
                     // rijd naar voren
-                    FrontL.setPower(-power);
-                    FrontR.setPower(power);
-                    BackL.setPower(power);
-                    BackR.setPower(-power);
+                    FrontL.setPower(-0.7*power);
+                    FrontR.setPower(0.7*power);
+                    BackL.setPower(0.7*power);
+                    BackR.setPower(-0.7*power);
                 } else if(OdoX_Pos < 0){
                     // rijd naar achteren
-                    FrontL.setPower(power);
-                    FrontR.setPower(-power);
-                    BackL.setPower(-power);
-                    BackR.setPower(power);
+                    FrontL.setPower(0.7*power);
+                    FrontR.setPower(-0.7*power);
+                    BackL.setPower(-0.7*power);
+                    BackR.setPower(0.7*power);
                 }}
 
 
-            while ((OdoX_Pos > 400 || OdoX_Pos < -400) && myOpMode.opModeIsActive()) {
+            while ((OdoX_Pos > 500 || OdoX_Pos < -500) && myOpMode.opModeIsActive()) {
                 if(OdoX_Pos > 0){
                     // rijd naar rechts
-                    FrontL.setPower(-power);
-                    FrontR.setPower(power);
-                    BackL.setPower(power);
-                    BackR.setPower(-power);
+                    FrontL.setPower(-0.4*power);
+                    FrontR.setPower(0.4*power);
+                    BackL.setPower(0.4*power);
+                    BackR.setPower(-0.4*power);
                 } else if(OdoX_Pos < 0){
                     // rijd naar links
-                    FrontL.setPower(power);
-                    FrontR.setPower(-power);
-                    BackL.setPower(-power);
-                    BackR.setPower(power);
+                    FrontL.setPower(0.4*power);
+                    FrontR.setPower(-0.4*power);
+                    BackL.setPower(-0.4*power);
+                    BackR.setPower(0.4*power);
                 }
                 OdoX_Pos = FrontL.getCurrentPosition();
                 OdoY_Pos = BackL.getCurrentPosition();
@@ -255,19 +255,19 @@ public class EigenOdometry {
                         BackR.setPower(0.7*power);
                     }}
 
-            while ((OdoY_Pos > 400 || OdoY_Pos < -400) && myOpMode.opModeIsActive()) {
+            while ((OdoY_Pos > 600 || OdoY_Pos < -600) && myOpMode.opModeIsActive()) {
                 if(OdoY_Pos > 0){
                     // rijd naar voren
-                    FrontL.setPower(-0.4*power);
-                    FrontR.setPower(-0.4*power);
-                    BackL.setPower(-0.4*power);
-                    BackR.setPower(-0.4*power);
+                    FrontL.setPower(-0.3*power);
+                    FrontR.setPower(-0.3*power);
+                    BackL.setPower(-0.3*power);
+                    BackR.setPower(-0.3*power);
                 } else if(OdoY_Pos < 0){
                     // rijd naar achteren
-                    FrontL.setPower(0.4*power);
-                    FrontR.setPower(0.4*power);
-                    BackL.setPower(0.4*power);
-                    BackR.setPower(0.4*power);
+                    FrontL.setPower(0.3*power);
+                    FrontR.setPower(0.3*power);
+                    BackL.setPower(0.3*power);
+                    BackR.setPower(0.3*power);
                 }
                 OdoY_Pos = BackL.getCurrentPosition();
                 OdoX_Pos = FrontL.getCurrentPosition();
