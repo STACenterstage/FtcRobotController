@@ -46,7 +46,7 @@ public class EigenOdometry {
     double heading;
     double dHeading;
 
-    double power = 0.45;
+    double power = 0.3;
 
     private DcMotor encoderX, encoderY;
 
@@ -231,10 +231,10 @@ public class EigenOdometry {
             telemetry.addData("PosX", OdoX_Pos/OURTICKS_PER_CM_X);
             telemetry.update();
 
-            FrontL.setPower(-speed + turn);
-            FrontR.setPower(speed - turn);
-            BackL.setPower(gravityConstant * (speed + turn));
-            BackR.setPower(gravityConstant * (-speed - turn));
+            FrontL.setPower(-0.8*speed + turn);
+            FrontR.setPower(0.8*speed - turn);
+            BackL.setPower(gravityConstant * (0.8*speed + turn));
+            BackR.setPower(gravityConstant * (-0.8*speed - turn));
 
             OdoY_Pos = BackL.getCurrentPosition();
             OdoX_Pos = FrontL.getCurrentPosition();

@@ -70,12 +70,12 @@ public class StaDoubleDriveKids extends LinearOpMode {
 
 
             if (arm.ArmPos() < 400) {
-                arm.moveGripper(0.245);
+                arm.moveGripper(0.258);
 //              was 0.1
             } else if (arm.ArmPos() > 2300) {
-                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.18);
+                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.195);
             } else {
-                arm.moveGripper(.0003 * (arm.ArmPos() - 400) + 0.26);
+                arm.moveGripper(.0003 * (arm.ArmPos() - 400) + 0.27);
             }
 
 

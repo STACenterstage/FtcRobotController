@@ -84,23 +84,24 @@ public class CameraRedBackstage extends LinearOpMode {
             int finalPos = camera.pos;
             if (finalPos == 0) {
 
-                methods.driveY(66);
+                methods.driveY(67);
                 methods.rotateToHeading(-90);
                 methods.driveY(-10);
                 methods.Stop();
-                servoIntakeR.setPosition(0.4);
+                servoIntakeR.setPosition(0.3);
                 sleep(300);
-                methods.driveY(95);
+                methods.driveY(98);
+                methods.driveX(-7);
                 methods.Stop();
                 servoIntakeR.setPosition(1);
                 sleep(300);
-                while (arm.ArmPos() < 3000 && !isStopRequested()){
+                while (arm.ArmPos() < 3050 && !isStopRequested()){
                     arm1.setPower(.7);
                 }
                 arm1.setPower(0);
                 methods.Stop();
                 sleep(300);
-                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.23);
+                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.25);
                 sleep(800);
                 servoChopstickR.setPosition(0.19);
                 sleep(800);
@@ -113,6 +114,7 @@ public class CameraRedBackstage extends LinearOpMode {
                 servoChopstickR.setPosition(0.19);
                 sleep(300);
                 methods.driveX(75);
+                methods.driveY(15);
                 methods.Stop();
                 terminateOpModeNow();
 //                servoChopstickL.setPosition(0.47);
@@ -284,19 +286,19 @@ public class CameraRedBackstage extends LinearOpMode {
                 methods.Stop();
                 servoIntakeR.setPosition(1);
                 sleep(300);
-                methods.driveY(55);
+                methods.driveY(40);
                 methods.Stop();
                 sleep(300);
-                methods.driveX(60);
+                methods.driveX(65);
                 methods.Stop();
                 sleep(300);
-                while (arm.ArmPos() < 3000 && !isStopRequested()){
+                while (arm.ArmPos() < 3050 && !isStopRequested()){
                     arm1.setPower(.7);
                 }
                 arm1.setPower(0);
                 methods.Stop();
                 sleep(300);
-                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.23);
+                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.25);
                 sleep(800);
                 servoChopstickR.setPosition(0.19);
                 sleep(800);
@@ -308,7 +310,8 @@ public class CameraRedBackstage extends LinearOpMode {
                 servoMoveGripper.setPosition(0.245);
                 servoChopstickR.setPosition(0.19);
                 sleep(300);
-                methods.driveX(50);
+                methods.driveX(45);
+                methods.driveY(15);
                 methods.Stop();
                 terminateOpModeNow();
 
@@ -466,7 +469,7 @@ public class CameraRedBackstage extends LinearOpMode {
                 arm1.setPower(0);
                 methods.Stop();
                 sleep(300);
-                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.23);
+                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.25);
                 sleep(800);
                 servoChopstickR.setPosition(0.19);
                 sleep(800);
@@ -478,7 +481,8 @@ public class CameraRedBackstage extends LinearOpMode {
                 servoMoveGripper.setPosition(0.245);
                 servoChopstickR.setPosition(0.19);
                 sleep(300);
-                methods.driveX(35);
+                methods.driveX(30);
+                methods.driveY(15);
                 methods.Stop();
                 terminateOpModeNow();
 
