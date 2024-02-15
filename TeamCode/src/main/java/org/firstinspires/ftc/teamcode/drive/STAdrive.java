@@ -134,10 +134,10 @@ public class STAdrive extends LinearOpMode {
             if (climbMode){
                 arm.moveGripper(0.12);
             } else if (arm.ArmPos() < 400) {
-                arm.moveGripper(0.258 + gamepad2.left_stick_x * 0.02);
+                arm.moveGripper(0.258 + gamepad2.left_stick_y * 0.02);
 //              was 0.1
             } else if (arm.ArmPos() > 2300) {
-                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.195 + gamepad2.left_stick_x * 0.06);
+                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.195 + gamepad2.left_stick_y * -0.06);
             } else {
                 arm.moveGripper(.0003 * (arm.ArmPos() - 400) + 0.27);
             }
