@@ -7,12 +7,15 @@ import org.firstinspires.ftc.teamcode.robotParts.Arm;
 //import org.firstinspires.ftc.teamcode.robotParts.Limits;
 import org.firstinspires.ftc.teamcode.robotParts.Drivetrain;
 
+import java.util.concurrent.TimeUnit;
+
 @TeleOp(name = "STAdrive",group = "TeleOp")
 public class STAdrive extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
     Drivetrain.drivetrain drivetrain = new Drivetrain.drivetrain();
     Arm arm = new Arm();
     boolean climbMode = false;
+    double t1;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -48,13 +51,10 @@ public class STAdrive extends LinearOpMode {
 
             double armPower = (gamepad2.right_trigger - gamepad2.left_trigger);
 
-            boolean intakeBtn = gamepad2.x;
-            boolean til = gamepad2.dpad_left;
-            boolean pak = gamepad2.dpad_right;
-
             boolean chopstickOn = gamepad2.y;
             boolean chopstickLOff = gamepad2.right_bumper;
             boolean chopstickROff = gamepad2.left_bumper;
+
 
             if (chopstickOn) {
                 arm.chopstickL(0.45);
@@ -101,11 +101,13 @@ public class STAdrive extends LinearOpMode {
 
             if (servoVliegtuigTrigger) {
                 arm.servoVliegtuigHouder(1);
-                sleep(80);
-                arm.servoVliegtuig(1);
-                sleep(920);
+                t1 = System.currentTimeMillis();
+            }
+            if (System.currentTimeMillis() > 1200 + t1){
                 arm.servoVliegtuig(0);
                 arm.servoVliegtuigHouder(0);
+            } else if (System.currentTimeMillis() > 100 + t1){
+                arm.servoVliegtuig(1);
             }
 
 //            if (arm.ArmPos() < 2550) {
@@ -123,22 +125,21 @@ public class STAdrive extends LinearOpMode {
 //            } else {
 //                arm.moveGripper(.0005 * (arm.ArmPos() - 400));
 //            }
-
-            if (gamepad2.dpad_down) {
+            if (gamepad2.dpad_down){
                 climbMode = true;
-            } else if (gamepad2.dpad_up) {
+            }else if (gamepad2.dpad_up){
                 climbMode = false;
             }
 
-            if (climbMode) {
-                arm.moveGripper(0.245);
+            if (climbMode){
+                arm.moveGripper(0.12);
             } else if (arm.ArmPos() < 400) {
-                arm.moveGripper(0.245 + gamepad2.left_stick_x * 0.02);
+                arm.moveGripper(0.258 + gamepad2.left_stick_y * 0.02);
 //              was 0.1
             } else if (arm.ArmPos() > 2300) {
-                arm.moveGripper(0.00015 * arm.ArmPos() * -1 + 1.18 + gamepad2.left_stick_x * 0.06);
+                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.195 + gamepad2.left_stick_y * -0.06);
             } else {
-                arm.moveGripper(.0003 * (arm.ArmPos() - 400) + 0.26);
+                arm.moveGripper(.0003 * (arm.ArmPos() - 400) + 0.27);
             }
 
 //
@@ -155,6 +156,7 @@ public class STAdrive extends LinearOpMode {
 //                btnMode = false;
 //            }
 
+            telemetry.addData("climbMode", climbMode);
             telemetry.addData("ArmPos", arm.ArmPos());
             telemetry.addData("MoveGripperPos", arm.MoveGripperPos());
             drivetrain.drive(x, y, rotate);

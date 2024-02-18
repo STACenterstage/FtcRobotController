@@ -12,11 +12,13 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.robotParts.Arm;
 import org.firstinspires.ftc.teamcode.robotParts.Drivetrain;
 
+import java.lang.reflect.Method;
+
 
 @Autonomous(name = "CameraRedBackstage")
 public class CameraRedBackstage extends LinearOpMode {
 
-    newAutonMethods methods = new newAutonMethods(this);
+    EigenOdometry methods = new EigenOdometry(this);
     OpenCVTrussIsLeft camera = new OpenCVTrussIsLeft(this);
 
     private DcMotorEx leftFront;
@@ -58,11 +60,11 @@ public class CameraRedBackstage extends LinearOpMode {
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        servoChopstickL.setPosition(0.47);
-        servoChopstickR.setPosition(0.3);
+        servoChopstickL.setPosition(0.61);
+        servoChopstickR.setPosition(0.32);
         servoIntakeL.setPosition(0);
         servoIntakeR.setPosition(1);
-        servoMoveGripper.setPosition(0);
+        servoMoveGripper.setPosition(0.2);
 
     }
 
@@ -81,459 +83,571 @@ public class CameraRedBackstage extends LinearOpMode {
         if (opModeIsActive()) {
             int finalPos = camera.pos;
             if (finalPos == 0) {
-                servoChopstickL.setPosition(0.47);
-                servoChopstickR.setPosition(0.3);
-                servoIntakeL.setPosition(0);
+
+                methods.driveDean(0,-200);
+//                methods.driveY(67);
+//                methods.rotateToHeading(-90);
+//                methods.driveY(-10);
+//                methods.Stop();
+//                servoIntakeR.setPosition(0.3);
+//                sleep(300);
+//                methods.driveY(98);
+//                methods.driveX(-7);
+//                methods.Stop();
+//                servoIntakeR.setPosition(1);
+//                sleep(300);
+//                while (arm.ArmPos() < 3050 && !isStopRequested()){
+//                    arm1.setPower(.7);
+//                }
+//                arm1.setPower(0);
+//                methods.Stop();
+//                sleep(300);
+//                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.25);
+//                sleep(800);
+//                servoChopstickR.setPosition(0.19);
+//                sleep(800);
+//                while (arm.ArmPos() > 600 && !isStopRequested()){
+//                    arm1.setPower(-.7);
+//                }
+//                arm1.setPower(0);
+//                methods.Stop();
+//                servoMoveGripper.setPosition(0.245);
+//                servoChopstickR.setPosition(0.19);
+//                sleep(300);
+//                methods.driveX(75);
+//                methods.driveY(15);
+//                methods.Stop();
+//                terminateOpModeNow();
+//                servoChopstickL.setPosition(0.47);
+//                servoChopstickR.setPosition(0.3);
+//                servoIntakeL.setPosition(0);
+//                servoIntakeR.setPosition(1);
+//                servoMoveGripper.setPosition(0);
+//                sleep(50);
+//
+//                leftFront.setPower(power);
+//                rightFront.setPower(power);
+//                leftBack.setPower(power);
+//                rightBack.setPower(power);
+//                sleep(1870);
+//
+//                leftFront.setPower(-power);
+//                rightFront.setPower(power);
+//                leftBack.setPower(-power);
+//                rightBack.setPower(power);
+//                sleep(1200);
+//
+//                leftFront.setPower(-power);
+//                rightFront.setPower(-power);
+//                leftBack.setPower(-power);
+//                rightBack.setPower(-power);
+//                sleep(640);
+//
+//                leftFront.setPower(0);
+//                rightFront.setPower(0);
+//                leftBack.setPower(0);
+//                rightBack.setPower(0);
+//                servoIntakeR.setPosition(0);
+//                sleep(200);
+//
+//                leftFront.setPower(power);
+//                rightFront.setPower(power);
+//                leftBack.setPower(power);
+//                rightBack.setPower(power);
+//                sleep(3000);
+//
+//                servoIntakeR.setPosition(0);
+//                leftFront.setPower(-power);
+//                rightFront.setPower(power);
+//                leftBack.setPower(power);
+//                rightBack.setPower(-power);
+//                sleep(500);
+//
+//                leftFront.setPower(power);
+//                rightFront.setPower(power);
+//                leftBack.setPower(power);
+//                rightBack.setPower(power);
+//                sleep(1000);
+//
+//
+//
+//                leftFront.setPower(0);
+//                rightFront.setPower(0);
+//                leftBack.setPower(0);
+//                rightBack.setPower(0);
+//                sleep(200);
+//
+//                /*leftFront.setPower(-power);
+//                rightFront.setPower(power);
+//                leftBack.setPower(power);
+//                rightBack.setPower(-power);
+//                sleep(500);
+//
+//                leftFront.setPower(0);
+//                rightFront.setPower(0);
+//                leftBack.setPower(0);
+//                rightBack.setPower(0);
+//                sleep(200);*/
+//
+//                //naar voren nadat tegen bord aan
+//                leftFront.setPower(-power);
+//                rightFront.setPower(-power);
+//                leftBack.setPower(-power);
+//                rightBack.setPower(-power);
+//                sleep(620);
+//
+//                leftFront.setPower(0);
+//                rightFront.setPower(0);
+//                leftBack.setPower(0);
+//                rightBack.setPower(0);
+//                sleep(200);
+//
+//                telemetry.addData("ArmPos",arm.ArmPos());
+//                telemetry.update();
+//
+//                //arm omhoog
+//                while (arm.ArmPos() < 3020 && !isStopRequested()){
+//                    arm1.setPower(.7);
+//                }
+//                arm1.setPower(0);
+//                sleep(200);
+//
+//                servoMoveGripper.setPosition((0.000275 * arm.ArmPos()*-1+1) + 0.7);
+//                telemetry.addData("ArmPos",arm.ArmPos());
+//                telemetry.update();
+//                sleep(400);
+//
+//                //laat gele pixel los
+//                servoChopstickL.setPosition(1);
+//                servoChopstickR.setPosition(0);
+//                sleep(800);
+//
+//
+//                //alles uit
+//                leftFront.setPower(0);
+//                rightFront.setPower(0);
+//                leftBack.setPower(0);
+//                rightBack.setPower(0);
+//                sleep(2000);
+//
+//                //klein stukje naar voren
+//                leftFront.setPower(-power);
+//                rightFront.setPower(-power);
+//                leftBack.setPower(-power);
+//                rightBack.setPower(-power);
+//                sleep(1000);
+//
+//                //Klein stukje naar links
+//                leftFront.setPower(power);
+//                rightFront.setPower(-power);
+//                leftBack.setPower(-power);
+//                rightBack.setPower(power);
+//                sleep(3020);
+//
+//                //Arm in
+//                while (arm.ArmPos() > 600 && !isStopRequested()){
+//                    arm1.setPower(-.7);
+//                }
+//                arm1.setPower(0);
+//                sleep(100);
+//
+//                servoMoveGripper.setPosition(0);
+//                telemetry.addData("ArmPos",arm.ArmPos());
+//                telemetry.update();
+//                sleep(400);
+//
+//                //Naar achteren rijden
+//                arm1.setPower(0);
+//                leftFront.setPower(power);
+//                rightFront.setPower(power);
+//                leftBack.setPower(power);
+//                rightBack.setPower(power);
+//                sleep(3000);
+//
+//                //alles uit
+//                leftFront.setPower(-0);
+//                rightFront.setPower(-0);
+//                leftBack.setPower(-0);
+//                rightBack.setPower(-0);
+//                sleep(400);
+//
+//                arm1.setPower(0);
+//                servoMoveGripper.setPosition(0);
+            } else if (finalPos == 1) {
+
+                methods.driveY(110);
+                methods.Stop();
+                servoIntakeR.setPosition(0);
+                sleep(300);
+                methods.driveY(15);
+                methods.rotateToHeading(-90);
+                methods.Stop();
+                sleep(300);
+                methods.driveY(30);
+                methods.Stop();
                 servoIntakeR.setPosition(1);
-                servoMoveGripper.setPosition(0);
-                sleep(50);
-
-                leftFront.setPower(power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(power);
-                sleep(1870);
-
-                leftFront.setPower(-power);
-                rightFront.setPower(power);
-                leftBack.setPower(-power);
-                rightBack.setPower(power);
-                sleep(1200);
-
-                leftFront.setPower(-power);
-                rightFront.setPower(-power);
-                leftBack.setPower(-power);
-                rightBack.setPower(-power);
-                sleep(640);
-
-                leftFront.setPower(0);
-                rightFront.setPower(0);
-                leftBack.setPower(0);
-                rightBack.setPower(0);
-                servoIntakeR.setPosition(0);
-                sleep(200);
-
-                leftFront.setPower(power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(power);
-                sleep(3000);
-
-                servoIntakeR.setPosition(0);
-                leftFront.setPower(-power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(-power);
-                sleep(500);
-
-                leftFront.setPower(power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(power);
-                sleep(1000);
-
-
-
-                leftFront.setPower(0);
-                rightFront.setPower(0);
-                leftBack.setPower(0);
-                rightBack.setPower(0);
-                sleep(200);
-
-                /*leftFront.setPower(-power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(-power);
-                sleep(500);
-
-                leftFront.setPower(0);
-                rightFront.setPower(0);
-                leftBack.setPower(0);
-                rightBack.setPower(0);
-                sleep(200);*/
-
-                //naar voren nadat tegen bord aan
-                leftFront.setPower(-power);
-                rightFront.setPower(-power);
-                leftBack.setPower(-power);
-                rightBack.setPower(-power);
-                sleep(620);
-
-                leftFront.setPower(0);
-                rightFront.setPower(0);
-                leftBack.setPower(0);
-                rightBack.setPower(0);
-                sleep(200);
-
-                telemetry.addData("ArmPos",arm.ArmPos());
-                telemetry.update();
-
-                //arm omhoog
-                while (arm.ArmPos() < 3020 && !isStopRequested()){
+                sleep(300);
+                methods.driveY(40);
+                methods.Stop();
+                sleep(300);
+                methods.driveX(65);
+                methods.Stop();
+                sleep(300);
+                while (arm.ArmPos() < 3050 && !isStopRequested()){
                     arm1.setPower(.7);
                 }
                 arm1.setPower(0);
-                sleep(200);
-
-                servoMoveGripper.setPosition((0.000275 * arm.ArmPos()*-1+1) + 0.7);
-                telemetry.addData("ArmPos",arm.ArmPos());
-                telemetry.update();
-                sleep(400);
-
-                //laat gele pixel los
-                servoChopstickL.setPosition(1);
-                servoChopstickR.setPosition(0);
+                methods.Stop();
+                sleep(300);
+                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.25);
                 sleep(800);
-
-
-                //alles uit
-                leftFront.setPower(0);
-                rightFront.setPower(0);
-                leftBack.setPower(0);
-                rightBack.setPower(0);
-                sleep(2000);
-
-                //klein stukje naar voren
-                leftFront.setPower(-power);
-                rightFront.setPower(-power);
-                leftBack.setPower(-power);
-                rightBack.setPower(-power);
-                sleep(1000);
-
-                //Klein stukje naar links
-                leftFront.setPower(power);
-                rightFront.setPower(-power);
-                leftBack.setPower(-power);
-                rightBack.setPower(power);
-                sleep(3020);
-
-                //Arm in
+                servoChopstickR.setPosition(0.19);
+                sleep(800);
                 while (arm.ArmPos() > 600 && !isStopRequested()){
                     arm1.setPower(-.7);
                 }
                 arm1.setPower(0);
-                sleep(100);
+                methods.Stop();
+                servoMoveGripper.setPosition(0.245);
+                servoChopstickR.setPosition(0.19);
+                sleep(300);
+                methods.driveX(45);
+                methods.driveY(15);
+                methods.Stop();
+                terminateOpModeNow();
 
-                servoMoveGripper.setPosition(0);
-                telemetry.addData("ArmPos",arm.ArmPos());
-                telemetry.update();
-                sleep(400);
+//                servoChopstickL.setPosition(0.47);
+//                servoChopstickR.setPosition(0.3);
+//                servoIntakeL.setPosition(0);
+//                servoIntakeR.setPosition(1);
+//                servoMoveGripper.setPosition(0);
+//                sleep(50);
+//
+//                leftFront.setPower(power);
+//                rightFront.setPower(power);
+//                leftBack.setPower(power);
+//                rightBack.setPower(power);
+//                sleep(3000);
+//
+//                leftFront.setPower(0);
+//                rightFront.setPower(0);
+//                leftBack.setPower(0);
+//                rightBack.setPower(0);
+//                servoIntakeR.setPosition(0);
+//                sleep(200);
+//
+//                leftFront.setPower(power);
+//                rightFront.setPower(power);
+//                leftBack.setPower(power);
+//                rightBack.setPower(power);
+//                sleep(300);
+//
+//                leftFront.setPower(-power);
+//                rightFront.setPower(power);
+//                leftBack.setPower(-power);
+//                rightBack.setPower(power);
+//                sleep(1250);
+//
+//                servoIntakeR.setPosition(1);
+//                leftFront.setPower(power);
+//                rightFront.setPower(power);
+//                leftBack.setPower(power);
+//                rightBack.setPower(power);
+//                sleep(2000);
+//
+//                leftFront.setPower(power);
+//                rightFront.setPower(-power);
+//                leftBack.setPower(-power);
+//                rightBack.setPower(power);
+//                sleep(2000);
+//
+//                leftFront.setPower(power);
+//                rightFront.setPower(power);
+//                leftBack.setPower(power);
+//                rightBack.setPower(power);
+//                sleep(1500);
+//
+//                //naar voren nadat tegen bord aan
+//                leftFront.setPower(-power);
+//                rightFront.setPower(-power);
+//                leftBack.setPower(-power);
+//                rightBack.setPower(-power);
+//                sleep(620);
+//
+//                leftFront.setPower(0);
+//                rightFront.setPower(0);
+//                leftBack.setPower(0);
+//                rightBack.setPower(0);
+//                sleep(300);
+//
+//
+//                //arm omhoog
+//                while (arm.ArmPos() < 3000 && !isStopRequested()){
+//                    arm1.setPower(.7);
+//                }
+//                arm1.setPower(0);
+//                sleep(200);
+//
+//                servoMoveGripper.setPosition((0.000275 * arm.ArmPos()*-1+1) + 0.7);
+//                telemetry.addData("ArmPos",arm.ArmPos());
+//                telemetry.update();
+//                sleep(400);
+//
+//                //laat gele pixel los
+//                servoChopstickL.setPosition(1);
+//                servoChopstickR.setPosition(0);
+//                sleep(800);
+//
+//                //alles uit
+//                leftFront.setPower(0);
+//                rightFront.setPower(0);
+//                leftBack.setPower(0);
+//                rightBack.setPower(0);
+//                sleep(2000);
+//
+//                //klein stukje naar voren
+//                leftFront.setPower(-power);
+//                rightFront.setPower(-power);
+//                leftBack.setPower(-power);
+//                rightBack.setPower(-power);
+//                sleep(1000);
+//
+//                //Klein stukje naar links
+//                leftFront.setPower(power);
+//                rightFront.setPower(-power);
+//                leftBack.setPower(-power);
+//                rightBack.setPower(power);
+//                sleep(2000);
+//
+//                //Arm in
+//                while (arm.ArmPos() > 500 && !isStopRequested()){
+//                    arm1.setPower(-.7);
+//                }
+//                arm1.setPower(0);
+//                sleep(100);
+//
+//                servoMoveGripper.setPosition(0);
+//                telemetry.addData("ArmPos",arm.ArmPos());
+//                telemetry.update();
+//                sleep(400);
+//
+//                //Naar achteren rijden
+//                arm1.setPower(0);
+//                leftFront.setPower(power);
+//                rightFront.setPower(power);
+//                leftBack.setPower(power);
+//                rightBack.setPower(power);
+//                sleep(3000);
+//
+//                //alles uit
+//                leftFront.setPower(-0);
+//                rightFront.setPower(-0);
+//                leftBack.setPower(-0);
+//                rightBack.setPower(-0);
+//                sleep(400);
+//
+//                arm1.setPower(0);
+//                servoMoveGripper.setPosition(0);
 
-                //Naar achteren rijden
-                arm1.setPower(0);
-                leftFront.setPower(power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(power);
-                sleep(3000);
+            } else if (finalPos == 2){
 
-                //alles uit
-                leftFront.setPower(-0);
-                rightFront.setPower(-0);
-                leftBack.setPower(-0);
-                rightBack.setPower(-0);
-                sleep(400);
-
-                arm1.setPower(0);
-                servoMoveGripper.setPosition(0);
-
-            } else if (finalPos == 1) {
-                servoChopstickL.setPosition(0.47);
-                servoChopstickR.setPosition(0.3);
-                servoIntakeL.setPosition(0);
-                servoIntakeR.setPosition(1);
-                servoMoveGripper.setPosition(0);
-                sleep(50);
-
-                leftFront.setPower(power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(power);
-                sleep(3000);
-
-                leftFront.setPower(0);
-                rightFront.setPower(0);
-                leftBack.setPower(0);
-                rightBack.setPower(0);
+                methods.driveY(68);
+                methods.rotateToHeading(-90);
+                methods.driveY(30);
+                methods.Stop();
                 servoIntakeR.setPosition(0);
-                sleep(200);
-
-                leftFront.setPower(power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(power);
                 sleep(300);
-
-                leftFront.setPower(-power);
-                rightFront.setPower(power);
-                leftBack.setPower(-power);
-                rightBack.setPower(power);
-                sleep(1250);
-
+                methods.driveY(38);
+                methods.Stop();
                 servoIntakeR.setPosition(1);
-                leftFront.setPower(power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(power);
-                sleep(2000);
-
-                leftFront.setPower(power);
-                rightFront.setPower(-power);
-                leftBack.setPower(-power);
-                rightBack.setPower(power);
-                sleep(2000);
-
-                leftFront.setPower(power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(power);
-                sleep(1500);
-
-                //naar voren nadat tegen bord aan
-                leftFront.setPower(-power);
-                rightFront.setPower(-power);
-                leftBack.setPower(-power);
-                rightBack.setPower(-power);
-                sleep(620);
-
-                leftFront.setPower(0);
-                rightFront.setPower(0);
-                leftBack.setPower(0);
-                rightBack.setPower(0);
                 sleep(300);
-
-
-                //arm omhoog
+                methods.driveX(30);
+                methods.Stop();
+                sleep(300);
                 while (arm.ArmPos() < 3000 && !isStopRequested()){
                     arm1.setPower(.7);
                 }
                 arm1.setPower(0);
-                sleep(200);
-
-                servoMoveGripper.setPosition((0.000275 * arm.ArmPos()*-1+1) + 0.7);
-                telemetry.addData("ArmPos",arm.ArmPos());
-                telemetry.update();
-                sleep(400);
-
-                //laat gele pixel los
-                servoChopstickL.setPosition(1);
-                servoChopstickR.setPosition(0);
+                methods.Stop();
+                sleep(300);
+                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.25);
                 sleep(800);
-
-                //alles uit
-                leftFront.setPower(0);
-                rightFront.setPower(0);
-                leftBack.setPower(0);
-                rightBack.setPower(0);
-                sleep(2000);
-
-                //klein stukje naar voren
-                leftFront.setPower(-power);
-                rightFront.setPower(-power);
-                leftBack.setPower(-power);
-                rightBack.setPower(-power);
-                sleep(1000);
-
-                //Klein stukje naar links
-                leftFront.setPower(power);
-                rightFront.setPower(-power);
-                leftBack.setPower(-power);
-                rightBack.setPower(power);
-                sleep(2000);
-
-                //Arm in
-                while (arm.ArmPos() > 500 && !isStopRequested()){
-                    arm1.setPower(-.7);
-                }
-                arm1.setPower(0);
-                sleep(100);
-
-                servoMoveGripper.setPosition(0);
-                telemetry.addData("ArmPos",arm.ArmPos());
-                telemetry.update();
-                sleep(400);
-
-                //Naar achteren rijden
-                arm1.setPower(0);
-                leftFront.setPower(power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(power);
-                sleep(3000);
-
-                //alles uit
-                leftFront.setPower(-0);
-                rightFront.setPower(-0);
-                leftBack.setPower(-0);
-                rightBack.setPower(-0);
-                sleep(400);
-
-                arm1.setPower(0);
-                servoMoveGripper.setPosition(0);
-
-            } else if (finalPos == 2){
-                servoChopstickL.setPosition(0.47);
-                servoChopstickR.setPosition(0.3);
-                servoIntakeL.setPosition(0);
-                servoIntakeR.setPosition(1);
-                servoMoveGripper.setPosition(0);
-                sleep(50);
-
-                leftFront.setPower(power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(power);
-                sleep(1870);
-
-                leftFront.setPower(-power);
-                rightFront.setPower(power);
-                leftBack.setPower(-power);
-                rightBack.setPower(power);
-                sleep(1200);
-
-                leftFront.setPower(0);
-                rightFront.setPower(0);
-                leftBack.setPower(0);
-                rightBack.setPower(0);
-                sleep(200);
-
-                leftFront.setPower(power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(power);
-                sleep(1000);
-
-                servoIntakeR.setPosition(0);
-                sleep(500);
-
-                servoIntakeR.setPosition(1);
-                leftFront.setPower(power);
-                rightFront.setPower(-power);
-                leftBack.setPower(-power);
-                rightBack.setPower(power);
-                sleep(700);
-
-                leftFront.setPower(power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(power);
-                sleep(1400);
-
-                leftFront.setPower(0);
-                rightFront.setPower(0);
-                leftBack.setPower(0);
-                rightBack.setPower(0);
-                sleep(200);
-
-                leftFront.setPower(power);
-                rightFront.setPower(-power);
-                leftBack.setPower(-power);
-                rightBack.setPower(power);
-                sleep(500);
-
-                leftFront.setPower(0);
-                rightFront.setPower(0);
-                leftBack.setPower(0);
-                rightBack.setPower(0);
-                sleep(200);
-
-                /*leftFront.setPower(-power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(-power);
-                sleep(500);
-
-                leftFront.setPower(0);
-                rightFront.setPower(0);
-                leftBack.setPower(0);
-                rightBack.setPower(0);
-                sleep(200);*/
-
-                //naar voren nadat tegen bord aan
-                leftFront.setPower(-power);
-                rightFront.setPower(-power);
-                leftBack.setPower(-power);
-                rightBack.setPower(-power);
-                sleep(620);
-
-                leftFront.setPower(0);
-                rightFront.setPower(0);
-                leftBack.setPower(0);
-                rightBack.setPower(0);
-                sleep(200);
-
-                telemetry.addData("ArmPos",arm.ArmPos());
-                telemetry.update();
-
-                //arm omhoog
-                while (arm.ArmPos() < 3020 && !isStopRequested()){
-                    arm1.setPower(.7);
-                }
-                arm1.setPower(0);
-                sleep(200);
-
-                servoMoveGripper.setPosition((0.000275 * arm.ArmPos()*-1+1) + 0.7);
-                telemetry.addData("ArmPos",arm.ArmPos());
-                telemetry.update();
-                sleep(400);
-
-                //laat gele pixel los
-                servoChopstickL.setPosition(1);
-                servoChopstickR.setPosition(0);
+                servoChopstickR.setPosition(0.19);
                 sleep(800);
-
-
-                //alles uit
-                leftFront.setPower(0);
-                rightFront.setPower(0);
-                leftBack.setPower(0);
-                rightBack.setPower(0);
-                sleep(2000);
-
-                //klein stukje naar voren
-                leftFront.setPower(-power);
-                rightFront.setPower(-power);
-                leftBack.setPower(-power);
-                rightBack.setPower(-power);
-                sleep(600);
-
-                //Klein stukje naar links
-                leftFront.setPower(power);
-                rightFront.setPower(-power);
-                leftBack.setPower(-power);
-                rightBack.setPower(power);
-                sleep(3000);
-
-                //Arm in
                 while (arm.ArmPos() > 600 && !isStopRequested()){
                     arm1.setPower(-.7);
                 }
                 arm1.setPower(0);
-                sleep(100);
+                methods.Stop();
+                servoMoveGripper.setPosition(0.245);
+                servoChopstickR.setPosition(0.19);
+                sleep(300);
+                methods.driveX(30);
+                methods.driveY(15);
+                methods.Stop();
+                terminateOpModeNow();
 
-                servoMoveGripper.setPosition(0);
-                telemetry.addData("ArmPos",arm.ArmPos());
-                telemetry.update();
-                sleep(400);
-
-                //Naar achteren rijden
-                arm1.setPower(0);
-                leftFront.setPower(power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(power);
-                sleep(2600);
-
-                //alles uit
-                leftFront.setPower(-0);
-                rightFront.setPower(-0);
-                leftBack.setPower(-0);
-                rightBack.setPower(-0);
-                sleep(400);
-
-                arm1.setPower(0);
-                servoMoveGripper.setPosition(0);
-
+//                servoChopstickL.setPosition(0.47);
+//                servoChopstickR.setPosition(0.3);
+//                servoIntakeL.setPosition(0);
+//                servoIntakeR.setPosition(1);
+//                servoMoveGripper.setPosition(0);
+//                sleep(50);
+//
+//                leftFront.setPower(power);
+//                rightFront.setPower(power);
+//                leftBack.setPower(power);
+//                rightBack.setPower(power);
+//                sleep(1870);
+//
+//                leftFront.setPower(-power);
+//                rightFront.setPower(power);
+//                leftBack.setPower(-power);
+//                rightBack.setPower(power);
+//                sleep(1200);
+//
+//                leftFront.setPower(0);
+//                rightFront.setPower(0);
+//                leftBack.setPower(0);
+//                rightBack.setPower(0);
+//                sleep(200);
+//
+//                leftFront.setPower(power);
+//                rightFront.setPower(power);
+//                leftBack.setPower(power);
+//                rightBack.setPower(power);
+//                sleep(1000);
+//
+//                servoIntakeR.setPosition(0);
+//                sleep(500);
+//
+//                servoIntakeR.setPosition(1);
+//                leftFront.setPower(power);
+//                rightFront.setPower(-power);
+//                leftBack.setPower(-power);
+//                rightBack.setPower(power);
+//                sleep(700);
+//
+//                leftFront.setPower(power);
+//                rightFront.setPower(power);
+//                leftBack.setPower(power);
+//                rightBack.setPower(power);
+//                sleep(1400);
+//
+//                leftFront.setPower(0);
+//                rightFront.setPower(0);
+//                leftBack.setPower(0);
+//                rightBack.setPower(0);
+//                sleep(200);
+//
+//                leftFront.setPower(power);
+//                rightFront.setPower(-power);
+//                leftBack.setPower(-power);
+//                rightBack.setPower(power);
+//                sleep(500);
+//
+//                leftFront.setPower(0);
+//                rightFront.setPower(0);
+//                leftBack.setPower(0);
+//                rightBack.setPower(0);
+//                sleep(200);
+//
+//                /*leftFront.setPower(-power);
+//                rightFront.setPower(power);
+//                leftBack.setPower(power);
+//                rightBack.setPower(-power);
+//                sleep(500);
+//
+//                leftFront.setPower(0);
+//                rightFront.setPower(0);
+//                leftBack.setPower(0);
+//                rightBack.setPower(0);
+//                sleep(200);*/
+//
+//                //naar voren nadat tegen bord aan
+//                leftFront.setPower(-power);
+//                rightFront.setPower(-power);
+//                leftBack.setPower(-power);
+//                rightBack.setPower(-power);
+//                sleep(620);
+//
+//                leftFront.setPower(0);
+//                rightFront.setPower(0);
+//                leftBack.setPower(0);
+//                rightBack.setPower(0);
+//                sleep(200);
+//
+//                telemetry.addData("ArmPos",arm.ArmPos());
+//                telemetry.update();
+//
+//                //arm omhoog
+//                while (arm.ArmPos() < 3020 && !isStopRequested()){
+//                    arm1.setPower(.7);
+//                }
+//                arm1.setPower(0);
+//                sleep(200);
+//
+//                servoMoveGripper.setPosition((0.000275 * arm.ArmPos()*-1+1) + 0.7);
+//                telemetry.addData("ArmPos",arm.ArmPos());
+//                telemetry.update();
+//                sleep(400);
+//
+//                //laat gele pixel los
+//                servoChopstickL.setPosition(1);
+//                servoChopstickR.setPosition(0);
+//                sleep(800);
+//
+//
+//                //alles uit
+//                leftFront.setPower(0);
+//                rightFront.setPower(0);
+//                leftBack.setPower(0);
+//                rightBack.setPower(0);
+//                sleep(2000);
+//
+//                //klein stukje naar voren
+//                leftFront.setPower(-power);
+//                rightFront.setPower(-power);
+//                leftBack.setPower(-power);
+//                rightBack.setPower(-power);
+//                sleep(600);
+//
+//                //Klein stukje naar links
+//                leftFront.setPower(power);
+//                rightFront.setPower(-power);
+//                leftBack.setPower(-power);
+//                rightBack.setPower(power);
+//                sleep(3000);
+//
+//                //Arm in
+//                while (arm.ArmPos() > 600 && !isStopRequested()){
+//                    arm1.setPower(-.7);
+//                }
+//                arm1.setPower(0);
+//                sleep(100);
+//
+//                servoMoveGripper.setPosition(0);
+//                telemetry.addData("ArmPos",arm.ArmPos());
+//                telemetry.update();
+//                sleep(400);
+//
+//                //Naar achteren rijden
+//                arm1.setPower(0);
+//                leftFront.setPower(power);
+//                rightFront.setPower(power);
+//                leftBack.setPower(power);
+//                rightBack.setPower(power);
+//                sleep(2600);
+//
+//                //alles uit
+//                leftFront.setPower(-0);
+//                rightFront.setPower(-0);
+//                leftBack.setPower(-0);
+//                rightBack.setPower(-0);
+//                sleep(400);
+//
+//                arm1.setPower(0);
+//                servoMoveGripper.setPosition(0);
             }
             sleep(30000);
 
