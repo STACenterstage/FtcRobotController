@@ -30,9 +30,9 @@ public class EigenOdometry {
     double TICKS_PER_ROTATION = 8192;
     double OURTICKS_PER_CM_Y;
     double OURTICKS_PER_CM_X;
-    double threshold = 250;
-    final double odoMultiplierY = .715; //TODO: waardes aanpassen
-    final double odoMultiplierX = .7;  //TODO: waardes aanpassen
+    double threshold = 2000;
+    final double odoMultiplierY = .742; //TODO: waardes aanpassen
+    final double odoMultiplierX = .77;  //TODO: waardes aanpassen
     private DcMotorEx arm1;
 
     double beginTime;
@@ -59,7 +59,7 @@ public class EigenOdometry {
     double direction;
 
 
-    double power = 0.2;
+    double power = 0.35;
 
     private DcMotor encoderX, encoderY;
 
@@ -94,16 +94,16 @@ public class EigenOdometry {
 
 
     public void updateDean(){
-        dHeading = getCurrentHeading() - heading;
-        OdoY_Pos = FrontL.getCurrentPosition();
-        OdoX_Pos = FrontR.getCurrentPosition();
+        dHeading = getCurrentHeading() + current_target_heading;
         TimeElapsed = System.currentTimeMillis() - beginTime;
+        OdoX_Pos = FrontL.getCurrentPosition();
+        OdoY_Pos = BackL.getCurrentPosition();
         dPosY = tickY - OdoY_Pos;
         dPosX = tickX - OdoX_Pos;
         dPos = Math.abs(dPosX) + Math.abs(dPosY);
     }
 
-    public void driveDean(double x, double y) {driveDean(x, y, 0.3, myOpMode.telemetry, 8000);}
+    public void driveDean(double x, double y) {driveDean(x, y, 0.3, myOpMode.telemetry, 30000);}
     public void driveDean(double x,double y, double max_speed, Telemetry telemetry, double stopTime) {
         calibrateEncoders();
 
@@ -114,6 +114,9 @@ public class EigenOdometry {
         tickX = (int) (x * OURTICKS_PER_CM_X);
         remweg = max_speed * remwegTicks;
         updateDean();
+
+
+
         while ((Math.abs(dPosY) > threshold || Math.abs(dPosX) > threshold || Math.abs(dHeading) > 0.5) && myOpMode.opModeIsActive() && TimeElapsed < stopTime){
 
             if (Math.abs(dPosY) < remweg) {
@@ -121,11 +124,11 @@ public class EigenOdometry {
             } else {
                 a = 1;
             }
-        if (Math.abs(dPosX) < remweg) {
-            b = dPosX / remweg;
-        } else {
-            b = 1;
-        }
+            if (Math.abs(dPosX) < remweg) {
+                b = dPosX / remweg;
+            } else {
+                b = 1;
+            }
 
         FWD = a * max_speed;
         speed = min_speed + a * (max_speed - min_speed);
@@ -136,7 +139,7 @@ public class EigenOdometry {
         if ((dPosX < 0 && STR > 0) || (dPosX > 0 && STR < 0)) {
             STR = -STR;
         }
-        turn = -1 * Kp * Math.abs(speed) * dHeading;
+        turn =  (-1 * Kp * Math.abs(speed) * dHeading);
 
         telemetry.addData("PosY", OdoY_Pos / OURTICKS_PER_CM_Y);
         telemetry.addData("PosX", OdoX_Pos / OURTICKS_PER_CM_X);
@@ -197,7 +200,7 @@ public class EigenOdometry {
             OdoY_Pos = BackL.getCurrentPosition();
             dPos = tick - OdoY_Pos;
 
-            while ((OdoX_Pos > 2000 || OdoX_Pos < -2000) && myOpMode.opModeIsActive()) {
+            while ((OdoX_Pos > 800 || OdoX_Pos < -800) && myOpMode.opModeIsActive()) {
                 if(OdoX_Pos > 0){
                     // rijd naar voren
                     FrontL.setPower(-0.7*power);
@@ -213,24 +216,24 @@ public class EigenOdometry {
                 }}
 
 
-            while ((OdoX_Pos > 500 || OdoX_Pos < -500) && myOpMode.opModeIsActive()) {
-                if(OdoX_Pos > 0){
-                    // rijd naar rechts
-                    FrontL.setPower(-0.4*power);
-                    FrontR.setPower(0.4*power);
-                    BackL.setPower(0.4*power);
-                    BackR.setPower(-0.4*power);
-                } else if(OdoX_Pos < 0){
-                    // rijd naar links
-                    FrontL.setPower(0.4*power);
-                    FrontR.setPower(-0.4*power);
-                    BackL.setPower(-0.4*power);
-                    BackR.setPower(0.4*power);
-                }
-                OdoX_Pos = FrontL.getCurrentPosition();
-                OdoY_Pos = BackL.getCurrentPosition();
-                dPos = tick - OdoY_Pos;
-            }
+//            while ((OdoX_Pos > 500 || OdoX_Pos < -500) && myOpMode.opModeIsActive()) {
+//                if(OdoX_Pos > 0){
+//                    // rijd naar rechts
+//                    FrontL.setPower(-0.4*power);
+//                    FrontR.setPower(0.4*power);
+//                    BackL.setPower(0.4*power);
+//                    BackR.setPower(-0.4*power);
+//                } else if(OdoX_Pos < 0){
+//                    // rijd naar links
+//                    FrontL.setPower(0.4*power);
+//                    FrontR.setPower(-0.4*power);
+//                    BackL.setPower(-0.4*power);
+//                    BackR.setPower(0.4*power);
+//                }
+//                OdoX_Pos = FrontL.getCurrentPosition();
+//                OdoY_Pos = BackL.getCurrentPosition();
+//                dPos = tick - OdoY_Pos;
+//            }
             while (((getCurrentHeading()+current_target_heading)  > 5 || (getCurrentHeading()+current_target_heading) < -5) && myOpMode.opModeIsActive()) {
                 if((getCurrentHeading()+current_target_heading) > 0){
                     FrontL.setPower(-0.7*power);
@@ -304,7 +307,7 @@ public class EigenOdometry {
             OdoX_Pos = FrontL.getCurrentPosition();
             dPos = tick - OdoX_Pos;
 
-                while ((OdoY_Pos > 2000 || OdoY_Pos < -2000) && myOpMode.opModeIsActive()) {
+                while ((OdoY_Pos > 800 || OdoY_Pos < -800) && myOpMode.opModeIsActive()) {
                     if(OdoY_Pos > 0){
                         // rijd naar voren
                         FrontL.setPower(-0.7*power);
@@ -319,24 +322,24 @@ public class EigenOdometry {
                         BackR.setPower(0.7*power);
                     }}
 
-            while ((OdoY_Pos > 600 || OdoY_Pos < -600) && myOpMode.opModeIsActive()) {
-                if(OdoY_Pos > 0){
-                    // rijd naar voren
-                    FrontL.setPower(-0.3*power);
-                    FrontR.setPower(-0.3*power);
-                    BackL.setPower(-0.3*power);
-                    BackR.setPower(-0.3*power);
-                } else if(OdoY_Pos < 0){
-                    // rijd naar achteren
-                    FrontL.setPower(0.3*power);
-                    FrontR.setPower(0.3*power);
-                    BackL.setPower(0.3*power);
-                    BackR.setPower(0.3*power);
-                }
-                OdoY_Pos = BackL.getCurrentPosition();
-                OdoX_Pos = FrontL.getCurrentPosition();
-                dPos = tick - OdoX_Pos;
-            }
+//            while ((OdoY_Pos > 600 || OdoY_Pos < -600) && myOpMode.opModeIsActive()) {
+//                if(OdoY_Pos > 0){
+//                    // rijd naar voren
+//                    FrontL.setPower(-0.3*power);
+//                    FrontR.setPower(-0.3*power);
+//                    BackL.setPower(-0.3*power);
+//                    BackR.setPower(-0.3*power);
+//                } else if(OdoY_Pos < 0){
+//                    // rijd naar achteren
+//                    FrontL.setPower(0.3*power);
+//                    FrontR.setPower(0.3*power);
+//                    BackL.setPower(0.3*power);
+//                    BackR.setPower(0.3*power);
+//                }
+//                OdoY_Pos = BackL.getCurrentPosition();
+//                OdoX_Pos = FrontL.getCurrentPosition();
+//                dPos = tick - OdoX_Pos;
+//            }
 
                 while (((getCurrentHeading()+current_target_heading) > 5 || (getCurrentHeading()+current_target_heading) < -5) && myOpMode.opModeIsActive()) {
                     if((getCurrentHeading()+current_target_heading) > 0){

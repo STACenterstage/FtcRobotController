@@ -80,26 +80,40 @@ public class CameraBlueBackstage extends LinearOpMode {
             int finalPos = camera.pos;
             if (finalPos == 0) {
 
-                //todo: hier is auton testen
-                methods.driveY(-150);
-                methods.rotateToHeading(-90);
-                methods.driveY(-40);
-                methods.rotateToHeading(180);
-                methods.driveY(-40);
+                methods.driveDean(-55 ,72);
                 methods.rotateToHeading(90);
-                methods.driveY(-40);
-                methods.rotateToHeading(0);
-                methods.driveY(-40);
-                methods.rotateToHeading(-90);
-                methods.driveY(-40);
-                methods.rotateToHeading(180);
-                methods.driveY(-40);
-                methods.rotateToHeading(90);
-                methods.driveY(-40);
-                methods.rotateToHeading(0);
-                methods.driveY(-40);
+                methods.Stop();
+                servoIntakeR.setPosition(0);
+                sleep(300);
+                methods.driveDean(-25,40);
+                methods.Stop();
+                servoIntakeR.setPosition(1);
+                sleep(300);
+                while (arm.ArmPos() < 3250 && !isStopRequested()){
+                    arm1.setPower(.7);
+                }
+                arm1.setPower(0);
+                methods.Stop();
+                sleep(500);
+                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.2);
+                sleep(800);
+                servoChopstickR.setPosition(0.19);
+                sleep(800);
+                methods.Stop();
+                while (arm.ArmPos() > 400 && !isStopRequested()){
+                    arm1.setPower(-.7);
+                }
+                arm1.setPower(0);
+                methods.Stop();
+                servoMoveGripper.setPosition(0.245);
+                servoChopstickR.setPosition(0.19);
+                sleep(300);
+                methods.driveDean(-45,15);
+                methods.Stop();
                 terminateOpModeNow();
 
+
+/*
                 servoChopstickL.setPosition(0.61);
                 servoChopstickR.setPosition(0.19);
                 servoIntakeL.setPosition(0);
@@ -254,8 +268,43 @@ public class CameraBlueBackstage extends LinearOpMode {
 
                 arm1.setPower(0);
                 servoMoveGripper.setPosition(0);
-
+*/
             } else if (finalPos == 1) {
+
+                methods.driveDean(-32,86);
+                methods.rotateToHeading(90);
+                methods.Stop();
+                servoIntakeR.setPosition(0);
+                sleep(300);
+                methods.driveDean(-25,64);
+                methods.Stop();
+                servoIntakeR.setPosition(1);
+                sleep(300);
+                while (arm.ArmPos() < 3250 && !isStopRequested()){
+                    arm1.setPower(.7);
+                }
+                arm1.setPower(0);
+                methods.Stop();
+                sleep(500);
+                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.2);
+                sleep(800);
+                servoChopstickR.setPosition(0.19);
+                sleep(800);
+                methods.Stop();
+                while (arm.ArmPos() > 400 && !isStopRequested()){
+                    arm1.setPower(-.7);
+                }
+                arm1.setPower(0);
+                methods.Stop();
+                servoMoveGripper.setPosition(0.245);
+                servoChopstickR.setPosition(0.19);
+                sleep(300);
+                methods.driveDean(-58,15);
+                methods.Stop();
+                terminateOpModeNow();
+
+
+/*
                 servoChopstickL.setPosition(0.47);
                 servoChopstickR.setPosition(0.3);
                 servoIntakeL.setPosition(0);
@@ -431,7 +480,44 @@ public class CameraBlueBackstage extends LinearOpMode {
                 arm1.setPower(0);
                 servoMoveGripper.setPosition(0);
 
+*/
             } else if (finalPos == 2){
+
+                methods.driveDean(-20,67);
+                methods.rotateToHeading(90);
+                methods.driveDean(0,-20);
+                methods.Stop();
+                servoIntakeR.setPosition(0.3);
+                sleep(300);
+                methods.driveDean(5,97);
+                methods.Stop();
+                servoIntakeR.setPosition(1);
+                sleep(300);
+                while (arm.ArmPos() < 3250 && !isStopRequested()){
+                    arm1.setPower(.7);
+                }
+                arm1.setPower(0);
+                methods.Stop();
+                sleep(500);
+                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.2);
+                sleep(800);
+                servoChopstickR.setPosition(0.19);
+                sleep(800);
+                methods.Stop();
+                while (arm.ArmPos() > 400 && !isStopRequested()){
+                    arm1.setPower(-.7);
+                }
+                arm1.setPower(0);
+                methods.Stop();
+                servoMoveGripper.setPosition(0.245);
+                servoChopstickR.setPosition(0.19);
+                sleep(300);
+                methods.driveDean(-80,15);
+                methods.Stop();
+                terminateOpModeNow();
+
+
+/*
                 servoChopstickL.setPosition(0.47);
                 servoChopstickR.setPosition(0.3);
                 servoIntakeL.setPosition(0);
@@ -605,7 +691,7 @@ public class CameraBlueBackstage extends LinearOpMode {
 
                 arm1.setPower(0);
                 servoMoveGripper.setPosition(0);
-
+*/
             }
             sleep(30000);
 
