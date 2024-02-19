@@ -142,19 +142,21 @@ public class STAdrive extends LinearOpMode {
                 arm.moveGripper(.0003 * (arm.ArmPos() - 200) + 0.245);
             }
 
-//
-//            if (intakeBtn)
-//                if (til) {
-//                btnMode = true;+
-//                armHeight = -300;
-//            } else if (pak) {
-//                btnMode = true;
-//                armHeight = -500;
-//            }
-//
-//            if (Math.abs(armPower) > 0.1) {
-//                btnMode = false;
-//            }
+/*
+
+            if (intakeBtn)
+                if (til) {
+                btnMode = true;+
+                armHeight = -300;
+            } else if (pak) {
+                btnMode = true;
+                armHeight = -500;
+            }
+
+            if (Math.abs(armPower) > 0.1) {
+                btnMode = false;
+            }
+*/
 
             telemetry.addData("climbMode", climbMode);
             telemetry.addData("ArmPos", arm.ArmPos());
