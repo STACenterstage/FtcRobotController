@@ -13,8 +13,8 @@ import org.firstinspires.ftc.teamcode.robotParts.Arm;
 import org.firstinspires.ftc.teamcode.robotParts.Drivetrain;
 
 
-@Autonomous(name = "CameraRedWing")
-public class CameraRedWing extends LinearOpMode {
+@Autonomous(name = "CameraRedWingSpikeOnly")
+public class CameraRedWingSpikeOnly extends LinearOpMode {
 
     EigenOdometry methods = new EigenOdometry(this);
     OpenCVTrussIsLeft camera = new OpenCVTrussIsLeft(this);

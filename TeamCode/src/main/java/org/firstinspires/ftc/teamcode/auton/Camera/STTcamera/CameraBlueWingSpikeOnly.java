@@ -13,8 +13,8 @@ import org.firstinspires.ftc.teamcode.robotParts.Arm;
 import org.firstinspires.ftc.teamcode.robotParts.Drivetrain;
 
 
-@Autonomous(name = "CameraRedWing")
-public class CameraRedWing extends LinearOpMode {
+@Autonomous(name = "CameraBlueWingSpikeOnly")
+public class CameraBlueWingSpikeOnly extends LinearOpMode {
 
     EigenOdometry methods = new EigenOdometry(this);
     OpenCVTrussIsLeft camera = new OpenCVTrussIsLeft(this);
@@ -58,12 +58,11 @@ public class CameraRedWing extends LinearOpMode {
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        servoChopstickL.setPosition(0.45);
-        servoChopstickR.setPosition(0.19);
+        servoChopstickL.setPosition(0.61);
+        servoChopstickR.setPosition(0.32);
         servoIntakeL.setPosition(0);
         servoIntakeR.setPosition(1);
         servoMoveGripper.setPosition(0.2);
-
 
     }
 
@@ -82,14 +81,16 @@ public class CameraRedWing extends LinearOpMode {
         if (opModeIsActive()) {
             int finalPos = camera.pos;
             if (finalPos == 0) {
-                methods.driveDean(-55 ,75);
-                methods.rotateToHeading(90);
+
+                methods.driveDean(0,67);
+                methods.rotateToHeading(-90);
+                methods.driveDean(0,-20);
                 methods.Stop();
-                servoIntakeL.setPosition(1);
+                servoIntakeR.setPosition(0.3);
                 sleep(300);
                 methods.driveDean(0,15);
                 methods.Stop();
-                servoIntakeL.setPosition(0);
+                servoIntakeR.setPosition(1);
                 sleep(300);
                 methods.Stop();
                 terminateOpModeNow();
@@ -105,27 +106,17 @@ public class CameraRedWing extends LinearOpMode {
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(300);
-                leftFront.setPower(-power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(-power);
-                sleep(400);
-                leftFront.setPower(power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(power);
-                sleep(1700);
+                sleep(1850);            //todo: Dit aanpassen als te ver
                 leftFront.setPower(-power);
                 rightFront.setPower(power);
                 leftBack.setPower(-power);
                 rightBack.setPower(power);
-                sleep(1300);
+                sleep(1220);
                 leftFront.setPower(-power);
                 rightFront.setPower(-power);
                 leftBack.setPower(-power);
                 rightBack.setPower(-power);
-                sleep(240);
+                sleep(600);
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
@@ -143,14 +134,15 @@ public class CameraRedWing extends LinearOpMode {
                 rightBack.setPower(0);
 */
             } else if (finalPos == 1) {
-                methods.driveDean(-32,90);
-                methods.rotateToHeading(90);
+
+                methods.driveDean(12,86);
+                methods.rotateToHeading(-90);
                 methods.Stop();
-                servoIntakeL.setPosition(1);
+                servoIntakeR.setPosition(0);
                 sleep(300);
                 methods.driveDean(0,15);
                 methods.Stop();
-                servoIntakeL.setPosition(0);
+                servoIntakeR.setPosition(1);
                 sleep(300);
                 methods.Stop();
                 terminateOpModeNow();
@@ -162,47 +154,40 @@ public class CameraRedWing extends LinearOpMode {
                 servoIntakeR.setPosition(1);
                 servoMoveGripper.setPosition(0);
                 sleep(50);
+
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(300);
-                leftFront.setPower(-power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(-power);
-                sleep(400);
-                leftFront.setPower(power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(power);
-                sleep(2680);
+                sleep(2850);            //todo: Dit aanpassen als te ver
+
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
                 rightBack.setPower(0);
                 servoIntakeR.setPosition(0);
                 sleep(200);
+
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
                 sleep(250);
+
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
                 rightBack.setPower(0);
 */
             } else if (finalPos == 2){
-                methods.driveDean(-18,70);
-                methods.rotateToHeading(90);
-                methods.driveDean(0,-20);
+                methods.driveDean(35 ,72);
+                methods.rotateToHeading(-90);
                 methods.Stop();
-                servoIntakeL.setPosition(0.7);
+                servoIntakeR.setPosition(0);
                 sleep(300);
                 methods.driveDean(0,15);
                 methods.Stop();
-                servoIntakeL.setPosition(0);
+                servoIntakeR.setPosition(1);
                 sleep(300);
                 methods.Stop();
                 terminateOpModeNow();
@@ -214,47 +199,36 @@ public class CameraRedWing extends LinearOpMode {
                 servoIntakeR.setPosition(1);
                 servoMoveGripper.setPosition(0);
                 sleep(50);
+
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(300);
-                leftFront.setPower(-power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(-power);
-                sleep(800);
-                leftFront.setPower(power);
-                rightFront.setPower(power);
-                leftBack.setPower(power);
-                rightBack.setPower(power);
-                sleep(1300);
+                sleep(2200);            //todo: Dit aanpassen als te ver
+
                 leftFront.setPower(power);
                 rightFront.setPower(-power);
                 leftBack.setPower(power);
                 rightBack.setPower(-power);
-                sleep(1650);
+                sleep(1250);
+
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
                 rightBack.setPower(0);
                 servoIntakeR.setPosition(0);
                 sleep(200);
-                leftFront.setPower(-power);
-                rightFront.setPower(-power);
-                leftBack.setPower(-power);
-                rightBack.setPower(-power);
-                sleep(650);
+
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
                 sleep(250);
+
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
                 rightBack.setPower(0);
-
 */
             }
             sleep(30000);

@@ -30,7 +30,7 @@ public class EigenOdometry {
     double TICKS_PER_ROTATION = 8192;
     double OURTICKS_PER_CM_Y;
     double OURTICKS_PER_CM_X;
-    double threshold = 2000;
+    double threshold = 2500;
     final double odoMultiplierY = .742; //TODO: waardes aanpassen
     final double odoMultiplierX = .77;  //TODO: waardes aanpassen
     private DcMotorEx arm1;
