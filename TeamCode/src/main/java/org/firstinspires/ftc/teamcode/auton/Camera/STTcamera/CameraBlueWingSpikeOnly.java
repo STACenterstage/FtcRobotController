@@ -59,7 +59,7 @@ public class CameraBlueWingSpikeOnly extends LinearOpMode {
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         servoChopstickL.setPosition(0.61);
-        servoChopstickR.setPosition(0.32);
+        servoChopstickR.setPosition(0.19);
         servoIntakeL.setPosition(0);
         servoIntakeR.setPosition(1);
         servoMoveGripper.setPosition(0.2);

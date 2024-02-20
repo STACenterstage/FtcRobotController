@@ -58,7 +58,7 @@ public class CameraRedWingSpikeOnly extends LinearOpMode {
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        servoChopstickL.setPosition(0.45);
+        servoChopstickL.setPosition(0.61);
         servoChopstickR.setPosition(0.19);
         servoIntakeL.setPosition(0);
         servoIntakeR.setPosition(1);

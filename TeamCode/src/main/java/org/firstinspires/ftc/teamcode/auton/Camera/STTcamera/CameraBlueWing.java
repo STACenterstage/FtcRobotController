@@ -58,8 +58,8 @@ public class CameraBlueWing extends LinearOpMode {
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        servoChopstickL.setPosition(0.61);
-        servoChopstickR.setPosition(0.32);
+        servoChopstickL.setPosition(0.45);
+        servoChopstickR.setPosition(0.19);
         servoIntakeL.setPosition(0);
         servoIntakeR.setPosition(1);
         servoMoveGripper.setPosition(0.2);
@@ -82,16 +82,38 @@ public class CameraBlueWing extends LinearOpMode {
             int finalPos = camera.pos;
             if (finalPos == 0) {
 
-                methods.driveDean(0,67);
-                methods.rotateToHeading(-90);
-                methods.driveDean(0,-20);
+                methods.driveDean(-10,70);
+                methods.rotateToHeading(90);
                 methods.Stop();
-                servoIntakeR.setPosition(0.3);
+                methods.driveDean(0,42);
+                servoIntakeL.setPosition(0.7);
                 sleep(300);
-                methods.driveDean(0,15);
+                methods.driveDean(0,80);
                 methods.Stop();
-                servoIntakeR.setPosition(1);
+                methods.driveDean(-30,75);
+                methods.Stop();
+                servoIntakeL.setPosition(0);
                 sleep(300);
+                while (arm.ArmPos() < 3250 && !isStopRequested()){
+                    arm1.setPower(.7);
+                }
+                arm1.setPower(0);
+                methods.Stop();
+                sleep(500);
+                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.2);
+                sleep(800);
+                servoChopstickL.setPosition(0.61);
+                sleep(800);
+                methods.Stop();
+                while (arm.ArmPos() > 400 && !isStopRequested()){
+                    arm1.setPower(-.7);
+                }
+                arm1.setPower(0);
+                methods.Stop();
+                servoMoveGripper.setPosition(0.245);
+                servoChopstickL.setPosition(0.61);
+                sleep(300);
+                methods.driveDean(-45,15);
                 methods.Stop();
                 terminateOpModeNow();
 
@@ -135,15 +157,37 @@ public class CameraBlueWing extends LinearOpMode {
 */
             } else if (finalPos == 1) {
 
-                methods.driveDean(12,86);
-                methods.rotateToHeading(-90);
+                methods.driveDean(0,80);
+                methods.rotateToHeading(180);
                 methods.Stop();
-                servoIntakeR.setPosition(0);
+                servoIntakeL.setPosition(1);
                 sleep(300);
-                methods.driveDean(0,15);
+                methods.driveDean(-5,15);
+                methods.rotateToHeading(90);
+                methods.driveDean(-5,170);
                 methods.Stop();
-                servoIntakeR.setPosition(1);
+                servoIntakeL.setPosition(0);
                 sleep(300);
+                while (arm.ArmPos() < 3250 && !isStopRequested()){
+                    arm1.setPower(.7);
+                }
+                arm1.setPower(0);
+                methods.Stop();
+                sleep(500);
+                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.2);
+                sleep(800);
+                servoChopstickL.setPosition(0.61);
+                sleep(800);
+                methods.Stop();
+                while (arm.ArmPos() > 400 && !isStopRequested()){
+                    arm1.setPower(-.7);
+                }
+                arm1.setPower(0);
+                methods.Stop();
+                servoMoveGripper.setPosition(0.245);
+                servoChopstickL.setPosition(0.61);
+                sleep(300);
+                methods.driveDean(-58,15);
                 methods.Stop();
                 terminateOpModeNow();
 
@@ -180,15 +224,36 @@ public class CameraBlueWing extends LinearOpMode {
                 rightBack.setPower(0);
 */
             } else if (finalPos == 2){
-                methods.driveDean(35 ,72);
+                methods.driveDean(0,100);
                 methods.rotateToHeading(-90);
                 methods.Stop();
-                servoIntakeR.setPosition(0);
+                servoIntakeL.setPosition(0.7);
                 sleep(300);
-                methods.driveDean(0,15);
+                methods.driveDean(-10,160);
+                methods.driveDean(20,35);
                 methods.Stop();
-                servoIntakeR.setPosition(1);
+                servoIntakeL.setPosition(0);
                 sleep(300);
+                while (arm.ArmPos() < 3250 && !isStopRequested()){
+                    arm1.setPower(.7);
+                }
+                arm1.setPower(0);
+                methods.Stop();
+                sleep(500);
+                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.2);
+                sleep(800);
+                servoChopstickL.setPosition(0.61);
+                sleep(800);
+                methods.Stop();
+                while (arm.ArmPos() > 400 && !isStopRequested()){
+                    arm1.setPower(-.7);
+                }
+                arm1.setPower(0);
+                methods.Stop();
+                servoMoveGripper.setPosition(0.245);
+                servoChopstickL.setPosition(0.61);
+                sleep(300);
+                methods.driveDean(-80,15);
                 methods.Stop();
                 terminateOpModeNow();
 
