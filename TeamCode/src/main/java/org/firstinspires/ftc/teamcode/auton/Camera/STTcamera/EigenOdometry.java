@@ -49,9 +49,9 @@ public class EigenOdometry {
     double STR;
     double ROT;
     double speed;
-    double min_speed = 0.13;
+    double min_speed = 0.2;
     double remweg;
-    int remwegTicks = 16000;
+    int remwegTicks = 18000;
     double a = 1;
     double b = 1;
     double heading;
@@ -103,7 +103,7 @@ public class EigenOdometry {
         dPos = Math.abs(dPosX) + Math.abs(dPosY);
     }
 
-    public void driveDean(double x, double y) {driveDean(x, y, 0.3, myOpMode.telemetry, 30000);}
+    public void driveDean(double x, double y) {driveDean(x, y, 0.4, myOpMode.telemetry, 30000);}
     public void driveDean(double x,double y, double max_speed, Telemetry telemetry, double stopTime) {
         calibrateEncoders();
 
@@ -158,6 +158,7 @@ public class EigenOdometry {
         }
     }
 
+/*
 
 
     public void driveY (double position){
@@ -374,9 +375,11 @@ public class EigenOdometry {
 
         myOpMode.sleep(100);
     }
+*/
 
-    public void rotateToHeading(double target_heading){rotateToHeading(target_heading,0.45, myOpMode.telemetry);}
+    public void rotateToHeading(double target_heading){rotateToHeading(target_heading,0.6, myOpMode.telemetry);}
     public void rotateToHeading(double target_heading, double speed, Telemetry telemetry) {
+        calibrateEncoders();
         target_heading *= -1;
         double current_heading = -getCurrentHeading();
         double dHeading = target_heading - current_heading;
@@ -400,6 +403,7 @@ public class EigenOdometry {
             if(dHeading < 10 * margin) {
                 speed = 0.2;
             }
+            telemetry.addData("current_target_heading", current_target_heading);
             telemetry.addData("curHeading", current_heading);
             telemetry.addData("dHeading",dHeading);
             telemetry.update();

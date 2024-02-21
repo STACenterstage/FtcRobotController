@@ -82,6 +82,7 @@ public class CameraRedBackstage extends LinearOpMode {
 
         if (opModeIsActive()) {
             int finalPos = camera.pos;
+            time = System.currentTimeMillis();
             if (finalPos == 0) {
 
                 methods.driveDean(0,67);

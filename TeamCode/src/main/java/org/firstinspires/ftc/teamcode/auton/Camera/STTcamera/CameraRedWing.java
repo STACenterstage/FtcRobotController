@@ -58,8 +58,9 @@ public class CameraRedWing extends LinearOpMode {
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        servoChopstickL.setPosition(0.45);
-        servoChopstickR.setPosition(0.19);
+
+        servoChopstickL.setPosition(0.61); // 0.45 = on, 0.61 = off
+        servoChopstickR.setPosition(0.32); // 0.32 = on, 0.19 = off
         servoIntakeL.setPosition(0);
         servoIntakeR.setPosition(1);
         servoMoveGripper.setPosition(0.2);
@@ -81,16 +82,43 @@ public class CameraRedWing extends LinearOpMode {
 
         if (opModeIsActive()) {
             int finalPos = camera.pos;
+            time = System.currentTimeMillis();
             if (finalPos == 0) {
-                methods.driveDean(-55 ,75);
-                methods.rotateToHeading(90);
+                methods.driveDean(-28,90);
+                servoIntakeR.setPosition(0.3);
+                methods.driveDean(0,38);
+                methods.rotateToHeading(-90);
                 methods.Stop();
-                servoIntakeL.setPosition(1);
+                servoIntakeR.setPosition(1);
+                sleep(300);
+                methods.driveDean(0,145); //todo: Afstand tot backboard.
+                while ((System.currentTimeMillis() < time + 16000) && !isStopRequested()){
+                    methods.Stop();
+                    sleep(100);
+                }
+                methods.driveDean(42,95);
+                methods.Stop();
+                sleep(300);
+                while (arm.ArmPos() < 3250 && !isStopRequested()){
+                    arm1.setPower(.7);
+                }
+                arm1.setPower(0);
+                methods.Stop();
+                sleep(500);
+                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.2);
+                sleep(800);
+                servoChopstickR.setPosition(0.19);
+                sleep(800);
+                methods.Stop();
+                while (arm.ArmPos() > 400 && !isStopRequested()){
+                    arm1.setPower(-.7);
+                }
+                arm1.setPower(0);
+                methods.Stop();
+                servoMoveGripper.setPosition(0.245);
+                servoChopstickR.setPosition(0.19);
                 sleep(300);
                 methods.driveDean(0,15);
-                methods.Stop();
-                servoIntakeL.setPosition(0);
-                sleep(300);
                 methods.Stop();
                 terminateOpModeNow();
 
@@ -143,15 +171,43 @@ public class CameraRedWing extends LinearOpMode {
                 rightBack.setPower(0);
 */
             } else if (finalPos == 1) {
-                methods.driveDean(-32,90);
-                methods.rotateToHeading(90);
+                methods.driveDean(-12,114);
                 methods.Stop();
-                servoIntakeL.setPosition(1);
+                servoIntakeR.setPosition(0.3);
                 sleep(300);
                 methods.driveDean(0,15);
+                methods.rotateToHeading(-90);
                 methods.Stop();
-                servoIntakeL.setPosition(0);
+                servoIntakeR.setPosition(1);
                 sleep(300);
+                methods.driveDean(0,110); //todo: Afstand tot backboard.
+                while ((System.currentTimeMillis() < time + 16000) && !isStopRequested()){
+                    methods.Stop();
+                    sleep(100);
+                }
+                methods.driveDean(57,95);
+                methods.Stop();
+                sleep(300);
+                while (arm.ArmPos() < 3250 && !isStopRequested()){
+                    arm1.setPower(.7);
+                }
+                arm1.setPower(0);
+                methods.Stop();
+                sleep(500);
+                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.2);
+                sleep(800);
+                servoChopstickR.setPosition(0.19);
+                sleep(800);
+                methods.Stop();
+                while (arm.ArmPos() > 400 && !isStopRequested()){
+                    arm1.setPower(-.7);
+                }
+                arm1.setPower(0);
+                methods.Stop();
+                servoMoveGripper.setPosition(0.245);
+                servoChopstickR.setPosition(0.19);
+                sleep(300);
+                methods.driveDean(0,15);
                 methods.Stop();
                 terminateOpModeNow();
 
@@ -194,16 +250,47 @@ public class CameraRedWing extends LinearOpMode {
                 rightBack.setPower(0);
 */
             } else if (finalPos == 2){
-                methods.driveDean(-18,70);
-                methods.rotateToHeading(90);
-                methods.driveDean(0,-20);
+                methods.driveDean(-15,50);
+                methods.rotateToHeading(135);
                 methods.Stop();
-                servoIntakeL.setPosition(0.7);
+                methods.driveDean(0,-23);
+                methods.Stop();
+                servoIntakeR.setPosition(0.3);
+                sleep(300);
+                methods.driveDean(0,50);
+                methods.Stop();
+                servoIntakeR.setPosition(1);
+                sleep(300);
+                methods.driveDean(40,-85);
+                methods.rotateToHeading(-90);
+                methods.driveDean(0,106); //todo: Afstand tot backboard.
+                while ((System.currentTimeMillis() < time + 16000) && !isStopRequested()){
+                    methods.Stop();
+                    sleep(100);
+                }
+                methods.driveDean(75,95);
+                methods.Stop();
+                sleep(300);
+                while (arm.ArmPos() < 3250 && !isStopRequested()){
+                    arm1.setPower(.7);
+                }
+                arm1.setPower(0);
+                methods.Stop();
+                sleep(500);
+                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.2);
+                sleep(800);
+                servoChopstickR.setPosition(0.19);
+                sleep(800);
+                methods.Stop();
+                while (arm.ArmPos() > 400 && !isStopRequested()){
+                    arm1.setPower(-.7);
+                }
+                arm1.setPower(0);
+                methods.Stop();
+                servoMoveGripper.setPosition(0.245);
+                servoChopstickR.setPosition(0.19);
                 sleep(300);
                 methods.driveDean(0,15);
-                methods.Stop();
-                servoIntakeL.setPosition(0);
-                sleep(300);
                 methods.Stop();
                 terminateOpModeNow();
 

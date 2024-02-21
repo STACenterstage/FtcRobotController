@@ -81,6 +81,7 @@ public class CameraRedWingSpikeOnly extends LinearOpMode {
 
         if (opModeIsActive()) {
             int finalPos = camera.pos;
+            time = System.currentTimeMillis();
             if (finalPos == 0) {
                 methods.driveDean(-55 ,75);
                 methods.rotateToHeading(90);

@@ -29,6 +29,7 @@ public class CameraBlueWing extends LinearOpMode {
     private Servo servoIntakeR; // dicht is 1
     private Servo servoChopstickL;
     private Servo servoChopstickR;
+    double time;
 
 
     double power = .3;
@@ -58,8 +59,8 @@ public class CameraBlueWing extends LinearOpMode {
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        servoChopstickL.setPosition(0.45);
-        servoChopstickR.setPosition(0.19);
+        servoChopstickL.setPosition(0.45); // 0.45 = on, 0.61 = off
+        servoChopstickR.setPosition(0.19); // 0.32 = on, 0.19 = off
         servoIntakeL.setPosition(0);
         servoIntakeR.setPosition(1);
         servoMoveGripper.setPosition(0.2);
@@ -80,19 +81,29 @@ public class CameraBlueWing extends LinearOpMode {
 
         if (opModeIsActive()) {
             int finalPos = camera.pos;
+            time = System.currentTimeMillis();
             if (finalPos == 0) {
 
-                methods.driveDean(-10,70);
-                methods.rotateToHeading(90);
+                methods.driveDean(0,45);
+                methods.rotateToHeading(-135);
                 methods.Stop();
-                methods.driveDean(0,42);
+                methods.driveDean(0,-30);
+                methods.Stop();
                 servoIntakeL.setPosition(0.7);
                 sleep(300);
-                methods.driveDean(0,80);
-                methods.Stop();
-                methods.driveDean(-30,75);
+                methods.driveDean(0,50);
                 methods.Stop();
                 servoIntakeL.setPosition(0);
+                sleep(300);
+                methods.driveDean(-40,-85);
+                methods.rotateToHeading(90);
+                methods.driveDean(0,106); //todo: Afstand tot backboard.
+                while ((System.currentTimeMillis() < time + 16000) && !isStopRequested()){
+                    methods.Stop();
+                    sleep(100);
+                }
+                methods.driveDean(-75,95);
+                methods.Stop();
                 sleep(300);
                 while (arm.ArmPos() < 3250 && !isStopRequested()){
                     arm1.setPower(.7);
@@ -113,7 +124,7 @@ public class CameraBlueWing extends LinearOpMode {
                 servoMoveGripper.setPosition(0.245);
                 servoChopstickL.setPosition(0.61);
                 sleep(300);
-                methods.driveDean(-45,15);
+                methods.driveDean(0,15);
                 methods.Stop();
                 terminateOpModeNow();
 
@@ -157,16 +168,22 @@ public class CameraBlueWing extends LinearOpMode {
 */
             } else if (finalPos == 1) {
 
-                methods.driveDean(0,80);
-                methods.rotateToHeading(180);
+                methods.driveDean(-8,114);
                 methods.Stop();
-                servoIntakeL.setPosition(1);
+                servoIntakeL.setPosition(0.7);
                 sleep(300);
-                methods.driveDean(-5,15);
+                methods.driveDean(0,15);
                 methods.rotateToHeading(90);
-                methods.driveDean(-5,170);
                 methods.Stop();
                 servoIntakeL.setPosition(0);
+                sleep(300);
+                methods.driveDean(0,110); //todo: Afstand tot backboard.
+                while ((System.currentTimeMillis() < time + 16000) && !isStopRequested()){
+                    methods.Stop();
+                    sleep(100);
+                }
+                methods.driveDean(-57,95);
+                methods.Stop();
                 sleep(300);
                 while (arm.ArmPos() < 3250 && !isStopRequested()){
                     arm1.setPower(.7);
@@ -187,7 +204,7 @@ public class CameraBlueWing extends LinearOpMode {
                 servoMoveGripper.setPosition(0.245);
                 servoChopstickL.setPosition(0.61);
                 sleep(300);
-                methods.driveDean(-58,15);
+                methods.driveDean(0,15);
                 methods.Stop();
                 terminateOpModeNow();
 
@@ -224,15 +241,20 @@ public class CameraBlueWing extends LinearOpMode {
                 rightBack.setPower(0);
 */
             } else if (finalPos == 2){
-                methods.driveDean(0,100);
-                methods.rotateToHeading(-90);
-                methods.Stop();
+                methods.driveDean(10,95);
                 servoIntakeL.setPosition(0.7);
-                sleep(300);
-                methods.driveDean(-10,160);
-                methods.driveDean(20,35);
+                methods.driveDean(0,40);
+                methods.rotateToHeading(90);
                 methods.Stop();
                 servoIntakeL.setPosition(0);
+                sleep(300);
+                methods.driveDean(0,136); //todo: Afstand tot backboard.
+                while ((System.currentTimeMillis() < time + 16000) && !isStopRequested()){
+                    methods.Stop();
+                    sleep(100);
+                }
+                methods.driveDean(-42,95);
+                methods.Stop();
                 sleep(300);
                 while (arm.ArmPos() < 3250 && !isStopRequested()){
                     arm1.setPower(.7);
@@ -253,7 +275,7 @@ public class CameraBlueWing extends LinearOpMode {
                 servoMoveGripper.setPosition(0.245);
                 servoChopstickL.setPosition(0.61);
                 sleep(300);
-                methods.driveDean(-80,15);
+                methods.driveDean(0,15);
                 methods.Stop();
                 terminateOpModeNow();
 
