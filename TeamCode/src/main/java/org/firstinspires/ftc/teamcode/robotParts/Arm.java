@@ -62,7 +62,6 @@ public class   Arm {
 
     
     public int ArmPos(){return -spoel.getCurrentPosition();}
-    public int MoveGripperPos(){return (int) -servoMoveGripper.getPosition();}
 
     public void intakeL(double position){servoIntakeL.setPosition(position);}
     public void intakeR(double position){servoIntakeR.setPosition(position);}

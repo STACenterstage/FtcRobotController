@@ -23,9 +23,10 @@ public class STAdrive extends LinearOpMode {
         arm.init(hardwareMap);
 //            intake.init(hardwareMap);
 
-
+        telemetry.addLine("Robot is Initialized...");
+        telemetry.addLine();
+        telemetry.addData("climbMode", climbMode);
         telemetry.addData("ArmPos", arm.ArmPos());
-        telemetry.addData("MoveGripperPos", arm.MoveGripperPos());
         telemetry.update();
 
         waitForStart();
@@ -134,12 +135,12 @@ public class STAdrive extends LinearOpMode {
             if (climbMode){
                 arm.moveGripper(0.12);
             } else if (arm.ArmPos() < 200) {
-                arm.moveGripper(0.245 + gamepad2.left_stick_y * -0.02);
+                arm.moveGripper(0.235 + gamepad2.left_stick_y * -0.02);
 //              was 0.1
             } else if (arm.ArmPos() > 2200) {
                 arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.182 + gamepad2.left_stick_y * 0.06);
             } else {
-                arm.moveGripper(.0003 * (arm.ArmPos() - 200) + 0.245);
+                arm.moveGripper(.0003 * (arm.ArmPos() - 200) + 0.24);
             }
 
 /*
@@ -158,9 +159,10 @@ public class STAdrive extends LinearOpMode {
             }
 */
 
+            telemetry.addLine("Robot is Running...");
+            telemetry.addLine();
             telemetry.addData("climbMode", climbMode);
             telemetry.addData("ArmPos", arm.ArmPos());
-            telemetry.addData("MoveGripperPos", arm.MoveGripperPos());
             drivetrain.drive(x, y, rotate);
             arm.move(armPower);
             telemetry.update();

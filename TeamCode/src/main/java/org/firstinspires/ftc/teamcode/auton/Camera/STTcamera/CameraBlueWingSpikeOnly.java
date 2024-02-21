@@ -29,7 +29,7 @@ public class CameraBlueWingSpikeOnly extends LinearOpMode {
     private Servo servoIntakeR; // dicht is 1
     private Servo servoChopstickL;
     private Servo servoChopstickR;
-
+    double time;
 
     double power = .3;
 
@@ -64,6 +64,8 @@ public class CameraBlueWingSpikeOnly extends LinearOpMode {
         servoIntakeR.setPosition(1);
         servoMoveGripper.setPosition(0.2);
 
+        telemetry.addLine("Paarse Pixel moet RECHTS!");
+        telemetry.update();
     }
 
     public void runOpMode() {
@@ -90,9 +92,6 @@ public class CameraBlueWingSpikeOnly extends LinearOpMode {
                 servoIntakeR.setPosition(0.3);
                 sleep(300);
                 methods.driveDean(0,15);
-                methods.Stop();
-                servoIntakeR.setPosition(1);
-                sleep(300);
                 methods.Stop();
                 terminateOpModeNow();
 
@@ -143,9 +142,6 @@ public class CameraBlueWingSpikeOnly extends LinearOpMode {
                 sleep(300);
                 methods.driveDean(0,15);
                 methods.Stop();
-                servoIntakeR.setPosition(1);
-                sleep(300);
-                methods.Stop();
                 terminateOpModeNow();
 
 /*
@@ -187,9 +183,6 @@ public class CameraBlueWingSpikeOnly extends LinearOpMode {
                 servoIntakeR.setPosition(0);
                 sleep(300);
                 methods.driveDean(0,15);
-                methods.Stop();
-                servoIntakeR.setPosition(1);
-                sleep(300);
                 methods.Stop();
                 terminateOpModeNow();
 

@@ -29,7 +29,7 @@ public class CameraRedWingSpikeOnly extends LinearOpMode {
     private Servo servoIntakeR; // dicht is 1
     private Servo servoChopstickL;
     private Servo servoChopstickR;
-
+    double time;
 
     double power = .3;
 
@@ -64,7 +64,8 @@ public class CameraRedWingSpikeOnly extends LinearOpMode {
         servoIntakeR.setPosition(1);
         servoMoveGripper.setPosition(0.2);
 
-
+        telemetry.addLine("Paarse Pixel moet LINKS!");
+        telemetry.update();
     }
 
     public void runOpMode() {
@@ -89,9 +90,6 @@ public class CameraRedWingSpikeOnly extends LinearOpMode {
                 servoIntakeL.setPosition(1);
                 sleep(300);
                 methods.driveDean(0,15);
-                methods.Stop();
-                servoIntakeL.setPosition(0);
-                sleep(300);
                 methods.Stop();
                 terminateOpModeNow();
 
@@ -151,9 +149,6 @@ public class CameraRedWingSpikeOnly extends LinearOpMode {
                 sleep(300);
                 methods.driveDean(0,15);
                 methods.Stop();
-                servoIntakeL.setPosition(0);
-                sleep(300);
-                methods.Stop();
                 terminateOpModeNow();
 
 /*
@@ -202,9 +197,6 @@ public class CameraRedWingSpikeOnly extends LinearOpMode {
                 servoIntakeL.setPosition(0.7);
                 sleep(300);
                 methods.driveDean(0,15);
-                methods.Stop();
-                servoIntakeL.setPosition(0);
-                sleep(300);
                 methods.Stop();
                 terminateOpModeNow();
 

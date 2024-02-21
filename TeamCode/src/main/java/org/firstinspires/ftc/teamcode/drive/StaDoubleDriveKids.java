@@ -93,7 +93,6 @@ public class StaDoubleDriveKids extends LinearOpMode {
                 arm.servoVliegtuigHouder(0);
             }
             telemetry.addData("ArmPos", arm.ArmPos());
-            telemetry.addData("MoveGripperPos", arm.MoveGripperPos());
             drivetrain.drive(x, y, rotate);
             arm.move(armPower);
             telemetry.update();

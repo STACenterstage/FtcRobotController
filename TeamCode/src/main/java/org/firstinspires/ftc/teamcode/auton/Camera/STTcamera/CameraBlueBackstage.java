@@ -27,7 +27,7 @@ public class CameraBlueBackstage extends LinearOpMode {
     private Servo servoIntakeR; // dicht is 1
     private Servo servoChopstickL;
     private Servo servoChopstickR;
-
+    double time;
 
     double power = .3;
 
@@ -62,6 +62,8 @@ public class CameraBlueBackstage extends LinearOpMode {
         servoIntakeR.setPosition(1);
         servoMoveGripper.setPosition(0.2);
 
+        telemetry.addLine("Paarse Pixel moet LINKS!");
+        telemetry.update();
     }
 
     public void runOpMode() {

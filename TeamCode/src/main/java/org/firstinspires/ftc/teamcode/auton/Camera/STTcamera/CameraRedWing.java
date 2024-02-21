@@ -29,7 +29,7 @@ public class CameraRedWing extends LinearOpMode {
     private Servo servoIntakeR; // dicht is 1
     private Servo servoChopstickL;
     private Servo servoChopstickR;
-
+    double time;
 
     double power = .3;
 
@@ -65,7 +65,8 @@ public class CameraRedWing extends LinearOpMode {
         servoIntakeR.setPosition(1);
         servoMoveGripper.setPosition(0.2);
 
-
+        telemetry.addLine("Paarse Pixel moet RECHTS!");
+        telemetry.update();
     }
 
     public void runOpMode() {
@@ -84,19 +85,19 @@ public class CameraRedWing extends LinearOpMode {
             int finalPos = camera.pos;
             time = System.currentTimeMillis();
             if (finalPos == 0) {
-                methods.driveDean(-28,90);
+                methods.driveDean(-27,92);
                 servoIntakeR.setPosition(0.3);
-                methods.driveDean(0,38);
+                methods.driveDean(0,35);
                 methods.rotateToHeading(-90);
                 methods.Stop();
                 servoIntakeR.setPosition(1);
                 sleep(300);
-                methods.driveDean(0,145); //todo: Afstand tot backboard.
+                methods.driveDean(0,147); //todo: Afstand tot backboard.
                 while ((System.currentTimeMillis() < time + 16000) && !isStopRequested()){
                     methods.Stop();
                     sleep(100);
                 }
-                methods.driveDean(42,95);
+                methods.driveDean(45,95);
                 methods.Stop();
                 sleep(300);
                 while (arm.ArmPos() < 3250 && !isStopRequested()){

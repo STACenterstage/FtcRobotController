@@ -65,6 +65,8 @@ public class CameraBlueWing extends LinearOpMode {
         servoIntakeR.setPosition(1);
         servoMoveGripper.setPosition(0.2);
 
+        telemetry.addLine("Paarse Pixel moet LINKS!");
+        telemetry.update();
     }
 
     public void runOpMode() {
@@ -248,7 +250,7 @@ public class CameraBlueWing extends LinearOpMode {
                 methods.Stop();
                 servoIntakeL.setPosition(0);
                 sleep(300);
-                methods.driveDean(0,136); //todo: Afstand tot backboard.
+                methods.driveDean(0,139); //todo: Afstand tot backboard.
                 while ((System.currentTimeMillis() < time + 16000) && !isStopRequested()){
                     methods.Stop();
                     sleep(100);

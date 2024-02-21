@@ -88,6 +88,7 @@ public class OpenCVTrussIsLeft {
                 myOpMode.telemetry.addData("Current_Pos", pos);
                 myOpMode.telemetry.addData("Conclusion", "right");
             } else {
+                myOpMode.telemetry.addData("Current_Pos", pos);
                 myOpMode.telemetry.addData("Conclusion", "left");
                 pos = 0;
             }
