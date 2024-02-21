@@ -82,8 +82,6 @@ public class StaDoubleDriveKids extends LinearOpMode {
             }
 
 
-//                arm.moveGripper(-0.000233 * arm.ArmPos() + 0.3433);
-
             if(servoVliegtuigTrigger){
                 arm.servoVliegtuigHouder(1);
                 sleep(200);

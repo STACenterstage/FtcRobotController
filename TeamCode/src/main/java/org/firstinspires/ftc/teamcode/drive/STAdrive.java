@@ -80,7 +80,6 @@ public class STAdrive extends LinearOpMode {
                 arm.intakeR(1);
             }
 
-
             /*
             if(runtime.milliseconds() > 2500) {
                 if (spoelPositivePower) {
@@ -111,21 +110,23 @@ public class STAdrive extends LinearOpMode {
                 arm.servoVliegtuig(1);
             }
 
-//            if (arm.ArmPos() < 2550) {
-//                arm.moveGripper(0);
-//            } else if (arm.ArmPos() > 2600) {
-//                arm.moveGripper((0.000275 * arm.ArmPos()*-1+1) + 0.7);
-//            }
-//                arm.moveGripper(-0.000233 * arm.ArmPos() + 0.3433);
+/*
+            if (arm.ArmPos() < 2550) {
+                arm.moveGripper(0);
+            } else if (arm.ArmPos() > 2600) {
+                arm.moveGripper((0.000275 * arm.ArmPos()*-1+1) + 0.7);
+            }
+                arm.moveGripper(-0.000233 * arm.ArmPos() + 0.3433);
+            if (arm.ArmPos() < 400) {
+                arm.moveGripper(0.00 + gamepad2.left_stick_x*0.05);
+//              was 0.1
+            } else if (arm.ArmPos() > 2400) {
+                arm.moveGripper((0.000275 * arm.ArmPos()*-1+1) + 0.88 + gamepad2.left_stick_x*0.1);
+            } else {
+                arm.moveGripper(.0005 * (arm.ArmPos() - 400));
+            }
+*/
 
-//            if (arm.ArmPos() < 400) {
-//                arm.moveGripper(0.00 + gamepad2.left_stick_x*0.05);
-////              was 0.1
-//            } else if (arm.ArmPos() > 2400) {
-//                arm.moveGripper((0.000275 * arm.ArmPos()*-1+1) + 0.88 + gamepad2.left_stick_x*0.1);
-//            } else {
-//                arm.moveGripper(.0005 * (arm.ArmPos() - 400));
-//            }
             if (gamepad2.dpad_down){
                 climbMode = true;
             }else if (gamepad2.dpad_up){
