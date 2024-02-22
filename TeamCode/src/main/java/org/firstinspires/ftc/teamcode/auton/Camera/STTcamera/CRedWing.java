@@ -13,8 +13,8 @@ import org.firstinspires.ftc.teamcode.robotParts.Arm;
 import org.firstinspires.ftc.teamcode.robotParts.Drivetrain;
 
 
-@Autonomous(name = "CameraBlueWing")
-public class CameraBlueWing extends LinearOpMode {
+@Autonomous(name = "CRedWing")
+public class CRedWing extends LinearOpMode {
 
     EigenOdometry methods = new EigenOdometry(this);
     OpenCVTrussIsLeft camera = new OpenCVTrussIsLeft(this);
@@ -30,7 +30,6 @@ public class CameraBlueWing extends LinearOpMode {
     private Servo servoChopstickL;
     private Servo servoChopstickR;
     double time;
-
 
     double power = .3;
 
@@ -59,13 +58,14 @@ public class CameraBlueWing extends LinearOpMode {
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        servoChopstickL.setPosition(0.45); // 0.45 = on, 0.61 = off
-        servoChopstickR.setPosition(0.19); // 0.32 = on, 0.19 = off
+
+        servoChopstickL.setPosition(0.61); // 0.45 = on, 0.61 = off
+        servoChopstickR.setPosition(0.32); // 0.32 = on, 0.19 = off
         servoIntakeL.setPosition(0);
         servoIntakeR.setPosition(1);
         servoMoveGripper.setPosition(0.2);
 
-        telemetry.addLine("Paarse Pixel moet LINKS!");
+        telemetry.addLine("Paarse Pixel moet RECHTS!");
         telemetry.update();
     }
 
@@ -85,29 +85,23 @@ public class CameraBlueWing extends LinearOpMode {
             int finalPos = camera.pos;
             time = System.currentTimeMillis();
             if (finalPos == 0) {
-
-                methods.driveDean(0,45);
-                methods.rotateToHeading(-135);
+                methods.driveDean(-27,92);
+                servoIntakeR.setPosition(0.3);
+                methods.driveDean(0,35);
+                methods.rotateToHeading(-90);
                 methods.Stop();
-                methods.driveDean(0,-30);
-                methods.Stop();
-                servoIntakeL.setPosition(0.7);
+                servoIntakeR.setPosition(1);
                 sleep(300);
-                methods.driveDean(0,50);
-                methods.Stop();
-                servoIntakeL.setPosition(0);
-                sleep(300);
-                methods.driveDean(-40,-85);
-                methods.rotateToHeading(90);
-                methods.driveDean(0,106); //todo: Afstand tot backboard.
+                methods.driveDean(0,97); //todo: Afstand tot backboard.
                 while ((System.currentTimeMillis() < time + 16000) && !isStopRequested()){
                     methods.Stop();
                     sleep(100);
                 }
-                methods.driveDean(-75,95);
+                methods.driveDean(0,105);
+                methods.driveDean(45,40);
                 methods.Stop();
                 sleep(300);
-                while (arm.ArmPos() < 3250 && !isStopRequested()){
+                while (arm.ArmPos() < 3200 && !isStopRequested()){
                     arm1.setPower(.7);
                 }
                 arm1.setPower(0);
@@ -115,16 +109,16 @@ public class CameraBlueWing extends LinearOpMode {
                 sleep(500);
                 arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.2);
                 sleep(800);
-                servoChopstickL.setPosition(0.61);
+                servoChopstickR.setPosition(0.19);
                 sleep(800);
                 methods.Stop();
-                while (arm.ArmPos() > 400 && !isStopRequested()){
+                while (arm.ArmPos() > 300 && !isStopRequested()){
                     arm1.setPower(-.7);
                 }
                 arm1.setPower(0);
                 methods.Stop();
                 servoMoveGripper.setPosition(0.245);
-                servoChopstickL.setPosition(0.61);
+                servoChopstickR.setPosition(0.19);
                 sleep(300);
                 methods.driveDean(0,15);
                 methods.Stop();
@@ -141,17 +135,27 @@ public class CameraBlueWing extends LinearOpMode {
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(1850);            //todo: Dit aanpassen als te ver
+                sleep(300);
+                leftFront.setPower(-power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(-power);
+                sleep(400);
+                leftFront.setPower(power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(power);
+                sleep(1700);
                 leftFront.setPower(-power);
                 rightFront.setPower(power);
                 leftBack.setPower(-power);
                 rightBack.setPower(power);
-                sleep(1220);
+                sleep(1300);
                 leftFront.setPower(-power);
                 rightFront.setPower(-power);
                 leftBack.setPower(-power);
                 rightBack.setPower(-power);
-                sleep(600);
+                sleep(240);
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
@@ -169,25 +173,25 @@ public class CameraBlueWing extends LinearOpMode {
                 rightBack.setPower(0);
 */
             } else if (finalPos == 1) {
-
-                methods.driveDean(-8,114);
+                methods.driveDean(-12,114);
                 methods.Stop();
-                servoIntakeL.setPosition(0.7);
+                servoIntakeR.setPosition(0.3);
                 sleep(300);
                 methods.driveDean(0,15);
-                methods.rotateToHeading(90);
+                methods.rotateToHeading(-90);
                 methods.Stop();
-                servoIntakeL.setPosition(0);
+                servoIntakeR.setPosition(1);
                 sleep(300);
-                methods.driveDean(0,110); //todo: Afstand tot backboard.
+                methods.driveDean(0,60); //todo: Afstand tot backboard.
                 while ((System.currentTimeMillis() < time + 16000) && !isStopRequested()){
                     methods.Stop();
                     sleep(100);
                 }
-                methods.driveDean(-57,95);
+                methods.driveDean(0,105);
+                methods.driveDean(57,40);
                 methods.Stop();
                 sleep(300);
-                while (arm.ArmPos() < 3250 && !isStopRequested()){
+                while (arm.ArmPos() < 3200 && !isStopRequested()){
                     arm1.setPower(.7);
                 }
                 arm1.setPower(0);
@@ -195,16 +199,16 @@ public class CameraBlueWing extends LinearOpMode {
                 sleep(500);
                 arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.2);
                 sleep(800);
-                servoChopstickL.setPosition(0.61);
+                servoChopstickR.setPosition(0.19);
                 sleep(800);
                 methods.Stop();
-                while (arm.ArmPos() > 400 && !isStopRequested()){
+                while (arm.ArmPos() > 300 && !isStopRequested()){
                     arm1.setPower(-.7);
                 }
                 arm1.setPower(0);
                 methods.Stop();
                 servoMoveGripper.setPosition(0.245);
-                servoChopstickL.setPosition(0.61);
+                servoChopstickR.setPosition(0.19);
                 sleep(300);
                 methods.driveDean(0,15);
                 methods.Stop();
@@ -217,48 +221,61 @@ public class CameraBlueWing extends LinearOpMode {
                 servoIntakeR.setPosition(1);
                 servoMoveGripper.setPosition(0);
                 sleep(50);
-
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(2850);            //todo: Dit aanpassen als te ver
-
+                sleep(300);
+                leftFront.setPower(-power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(-power);
+                sleep(400);
+                leftFront.setPower(power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(power);
+                sleep(2680);
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
                 rightBack.setPower(0);
                 servoIntakeR.setPosition(0);
                 sleep(200);
-
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
                 sleep(250);
-
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
                 rightBack.setPower(0);
 */
             } else if (finalPos == 2){
-                methods.driveDean(10,95);
-                servoIntakeL.setPosition(0.7);
-                methods.driveDean(0,40);
-                methods.rotateToHeading(90);
+                methods.driveDean(-15,50);
+                methods.rotateToHeading(135);
                 methods.Stop();
-                servoIntakeL.setPosition(0);
+                methods.driveDean(0,-23);
+                methods.Stop();
+                servoIntakeR.setPosition(0.3);
                 sleep(300);
-                methods.driveDean(0,139); //todo: Afstand tot backboard.
+                methods.driveDean(0,50);
+                methods.Stop();
+                servoIntakeR.setPosition(1);
+                sleep(300);
+                methods.driveDean(40,-85);
+                methods.rotateToHeading(-90);
+                methods.driveDean(0,56); //todo: Afstand tot backboard.
                 while ((System.currentTimeMillis() < time + 16000) && !isStopRequested()){
                     methods.Stop();
                     sleep(100);
                 }
-                methods.driveDean(-42,95);
+                methods.driveDean(0,105);
+                methods.driveDean(75,95);
                 methods.Stop();
                 sleep(300);
-                while (arm.ArmPos() < 3250 && !isStopRequested()){
+                while (arm.ArmPos() < 3200 && !isStopRequested()){
                     arm1.setPower(.7);
                 }
                 arm1.setPower(0);
@@ -266,16 +283,16 @@ public class CameraBlueWing extends LinearOpMode {
                 sleep(500);
                 arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.2);
                 sleep(800);
-                servoChopstickL.setPosition(0.61);
+                servoChopstickR.setPosition(0.19);
                 sleep(800);
                 methods.Stop();
-                while (arm.ArmPos() > 400 && !isStopRequested()){
+                while (arm.ArmPos() > 300 && !isStopRequested()){
                     arm1.setPower(-.7);
                 }
                 arm1.setPower(0);
                 methods.Stop();
                 servoMoveGripper.setPosition(0.245);
-                servoChopstickL.setPosition(0.61);
+                servoChopstickR.setPosition(0.19);
                 sleep(300);
                 methods.driveDean(0,15);
                 methods.Stop();
@@ -288,36 +305,47 @@ public class CameraBlueWing extends LinearOpMode {
                 servoIntakeR.setPosition(1);
                 servoMoveGripper.setPosition(0);
                 sleep(50);
-
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
-                sleep(2200);            //todo: Dit aanpassen als te ver
-
+                sleep(300);
+                leftFront.setPower(-power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(-power);
+                sleep(800);
+                leftFront.setPower(power);
+                rightFront.setPower(power);
+                leftBack.setPower(power);
+                rightBack.setPower(power);
+                sleep(1300);
                 leftFront.setPower(power);
                 rightFront.setPower(-power);
                 leftBack.setPower(power);
                 rightBack.setPower(-power);
-                sleep(1250);
-
+                sleep(1650);
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
                 rightBack.setPower(0);
                 servoIntakeR.setPosition(0);
                 sleep(200);
-
+                leftFront.setPower(-power);
+                rightFront.setPower(-power);
+                leftBack.setPower(-power);
+                rightBack.setPower(-power);
+                sleep(650);
                 leftFront.setPower(power);
                 rightFront.setPower(power);
                 leftBack.setPower(power);
                 rightBack.setPower(power);
                 sleep(250);
-
                 leftFront.setPower(0);
                 rightFront.setPower(0);
                 leftBack.setPower(0);
                 rightBack.setPower(0);
+
 */
             }
             sleep(30000);

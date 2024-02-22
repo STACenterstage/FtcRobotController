@@ -49,9 +49,9 @@ public class EigenOdometry {
     double STR;
     double ROT;
     double speed;
-    double min_speed = 0.2;
+    double min_speed = 0.3;
     double remweg;
-    int remwegTicks = 18000;
+    int remwegTicks = 24000;
     double a = 1;
     double b = 1;
     double heading;
@@ -103,7 +103,7 @@ public class EigenOdometry {
         dPos = Math.abs(dPosX) + Math.abs(dPosY);
     }
 
-    public void driveDean(double x, double y) {driveDean(x, y, 0.4, myOpMode.telemetry, 30000);}
+    public void driveDean(double x, double y) {driveDean(x, y, 0.35, myOpMode.telemetry, 30000);}
     public void driveDean(double x,double y, double max_speed, Telemetry telemetry, double stopTime) {
         calibrateEncoders();
 
@@ -132,7 +132,7 @@ public class EigenOdometry {
 
         FWD = a * max_speed;
         speed = min_speed + a * (max_speed - min_speed);
-        STR = b * max_speed;
+        STR = b * max_speed * 1.4;
         if ((dPosY < 0 && FWD > 0) || (dPosY > 0 && FWD < 0)) {
             FWD = -FWD;
         }
@@ -156,6 +156,7 @@ public class EigenOdometry {
         BackR.setPower(FWD + STR - turn);
         updateDean();
         }
+        Stop();
     }
 
 /*
