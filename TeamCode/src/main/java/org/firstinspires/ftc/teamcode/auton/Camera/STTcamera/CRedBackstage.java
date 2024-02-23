@@ -87,11 +87,11 @@ public class CRedBackstage extends LinearOpMode {
 
                 methods.driveDean(0,67);
                 methods.rotateToHeading(-90);
-                methods.driveDean(0,-20);
+                methods.driveDean(0,-21);
                 methods.Stop();
                 servoIntakeR.setPosition(0.3);
                 sleep(300);
-                methods.driveDean(-5,97);
+                methods.driveDean(-5,95);
                 methods.Stop();
                 servoIntakeR.setPosition(1);
                 sleep(300);
@@ -282,7 +282,8 @@ public class CRedBackstage extends LinearOpMode {
                 methods.Stop();
                 servoIntakeR.setPosition(0);
                 sleep(300);
-                methods.driveDean(25,64);
+                methods.driveDean(0,17);
+                methods.driveDean(25,52);
                 methods.Stop();
                 servoIntakeR.setPosition(1);
                 sleep(300);
@@ -494,7 +495,8 @@ public class CRedBackstage extends LinearOpMode {
                 methods.Stop();
                 servoIntakeR.setPosition(0);
                 sleep(300);
-                methods.driveDean(25,40);
+                methods.driveDean(0,12);
+                methods.driveDean(25,30);
                 methods.Stop();
                 servoIntakeR.setPosition(1);
                 sleep(300);

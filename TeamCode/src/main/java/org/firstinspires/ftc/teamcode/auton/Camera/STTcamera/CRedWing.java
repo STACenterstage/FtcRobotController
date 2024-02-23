@@ -92,7 +92,7 @@ public class CRedWing extends LinearOpMode {
                 methods.Stop();
                 servoIntakeR.setPosition(1);
                 sleep(300);
-                methods.driveDean(0,97); //todo: Afstand tot backboard.
+                methods.driveDean(0,97); //todo: Distance to backboard.
                 while ((System.currentTimeMillis() < time + 16000) && !isStopRequested()){
                     methods.Stop();
                     sleep(100);

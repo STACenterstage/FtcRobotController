@@ -100,6 +100,7 @@ public class STAdrive extends LinearOpMode {
             }
 
             if (servoVliegtuigTrigger) {
+                telemetry.addLine("Airplane has been launched.");
                 arm.servoVliegtuigHouder(1);
                 t1 = System.currentTimeMillis();
             }
@@ -129,7 +130,7 @@ public class STAdrive extends LinearOpMode {
 
             if (gamepad2.dpad_down){
                 climbMode = true;
-            }else if (gamepad2.dpad_up){
+            } else if (gamepad2.dpad_up){
                 climbMode = false;
             }
 

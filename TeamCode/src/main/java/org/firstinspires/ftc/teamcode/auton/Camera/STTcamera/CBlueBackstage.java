@@ -486,9 +486,9 @@ public class CBlueBackstage extends LinearOpMode {
 */
             } else if (finalPos == 2){
 
-                methods.driveDean(-18,70);
+                methods.driveDean(-17,70);
                 methods.rotateToHeading(90);
-                methods.driveDean(0,-20);
+                methods.driveDean(0,-21);
                 methods.Stop();
                 servoIntakeL.setPosition(0.7);
                 sleep(300);

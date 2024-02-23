@@ -52,6 +52,9 @@ public class   Arm {
         servoIntakeL = map.get(Servo.class, "servoIntakeL");
         servoIntakeR = map.get(Servo.class, "servoIntakeR");
 
+        servoVliegtuig(0);
+        servoVliegtuigHouder(0);
+
         arm.setDirection(DcMotorSimple.Direction.REVERSE);
         arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
