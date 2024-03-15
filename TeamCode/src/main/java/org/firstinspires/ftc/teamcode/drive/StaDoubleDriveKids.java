@@ -11,6 +11,7 @@ import org.firstinspires.ftc.teamcode.robotParts.Drivetrain;
 public class StaDoubleDriveKids extends LinearOpMode {
     Drivetrain.drivetrain drivetrain = new Drivetrain.drivetrain();
     Arm arm = new Arm();
+    boolean climbMode = false;
     @Override
     public void runOpMode() throws InterruptedException {
         drivetrain.init(hardwareMap);
@@ -69,17 +70,17 @@ public class StaDoubleDriveKids extends LinearOpMode {
             }
 
 
-            if (arm.ArmPos() < 400) {
-                arm.moveGripper(0.245 + gamepad2.left_stick_x * 0.02);
+            if (climbMode){
+                arm.moveGripper(0.12);
+            } else if (arm.ArmPos() < 200) {
+                arm.moveGripper(0.245 + gamepad2.right_stick_y * -0.02);
 //              was 0.1
-            } else if (arm.ArmPos() > 2300) {
-                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.18 + gamepad2.left_stick_x * 0.06);
+            } else if (arm.ArmPos() > 2200) {
+                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.182 + gamepad2.right_stick_y * 0.06);
             } else {
-                arm.moveGripper(.0003 * (arm.ArmPos() - 400) + 0.26);
+                arm.moveGripper(.0003 * (arm.ArmPos() - 200) + 0.245);
             }
 
-
-//                arm.moveGripper(-0.000233 * arm.ArmPos() + 0.3433);
 
             if(servoVliegtuigTrigger){
                 arm.servoVliegtuigHouder(1);
@@ -90,7 +91,6 @@ public class StaDoubleDriveKids extends LinearOpMode {
                 arm.servoVliegtuigHouder(0);
             }
             telemetry.addData("ArmPos", arm.ArmPos());
-            telemetry.addData("MoveGripperPos", arm.MoveGripperPos());
             drivetrain.drive(x, y, rotate);
             arm.move(armPower);
             telemetry.update();

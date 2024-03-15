@@ -13,10 +13,10 @@ import org.firstinspires.ftc.teamcode.robotParts.Arm;
 import org.firstinspires.ftc.teamcode.robotParts.Drivetrain;
 
 
-@Autonomous(name = "CameraBlueWing")
-public class CameraBlueWing extends LinearOpMode {
+@Autonomous(name = "CBlueWingSpikeOnly")
+public class CBlueWingSpikeOnly extends LinearOpMode {
 
-    newAutonMethods methods = new newAutonMethods(this);
+    EigenOdometry methods = new EigenOdometry(this);
     OpenCVTrussIsLeft camera = new OpenCVTrussIsLeft(this);
 
     private DcMotorEx leftFront;
@@ -29,7 +29,7 @@ public class CameraBlueWing extends LinearOpMode {
     private Servo servoIntakeR; // dicht is 1
     private Servo servoChopstickL;
     private Servo servoChopstickR;
-
+    double time;
 
     double power = .3;
 
@@ -58,12 +58,14 @@ public class CameraBlueWing extends LinearOpMode {
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        servoChopstickL.setPosition(1);
-        servoChopstickR.setPosition(0);
+        servoChopstickL.setPosition(0.61);
+        servoChopstickR.setPosition(0.19);
         servoIntakeL.setPosition(0);
         servoIntakeR.setPosition(1);
-        servoMoveGripper.setPosition(0);
+        servoMoveGripper.setPosition(0.2);
 
+        telemetry.addLine("Paarse Pixel moet RECHTS!");
+        telemetry.update();
     }
 
     public void runOpMode() {
@@ -80,7 +82,20 @@ public class CameraBlueWing extends LinearOpMode {
 
         if (opModeIsActive()) {
             int finalPos = camera.pos;
+            time = System.currentTimeMillis();
             if (finalPos == 0) {
+
+                methods.driveDean(0,67);
+                methods.rotateToHeading(-90);
+                methods.driveDean(0,-20);
+                methods.Stop();
+                servoIntakeR.setPosition(0.3);
+                sleep(300);
+                methods.driveDean(0,15);
+                methods.Stop();
+                terminateOpModeNow();
+
+/*
                 servoChopstickL.setPosition(1);
                 servoChopstickR.setPosition(0);
                 servoIntakeL.setPosition(0);
@@ -117,9 +132,19 @@ public class CameraBlueWing extends LinearOpMode {
                 rightFront.setPower(0);
                 leftBack.setPower(0);
                 rightBack.setPower(0);
-
-
+*/
             } else if (finalPos == 1) {
+
+                methods.driveDean(12,86);
+                methods.rotateToHeading(-90);
+                methods.Stop();
+                servoIntakeR.setPosition(0);
+                sleep(300);
+                methods.driveDean(0,15);
+                methods.Stop();
+                terminateOpModeNow();
+
+/*
                 servoChopstickL.setPosition(1);
                 servoChopstickR.setPosition(0);
                 servoIntakeL.setPosition(0);
@@ -150,8 +175,18 @@ public class CameraBlueWing extends LinearOpMode {
                 rightFront.setPower(0);
                 leftBack.setPower(0);
                 rightBack.setPower(0);
-
+*/
             } else if (finalPos == 2){
+                methods.driveDean(35 ,72);
+                methods.rotateToHeading(-90);
+                methods.Stop();
+                servoIntakeR.setPosition(0);
+                sleep(300);
+                methods.driveDean(0,15);
+                methods.Stop();
+                terminateOpModeNow();
+
+/*
                 servoChopstickL.setPosition(1);
                 servoChopstickR.setPosition(0);
                 servoIntakeL.setPosition(0);
@@ -188,40 +223,8 @@ public class CameraBlueWing extends LinearOpMode {
                 rightFront.setPower(0);
                 leftBack.setPower(0);
                 rightBack.setPower(0);
-
+*/
             }
-            sleep(30000);
-
-            telemetry.addData("DOnE","DONE");
-            telemetry.update();
-//            int finalPos = camera.pos;
-//            telemetry.addData("localPos", camera.pos);
-//            if (finalPos == 0) {
-//                methods.driveX(25.5 - 0.5 * methods.robotWidth_cm);
-//                methods.driveY(-90 + 0.5 * methods.robotLength_cm);
-//                methods.rotateToHeading(-90);
-//                methods.driveY(-40 + 0.5 * methods.robotLength_cm);
-//                methods.driveY(40 - 0.5 * methods.robotLength_cm);
-//                methods.driveX(-60 + 0.5 * methods.robotWidth_cm);
-//                methods.rotateToHeading(90);
-//                methods.driveY(-80 + 0.5 * methods.robotLength_cm);
-//            } else if (finalPos == 1) {
-//                methods.driveX(25.5 - 0.5 * methods.robotWidth_cm);
-//                methods.driveY(-112 + methods.robotLength_cm);
-//                methods.driveY(30);
-//                methods.driveX(-60);
-//                methods.driveY(-90 + 0.5 * methods.robotLength_cm);
-//                methods.rotateToHeading(90);
-//                methods.driveY(-30);
-//            } else if (finalPos == 2){
-//                methods.driveX(-0.5 * methods.robotWidth_cm);
-//                methods.driveY(-90 + 0.5 * methods.robotLength_cm);
-//                methods.driveY(30);
-//                methods.driveX(-30);
-//                methods.driveY(-90 + 0.5 * methods.robotLength_cm);
-//                methods.rotateToHeading(90);
-//                methods.driveY(-25);
-//            }
             sleep(30000);
         }
     }

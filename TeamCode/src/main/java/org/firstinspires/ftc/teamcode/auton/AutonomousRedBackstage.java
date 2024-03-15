@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.auton;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -13,7 +14,7 @@ import org.firstinspires.ftc.teamcode.robotParts.Drivetrain;
 
 import org.firstinspires.ftc.teamcode.drive.STAdrive;
 
-@Autonomous(name="AutonomousRedBackstage", group="LinearOpmode")
+@Disabled//@Autonomous(name="AutonomousRedBackstage", group="LinearOpmode")
 public class AutonomousRedBackstage extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
 

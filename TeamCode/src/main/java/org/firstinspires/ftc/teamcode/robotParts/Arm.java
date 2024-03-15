@@ -52,6 +52,9 @@ public class   Arm {
         servoIntakeL = map.get(Servo.class, "servoIntakeL");
         servoIntakeR = map.get(Servo.class, "servoIntakeR");
 
+        servoVliegtuig(0);
+        servoVliegtuigHouder(0);
+
         arm.setDirection(DcMotorSimple.Direction.REVERSE);
         arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
@@ -62,7 +65,6 @@ public class   Arm {
 
     
     public int ArmPos(){return -spoel.getCurrentPosition();}
-    public int MoveGripperPos(){return (int) -servoMoveGripper.getPosition();}
 
     public void intakeL(double position){servoIntakeL.setPosition(position);}
     public void intakeR(double position){servoIntakeR.setPosition(position);}
