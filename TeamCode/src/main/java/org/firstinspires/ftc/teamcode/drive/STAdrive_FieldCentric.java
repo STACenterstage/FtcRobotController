@@ -34,7 +34,6 @@ public class STAdrive_FieldCentric extends LinearOpMode {
         arm.init(hardwareMap);
 
         telemetry.addData("ArmPos", arm.ArmPos());
-        telemetry.addData("MoveGripperPos", arm.MoveGripperPos());
         telemetry.update();
 
         waitForStart();
@@ -141,7 +140,6 @@ public class STAdrive_FieldCentric extends LinearOpMode {
             telemetry.addData("climbMode", climbMode);
             telemetry.addData("IMU", imu);
             telemetry.addData("ArmPos", arm.ArmPos());
-            telemetry.addData("MoveGripperPos", arm.MoveGripperPos());
             arm.move(armPower);
             telemetry.update();
 

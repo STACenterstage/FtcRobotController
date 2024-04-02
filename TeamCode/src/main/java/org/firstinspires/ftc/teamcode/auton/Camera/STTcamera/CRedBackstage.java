@@ -16,7 +16,7 @@ import java.lang.reflect.Method;
 
 
 @Autonomous(name = "CameraRedBackstage")
-public class CameraRedBackstage extends LinearOpMode {
+public class CRedBackstage extends LinearOpMode {
 
     EigenOdometry methods = new EigenOdometry(this);
     OpenCVTrussIsLeft camera = new OpenCVTrussIsLeft(this);
