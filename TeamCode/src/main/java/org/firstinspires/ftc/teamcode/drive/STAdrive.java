@@ -7,15 +7,15 @@ import org.firstinspires.ftc.teamcode.robotParts.Arm;
 //import org.firstinspires.ftc.teamcode.robotParts.Limits;
 import org.firstinspires.ftc.teamcode.robotParts.Drivetrain;
 
-import java.util.concurrent.TimeUnit;
-
 @TeleOp(name = "STAdrive",group = "TeleOp")
 public class STAdrive extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
     Drivetrain.drivetrain drivetrain = new Drivetrain.drivetrain();
     Arm arm = new Arm();
     boolean climbMode = false;
+    boolean airplaneLaunched = false;
     double t1;
+    boolean airplaneInLaunch = false;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -100,13 +100,19 @@ public class STAdrive extends LinearOpMode {
             }
 
             if (servoVliegtuigTrigger) {
-                telemetry.addLine("Airplane has been launched.");
+                airplaneInLaunch = true;
                 arm.servoVliegtuigHouder(1);
                 t1 = System.currentTimeMillis();
             }
+
+            if (airplaneInLaunch) {
+                telemetry.addLine("Airplane is being launched.");
+            }
+
             if (System.currentTimeMillis() > 1200 + t1){
                 arm.servoVliegtuig(0);
                 arm.servoVliegtuigHouder(0);
+                airplaneInLaunch = false;
             } else if (System.currentTimeMillis() > 100 + t1){
                 arm.servoVliegtuig(1);
             }

@@ -24,15 +24,15 @@ public class EigenOdometry {
 
     double current_target_heading = 0;
     public IMU imu;
-    double WHEEL_RADIUS = 37.5;//mm
+    double WHEEL_RADIUS = 36.5;//mm
     double ODO_RADIUS = 25.0;//mm
     double GEAR_RATIO = 1/20.0;
     double TICKS_PER_ROTATION = 8192;
     double OURTICKS_PER_CM_Y;
     double OURTICKS_PER_CM_X;
     double threshold = 4000;
-    final double odoMultiplierY = .742; //TODO: waardes aanpassen
-    final double odoMultiplierX = .77;  //TODO: waardes aanpassen
+    final double odoMultiplierY = .58; //TODO: waardes aanpassen
+    final double odoMultiplierX = .6;  //TODO: waardes aanpassen
     private DcMotorEx arm1;
 
     double beginTime;
@@ -64,6 +64,7 @@ public class EigenOdometry {
     private DcMotor encoderX, encoderY;
 
     public EigenOdometry(LinearOpMode opmode) {myOpMode = opmode;}
+
 
     public void init(HardwareMap map) {
         imu = map.get(IMU.class, "imu");

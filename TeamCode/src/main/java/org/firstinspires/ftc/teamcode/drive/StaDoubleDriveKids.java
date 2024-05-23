@@ -42,13 +42,13 @@ public class StaDoubleDriveKids extends LinearOpMode {
             }
 
             boolean chopstickOn = gamepad2.y;
-            boolean chopstickLOff = gamepad2.left_bumper;
-            boolean chopstickROff = gamepad2.right_bumper;
+            boolean chopstickLOff = gamepad2.right_bumper;
+            boolean chopstickROff = gamepad2.left_bumper;
 
 
             if (chopstickOn) {
-                arm.chopstickL(0.47);
-                arm.chopstickR(0.3);
+                arm.chopstickL(0.45);
+                arm.chopstickR(0.32);
             } else {
                 if (chopstickLOff) {
                     arm.chopstickL(0.61);

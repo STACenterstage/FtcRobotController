@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.robotParts.Arm;
 
-@TeleOp(name = "STAdrive_FieldCentric",group = "TeleOp")
+@TeleOp(name = "FieldCentric_STAdrive",group = "TeleOp")
 public class STAdrive_FieldCentric extends LinearOpMode {
     Arm arm = new Arm();
     boolean climbMode = false;
