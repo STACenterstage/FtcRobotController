@@ -62,7 +62,7 @@ public class DemoMode extends LinearOpMode {
         servoChopstickR.setPosition(chopROff); // 0.32 = on, 0.19 = off
         servoIntakeR.setPosition(1);
         servoIntakeL.setPosition(0);
-        servoMoveGripper.setPosition(0.2);
+        servoMoveGripper.setPosition(0.243);
 
         telemetry.addLine("Paarse Pixel moet LINKS!");
         telemetry.update();
@@ -82,52 +82,49 @@ public class DemoMode extends LinearOpMode {
 
         while (opModeIsActive()) {
             time = System.currentTimeMillis();
-                methods.driveDean(285 ,0);
-                methods.Stop();
-                sleep(500);
-                while (arm.ArmPos() > -200 && !isStopRequested()){
-                    arm1.setPower(.7);
-                }
-                methods.Stop();
-                sleep(300);
-                servoChopstickL.setPosition(chopLOn);
-                servoChopstickR.setPosition(chopROn);
-                sleep(300);
-                servoIntakeL.setPosition(1);
-                servoIntakeR.setPosition(0);
-                sleep(500);
-                while (arm.ArmPos() < 3200 && !isStopRequested()){
-                    arm1.setPower(.7);
-                }
-                methods.Stop();
-                sleep(500);
-                arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.2);
-                sleep(800);
-                servoChopstickL.setPosition(chopLOff);
-                servoChopstickL.setPosition(chopLOff);
-                servoIntakeL.setPosition(0);
-                servoIntakeR.setPosition(1);
-                sleep(800);
-                methods.Stop();
-                while (arm.ArmPos() > 300 && !isStopRequested()){
-                    arm1.setPower(-.7);
-                }
-                methods.Stop();
-                methods.driveDean(-250 ,0);
-                servoIntakeL.setPosition(1);
-                servoIntakeR.setPosition(0);
+            methods.driveDean(0 ,270);
+            methods.Stop();
+            sleep(500);
+            while (arm.ArmPos() > -550 && !isStopRequested()){
+                arm1.setPower(-.65);
+            }
+            methods.Stop();
+            sleep(300);
+            servoChopstickL.setPosition(chopLOn);
+            servoChopstickR.setPosition(chopROn);
+            sleep(300);
+            servoIntakeL.setPosition(1);
+            servoIntakeR.setPosition(0);
+            sleep(500);
+            while (arm.ArmPos() < 2300 && !isStopRequested()){
+                arm1.setPower(.7);
+            }
+            methods.Stop();
+            sleep(500);
+            arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.2);
+            sleep(800);
+            servoChopstickL.setPosition(chopLOff);
+            servoChopstickR.setPosition(chopROff);
+            servoIntakeL.setPosition(0);
+            servoIntakeR.setPosition(1);
+            sleep(800);
+            arm.moveGripper(0.00015 * arm.ArmPos()*-1+1.3);
+            methods.Stop();
+            while (arm.ArmPos() > 200 && !isStopRequested()){
+                arm1.setPower(-.7);
+            }
+            methods.Stop();
+            servoMoveGripper.setPosition(0.243);
+            methods.driveDean(0 ,-190);
+            servoIntakeL.setPosition(1);
+            servoIntakeR.setPosition(0);
+            methods.driveDean(0,-82);
+            sleep(1500);
+            servoIntakeL.setPosition(0);
+            servoIntakeR.setPosition(1);
+            sleep(1500);
 
-
-
-
-
-            servoMoveGripper.setPosition(0.245);
-                servoChopstickL.setPosition(chopLOff);
-                sleep(300);
-                methods.driveDean(-45,15);
-                methods.Stop();
-                sleep(1000);
-
+            //terminateOpModeNow();
         }
     }
 }

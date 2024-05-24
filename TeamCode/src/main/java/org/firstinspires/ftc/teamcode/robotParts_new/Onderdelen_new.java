@@ -10,4 +10,6 @@ public class Onderdelen_new {
         servo1 = map.get(Servo.class, "servo1");
     }
     public void servo1(double position){servo1.setPosition(position);}
+    public void servo1(Servo.Direction direction){servo1.setDirection(direction);}
+
 }

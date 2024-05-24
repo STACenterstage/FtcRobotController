@@ -21,7 +21,7 @@ public class STAdrive_new extends LinearOpMode {
         if (isStopRequested()) return;
 
         while (opModeIsActive()) {                                  //Loop van het rijden van de robot
-            double y = gamepad1.left_stick_x;                       //Koppelt geactiveerde knop op controller aan variabele
+            double y = -gamepad1.left_stick_x;                       //Koppelt geactiveerde knop op controller aan variabele
             double x = gamepad1.left_stick_y;
             double rotate = gamepad1.right_stick_x;
 

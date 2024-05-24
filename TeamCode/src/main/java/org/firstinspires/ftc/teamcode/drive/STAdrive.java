@@ -13,7 +13,6 @@ public class STAdrive extends LinearOpMode {
     Drivetrain.drivetrain drivetrain = new Drivetrain.drivetrain();
     Arm arm = new Arm();
     boolean climbMode = false;
-    boolean airplaneLaunched = false;
     double t1;
     boolean airplaneInLaunch = false;
 
@@ -46,10 +45,6 @@ public class STAdrive extends LinearOpMode {
 
             boolean servoVliegtuigTrigger = gamepad1.left_bumper;
 
-
-            //boolean spoelNegativePower = gamepad2.left_bumper;
-            //boolean spoelPositivePower = gamepad2.right_bumper;
-
             double armPower = (gamepad2.right_trigger - gamepad2.left_trigger);
 
             boolean chopstickOn = gamepad2.y;
@@ -80,18 +75,6 @@ public class STAdrive extends LinearOpMode {
                 arm.intakeR(1);
             }
 
-            /*
-            if(runtime.milliseconds() > 2500) {
-                if (spoelPositivePower) {
-                    arm.spoelPositivePower(1);
-                } else if (spoelNegativePower) {
-                    arm.spoelNegativePower(1);
-                } else {
-                    arm.spoelNegativePower(0);
-                    arm.spoelPositivePower(0);
-                }
-            }
-            */
 
             if (servoIntakeOn) {
                 arm.servoIntake(1);

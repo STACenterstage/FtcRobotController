@@ -31,8 +31,8 @@ public class EigenOdometry {
     double OURTICKS_PER_CM_Y;
     double OURTICKS_PER_CM_X;
     double threshold = 4000;
-    final double odoMultiplierY = .58; //TODO: waardes aanpassen
-    final double odoMultiplierX = .6;  //TODO: waardes aanpassen
+    final double odoMultiplierY = .98; //TODO: waardes aanpassen
+    final double odoMultiplierX = 1;  //TODO: waardes aanpassen
     private DcMotorEx arm1;
 
     double beginTime;
@@ -98,13 +98,13 @@ public class EigenOdometry {
         dHeading = getCurrentHeading() + current_target_heading;
         TimeElapsed = System.currentTimeMillis() - beginTime;
         OdoX_Pos = FrontL.getCurrentPosition();
-        OdoY_Pos = BackL.getCurrentPosition();
+        OdoY_Pos = -BackL.getCurrentPosition();
         dPosY = tickY - OdoY_Pos;
         dPosX = tickX - OdoX_Pos;
         dPos = Math.abs(dPosX) + Math.abs(dPosY);
     }
 
-    public void driveDean(double x, double y) {driveDean(x, y, 0.35, myOpMode.telemetry, 30000);}
+    public void driveDean(double x, double y) {driveDean(x, y, 0.38, myOpMode.telemetry, 12000);}
     public void driveDean(double x,double y, double max_speed, Telemetry telemetry, double stopTime) {
         calibrateEncoders();
 
