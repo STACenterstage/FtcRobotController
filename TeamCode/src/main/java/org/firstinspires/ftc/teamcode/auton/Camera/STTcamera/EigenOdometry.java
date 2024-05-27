@@ -104,7 +104,7 @@ public class EigenOdometry {
         dPos = Math.abs(dPosX) + Math.abs(dPosY);
     }
 
-    public void driveDean(double x, double y) {driveDean(x, y, 0.38, myOpMode.telemetry, 12000);}
+    public void driveDean(double x, double y) {driveDean(x, y, 0.38, myOpMode.telemetry, 10000);}
     public void driveDean(double x,double y, double max_speed, Telemetry telemetry, double stopTime) {
         calibrateEncoders();
 

@@ -1,16 +1,16 @@
 package org.firstinspires.ftc.teamcode.auton.Camera.STTcamera;
 
-        import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-        import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-        import com.qualcomm.robotcore.hardware.DcMotor;
-        import com.qualcomm.robotcore.hardware.DcMotorEx;
-        import com.qualcomm.robotcore.hardware.DcMotorSimple;
-        import com.qualcomm.robotcore.hardware.HardwareMap;
-        import com.qualcomm.robotcore.hardware.Servo;
-        import org.firstinspires.ftc.teamcode.robotParts.Arm;
-        import org.firstinspires.ftc.teamcode.robotParts.Drivetrain;
-@Autonomous(name = "DemoMode")
-public class DemoMode extends LinearOpMode {
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
+import org.firstinspires.ftc.teamcode.robotParts.Arm;
+import org.firstinspires.ftc.teamcode.robotParts.Drivetrain;
+@Autonomous(name = "DemoMode2")
+public class DemoMode2 extends LinearOpMode {
 
     EigenOdometry methods = new EigenOdometry(this);
     OpenCVTrussIsLeft camera = new OpenCVTrussIsLeft(this);
@@ -86,6 +86,7 @@ public class DemoMode extends LinearOpMode {
             methods.driveDean(0 ,-12);
             methods.Stop();
             sleep(500);
+
             while (!isStopRequested()) {
                 iteration += 1;
                 while (arm.ArmPos() > -550 && !isStopRequested()) {
@@ -118,16 +119,20 @@ public class DemoMode extends LinearOpMode {
                 }
                 methods.Stop();
                 servoMoveGripper.setPosition(0.243);
-                methods.driveDean(0, -iteration*30);
+                methods.driveDean(0,-60);
+                methods.rotateToHeading(-40);
+                methods.driveDean(0, -250);
                 servoIntakeL.setPosition(1);
                 servoIntakeR.setPosition(0);
                 sleep(500);
-                methods.driveDean(0, -34.5);
+                methods.driveDean(0,-30);
                 sleep(1500);
                 servoIntakeL.setPosition(0);
                 servoIntakeR.setPosition(1);
                 sleep(1500);
-                methods.driveDean(0, iteration*30 + 30);
+                methods.driveDean(0, 280);
+                methods.rotateToHeading(0);
+                methods.driveDean(0,60);
                 if (iteration >= 7){
                     iteration = 0;
                 }
