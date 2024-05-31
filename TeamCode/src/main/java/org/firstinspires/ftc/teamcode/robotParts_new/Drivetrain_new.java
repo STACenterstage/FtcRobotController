@@ -27,7 +27,7 @@ public class Drivetrain_new {
         double rightFrontPower = forward - right - rotate;
         double rightRearPower = forward + right - rotate;
         double leftRearPower = forward - right + rotate;
-        double maxPower = 1.0;
+        double maxPower = 0;
 
         maxPower = Math.max(maxPower, Math.abs(leftFrontPower));
         maxPower = Math.max(maxPower, Math.abs(rightFrontPower));
